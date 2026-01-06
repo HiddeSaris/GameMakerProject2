@@ -6,9 +6,9 @@ if (!surface_exists(surface_tiles)){
 }
 draw_surface(surface_tiles, -surface_w/2, 0);
 
-
 var _draw_x = grid_to_pos_x(grid_x, grid_y);
 var _draw_y = grid_to_pos_y(grid_x, grid_y);
+
 
 // draw indicator
 draw_sprite(spr_indicator, 0, _draw_x, _draw_y)
@@ -24,7 +24,7 @@ else {
 
 
 if (mouse_check_button(mb_left)){
-	if (building_conveyors){
+	if (building_state == building_states.building && building_conveyors){
 		var _pos = building_conveyor_pos
 		
 		building_conveyors_dir = (abs(grid_x - _pos[0]) >= abs(grid_y - _pos[1]));
@@ -54,6 +54,6 @@ if (mouse_check_button(mb_left)){
 		}
 	}
 }
-else{ // draw preview
+else if (building_state == building_states.building){ // draw preview
 	draw_sprite_ext(object_get_sprite(object_buildings[selected_building]), selected_dir, _draw_x, _draw_y, 1, 1, 0, col, 1);
 }

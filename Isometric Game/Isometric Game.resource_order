@@ -43,6 +43,7 @@
     {"name":"spr_tree","order":9,"path":"sprites/spr_tree/spr_tree.yy",},
     {"name":"spr_ui_button_navigator","order":1,"path":"sprites/spr_ui_button_navigator/spr_ui_button_navigator.yy",},
     {"name":"spr_vegitation","order":8,"path":"sprites/spr_vegitation/spr_vegitation.yy",},
+    {"name":"spr_warehouse","order":16,"path":"sprites/spr_warehouse/spr_warehouse.yy",},
     {"name":"spr_water","order":6,"path":"sprites/spr_water/spr_water.yy",},
     {"name":"spr_wood","order":13,"path":"sprites/spr_wood/spr_wood.yy",},
   ],

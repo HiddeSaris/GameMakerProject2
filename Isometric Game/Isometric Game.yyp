@@ -71,6 +71,7 @@
     {"id":{"name":"spr_ui_bg","path":"sprites/spr_ui_bg/spr_ui_bg.yy",},},
     {"id":{"name":"spr_ui_button_navigator","path":"sprites/spr_ui_button_navigator/spr_ui_button_navigator.yy",},},
     {"id":{"name":"spr_vegitation","path":"sprites/spr_vegitation/spr_vegitation.yy",},},
+    {"id":{"name":"spr_warehouse","path":"sprites/spr_warehouse/spr_warehouse.yy",},},
     {"id":{"name":"spr_water","path":"sprites/spr_water/spr_water.yy",},},
     {"id":{"name":"spr_wood","path":"sprites/spr_wood/spr_wood.yy",},},
   ],

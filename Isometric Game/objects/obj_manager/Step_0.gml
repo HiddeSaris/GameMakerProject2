@@ -3,6 +3,7 @@
 grid_x = pos_to_grid_x(mouse_x, mouse_y);
 grid_y = pos_to_grid_y(mouse_x, mouse_y);
 
+
 var can_click_terrain = global.can_click;
 var can_scroll = global.can_scroll
 
@@ -31,57 +32,102 @@ else{
 
 #endregion
 
-#region CONTROLS
+#region MINING
 
-if (mouse_p_l && selected_building == buildings.conveyor){
-	building_conveyors = true;
-	building_conveyor_pos = [grid_x, grid_y];
-	building_conveyors_dir = selected_dir;
+if (mining_coord[0] != grid_x or mining_coord[1] != grid_y){
+	mining_time = 0;
+	mining_coord = [grid_x, grid_y];
 }
 
+#endregion
 
-if (mouse_r_l && building_conveyors_prev){
-	if (building_state == building_states.building && can_build_now){
-		if (building_conveyors_dir){
-			var _len = grid_x - building_conveyor_pos[0]
-			var _dir = -sign(_len) + 2;
-			if (_len == 0){ _dir = selected_dir}
+#region CONTROLS
+
+//if (mouse_p_l && selected_building == buildings.conveyor){
+//	building_conveyors = true;
+//	building_conveyor_pos = [grid_x, grid_y];
+//	building_conveyors_dir = selected_dir;
+//}
+//
+//
+//if (mouse_r_l && building_conveyors_prev){
+//	if (building_state == building_states.building && can_build_now){
+//		if (building_conveyors_dir){
+//			var _len = grid_x - building_conveyor_pos[0]
+//			var _dir = -sign(_len) + 2;
+//			if (_len == 0){ _dir = selected_dir}
+//	
+//			for (var _x=min(grid_x, building_conveyor_pos[0]); _x <= max(grid_x, building_conveyor_pos[0]); _x++){
+//	
+//				var _y = building_conveyor_pos[1];
+//				var _room_x = grid_to_pos_x(_x, _y);
+//				var _room_y = grid_to_pos_y(_x, _y);
+//				
+//				build(_x, _y, buildings.conveyor, _dir)
+//			}
+//		}
+//		else{
+//			var _len = grid_y - building_conveyor_pos[1]
+//			var _dir = sign(_len) + 1;
+//			if (_len == 0){ _dir = selected_dir}
+//			
+//			for (var _y=min(grid_y, building_conveyor_pos[1]); _y <= max(grid_y, building_conveyor_pos[1]); _y++){
+//				
+//				var _x = building_conveyor_pos[0];
+//				var _room_x = grid_to_pos_x(_x, _y);
+//				var _room_y = grid_to_pos_y(_x, _y);
+//				
+//				build(_x, _y, buildings.conveyor, _dir)
+//			}
+//		}
+//	}
+//}
+
+if (mouse_p_l){
+	switch (building_state)
+	{
+	case building_states.building:
+		if (!building_conveyors){
+			build(grid_x, grid_y, selected_building, selected_dir);
+		}
+	break;
+	case building_states.selecting:
+		
+	break;
+	case building_states.destroying:
 	
-			for (var _x=min(grid_x, building_conveyor_pos[0]); _x <= max(grid_x, building_conveyor_pos[0]); _x++){
-	
-				var _y = building_conveyor_pos[1];
-				var _room_x = grid_to_pos_x(_x, _y);
-				var _room_y = grid_to_pos_y(_x, _y);
-				
-				build(_x, _y, buildings.conveyor, _dir)
-			}
+	break;
+	}
+}
+
+if (mouse_l){
+	switch (building_state)
+	{
+	case building_states.building:
+		
+	break;
+	case building_states.selecting:
+		if (mining_time >= mining_dur){
+			mine(grid_x, grid_y)
+			mining_time = 0;
 		}
 		else{
-			var _len = grid_y - building_conveyor_pos[1]
-			var _dir = sign(_len) + 1;
-			if (_len == 0){ _dir = selected_dir}
-			
-			for (var _y=min(grid_y, building_conveyor_pos[1]); _y <= max(grid_y, building_conveyor_pos[1]); _y++){
-				
-				var _x = building_conveyor_pos[0];
-				var _room_x = grid_to_pos_x(_x, _y);
-				var _room_y = grid_to_pos_y(_x, _y);
-				
-				build(_x, _y, buildings.conveyor, _dir)
-			}
+			mining_time++;
 		}
+	break;
+	case building_states.destroying:
+	
+	break;
 	}
+}
+else{
+	mining_time = 0;
+	mining_coord = [-1, -1]
 }
 
 if (mouse_r_l or selected_building != buildings.conveyor){
 	building_conveyors = false;
 	building_conveyor_pos = [-1, -1]
-}
-
-if (mouse_p_l){
-	if (building_state == building_states.building && !building_conveyors){
-		build(grid_x, grid_y, selected_building, selected_dir);
-	}
 }
 
 if keyboard_check_pressed(ord("R")){

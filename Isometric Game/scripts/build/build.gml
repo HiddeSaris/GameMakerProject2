@@ -60,12 +60,9 @@ function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1){
 			array_copy(objects_build, 0, obj_manager.object_buildings, 0, array_length(obj_manager.object_buildings));
 			array_pop(objects_build);
 			
-			array_copy(objects_mine, 0, obj_manager.object_mineables, 0, array_length(obj_manager.object_mineables));
-			
 			var _inst_build = instance_position(_room_x, _room_y, objects_build);
-			var _inst_mine = instance_position(_room_x, _room_y, objects_mine);
 			
-			if (_inst_build != noone or _inst_mine != noone){
+			if (_inst_build != noone){
 				return false;
 			}
 			
@@ -93,4 +90,16 @@ function build(_x, _y, _building, _dir){
 	else {
 		// cannot build
 	}
+}
+
+function mine(_x, _y){
+	var _object = obj_manager.ds_buildings[# _x, _y];
+	
+	switch (_object){
+		case buildings.tree:
+			obj_manager.ds_buildings[# _x, _y] = 0;
+		break;
+	}
+	
+	obj_manager.update_draw_surface();
 }

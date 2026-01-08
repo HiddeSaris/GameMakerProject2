@@ -10,7 +10,7 @@ global.can_click = true;
 
 seed = irandom(65535); 
 random_set_seed(seed);
-seed_x = seed & 0b0000000011111111; // get first 8 bits of seed
+seed_x =  seed & 0b0000000011111111; // get first 8 bits of seed
 seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
 
 octaves = 4;
@@ -59,11 +59,15 @@ global.down = [-5, 6];
 global.left = [-13, -2];
 global.middle = [-1, 4];
 
-object_mineables = [obj_tree];
+//object_mineables = [obj_tree];
 sprite_items = [spr_wood];
 sprite_buildings = [spr_spawner, spr_conveyor, spr_tree];
 object_buildings = [obj_spawner, obj_conveyor];
 conveyor_buildings = [obj_conveyor];
+
+mining_dur = 60;
+mining_time = 0;
+mining_coord = [-1, -1];
 
 enum building_states{
 	selecting,
@@ -169,7 +173,12 @@ function create_terrain(){
 			ds_hydration_index[# _xx, _yy] = 1
 			//ds_buildings[# _xx, _yy] =
 			
-			ds_veg_index[# _xx, _yy] = irandom(1) * irandom(sprite_get_number(spr_vegitation)) * (_result < tree_level && _result > sea_level) * ds_hydration_index[# _xx, _yy];
+			var _veg_height = (_result - sea_level) / (100 - sea_level);
+			var _veg_variance = 0.5;
+			//ds_veg_index[# _xx, _yy] = irandom(1) * irandom(sprite_get_number(spr_vegitation)) * (_result < tree_level && _result > sea_level) * ds_hydration_index[# _xx, _yy];
+			if (_result > sea_level && irandom(100) < 65){
+				ds_veg_index[# _xx, _yy] = (sqrt(_veg_height) + random(_veg_variance)) * sprite_get_number(spr_vegitation) * ds_hydration_index[# _xx, _yy];
+			}
 			
 			var room_x = grid_to_pos_x(_xx, _yy);
 			var room_y = grid_to_pos_y(_xx, _yy);
@@ -207,11 +216,10 @@ function save(){
 	buffer_write(_buffer, buffer_string, _str_data);
 	buffer_save(_buffer, _filename);
 	buffer_delete(_buffer);
-	
-	show_debug_message("game saved: " + _str_data);
 }
 
 function load(){
+	var _start_time = current_time;
 	var _filename = "savedata.json"
 	var _buffer = buffer_load(_filename);
 	var _str_data = buffer_read(_buffer, buffer_string);
@@ -223,7 +231,7 @@ function load(){
 	
 	seed = _data_manager.Seed;
 	random_set_seed(seed);
-	seed_x = seed & 0b0000000011111111; // get first 8 bits of seed
+	seed_x =  seed & 0b0000000011111111; // get first 8 bits of seed
 	seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
 	building_state = building_states.selecting;
 	

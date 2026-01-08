@@ -45,6 +45,5 @@
     {"name":"spr_vegitation","order":8,"path":"sprites/spr_vegitation/spr_vegitation.yy",},
     {"name":"spr_water","order":6,"path":"sprites/spr_water/spr_water.yy",},
     {"name":"spr_wood","order":13,"path":"sprites/spr_wood/spr_wood.yy",},
-    {"name":"warehouse","order":16,"path":"sprites/warehouse/warehouse.yy",},
   ],
 }

@@ -4,7 +4,6 @@ grid_x = pos_to_grid_x(mouse_x, mouse_y);
 grid_y = pos_to_grid_y(mouse_x, mouse_y);
 
 var can_click_terrain = global.can_click;
-var can_type = true;
 var can_scroll = global.can_scroll
 
 var mouse_l   = mouse_check_button(mb_left)&&can_click_terrain;
@@ -42,7 +41,7 @@ if (mouse_p_l && selected_building == buildings.conveyor){
 
 
 if (mouse_r_l && building_conveyors_prev){
-	if (can_build_now){
+	if (building_state == building_states.building && can_build_now){
 		if (building_conveyors_dir){
 			var _len = grid_x - building_conveyor_pos[0]
 			var _dir = -sign(_len) + 2;
@@ -80,32 +79,38 @@ if (mouse_r_l or selected_building != buildings.conveyor){
 }
 
 if (mouse_p_l){
-	if (!building_conveyors){
+	if (building_state == building_states.building && !building_conveyors){
 		build(grid_x, grid_y, selected_building, selected_dir);
 	}
 }
 
-if (keyboard_check_pressed(ord("R")) && can_type){
+if keyboard_check_pressed(ord("R")){
 	selected_dir++; 
 	selected_dir = selected_dir % 4;
 }
 
-if (keyboard_check_pressed(ord("E")) && can_type){
+if keyboard_check_pressed(ord("E")){
 	selected_building++;
 	if (selected_building >= buildings.COUNT){
 		selected_building = 0;
 	}
 }
 
-if (keyboard_check_pressed(ord("Q")) && can_type){
+if keyboard_check_pressed(ord("Q")){
 	selected_building--;
 	if (selected_building < 0){
 		selected_building = buildings.COUNT-1;
 	}
 }
 
+if keyboard_check_pressed(ord("K")){
+	save();
+}
+if keyboard_check_pressed(ord("L")){
+	load();
+}
 
-if (keyboard_check_pressed(vk_escape) && can_type){
+if keyboard_check_pressed(vk_escape){
 	game_end();
 }
 
@@ -136,8 +141,8 @@ if (wheel != 0){
 }
 
 
-var _hor = ((keyboard_check(vk_right) or keyboard_check(ord("D"))) - (keyboard_check(vk_left) or keyboard_check(ord("A"))))*can_type;
-var _ver = ((keyboard_check(vk_down) or keyboard_check(ord("S"))) - (keyboard_check(vk_up) or keyboard_check(ord("W"))))*can_type;
+var _hor = ((keyboard_check(vk_right) or keyboard_check(ord("D"))) - (keyboard_check(vk_left) or keyboard_check(ord("A")))) * delta_time / game_get_speed(gamespeed_microseconds);
+var _ver = ((keyboard_check(vk_down) or keyboard_check(ord("S"))) - (keyboard_check(vk_up) or keyboard_check(ord("W")))) * delta_time / game_get_speed(gamespeed_microseconds);
 
 cam_goto_x = cam_goto_x + (_hor * cam_width / 109);
 cam_goto_y = cam_goto_y + (_ver * cam_height / 123);

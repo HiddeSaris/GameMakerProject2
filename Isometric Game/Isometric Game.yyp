@@ -36,7 +36,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.1.210",
+    "IDEVersion":"2024.14.2.213",
   },
   "name":"Isometric Game",
   "resources":[
@@ -71,6 +71,7 @@
     {"id":{"name":"spr_vegitation","path":"sprites/spr_vegitation/spr_vegitation.yy",},},
     {"id":{"name":"spr_water","path":"sprites/spr_water/spr_water.yy",},},
     {"id":{"name":"spr_wood","path":"sprites/spr_wood/spr_wood.yy",},},
+    {"id":{"name":"warehouse","path":"sprites/warehouse/warehouse.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

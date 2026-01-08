@@ -2,7 +2,7 @@
   "$GMSprite":"v2",
   "%Name":"spr_warehouse",
   "bboxMode":0,
-  "bbox_bottom":48,
+  "bbox_bottom":47,
   "bbox_left":16,
   "bbox_right":49,
   "bbox_top":16,

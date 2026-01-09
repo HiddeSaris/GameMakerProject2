@@ -76,10 +76,12 @@ enum building_states{
 }
 
 enum buildings{
+	
 	spawner,
 	conveyor, 
 	tree,
-	COUNT
+	COUNT,
+	NONE,
 }
 
 enum items{
@@ -136,9 +138,9 @@ function update_draw_surface(){
 				draw_sprite(spr_dried_ground, 1, _draw_x, _draw_y);
 			}
 			
-			switch (_building){
+			switch (_building[0]){
 				case buildings.tree:
-					draw_sprite(sprite_buildings[_building], _hydration_index, _draw_x, _draw_y);
+					draw_sprite(sprite_buildings[_building[0]], _hydration_index, _draw_x, _draw_y);
 				break;
 				default:
 					draw_sprite(spr_vegitation, _veg_index, _draw_x, _draw_y);
@@ -184,9 +186,11 @@ function create_terrain(){
 			var room_y = grid_to_pos_y(_xx, _yy);
 			
 			if (_result>=tree_level && random(1) < 0.5){
-				ds_buildings[# _xx, _yy] = buildings.tree;
+				ds_buildings[# _xx, _yy] = [buildings.tree, 0];
 			}
-			
+			else {
+				ds_buildings[# _xx, _yy] = [buildings.NONE, 0];
+			}
 		}
 	}
 }

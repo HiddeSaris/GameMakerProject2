@@ -27,14 +27,12 @@ function grid_to_pos_y(_x, _y){
 }
 
 function pos_to_grid_x(_x, _y){
-	
-	var _grid_x = floor((mouse_x / iso_width) + (mouse_y / iso_height));
+    var _grid_x = floor(((_x / (iso_width * 0.5)) + (_y / (iso_height * 0.5))) * 0.5);
 	return clamp(_grid_x, 0, hcells - 1);
 }
 
 function pos_to_grid_y(_x, _y){
-	
-	var _grid_y = floor((mouse_y / iso_height) - (mouse_x / iso_width));
+    var _grid_y = floor(((_y / (iso_height * 0.5)) - (_x / (iso_width * 0.5))) * 0.5);
 	return clamp(_grid_y, 0, vcells - 1);
 }
 
@@ -84,8 +82,8 @@ function build(_x, _y, _building, _dir){
 		
 		var _inst = instance_position(_room_x, _room_y, all);
 		instance_destroy(_inst)
-		instance_create_depth(_room_x, _room_y, -_room_y, obj_manager.object_buildings[_building], {output_dir: _dir})
-		obj_manager.ds_veg_index[# _x, _y] = 0;
+		obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, obj_manager.object_buildings[_building], {output_dir: _dir}) ];
+		//obj_manager.ds_veg_index[# _x, _y] = 0;
 	}
 	else {
 		// cannot build

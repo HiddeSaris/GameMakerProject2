@@ -22,13 +22,12 @@ if (mouse_check_button_released(mb_left) //&& global.can_click
 	else{
 		obj_manager.selected_building = button;
 		obj_manager.building_state = building_states.building;
-		/*
+		
 		switch button{
 			case buildings.conveyor:
 				obj_manager.selected_building = buildings.conveyor;
 			break;
 		}
-		*/
 	}
 }
 

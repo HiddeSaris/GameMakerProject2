@@ -43,45 +43,45 @@ if (mining_coord[0] != grid_x or mining_coord[1] != grid_y){
 
 #region CONTROLS
 
-//if (mouse_p_l && selected_building == buildings.conveyor){
-//	building_conveyors = true;
-//	building_conveyor_pos = [grid_x, grid_y];
-//	building_conveyors_dir = selected_dir;
-//}
-//
-//
-//if (mouse_r_l && building_conveyors_prev){
-//	if (building_state == building_states.building && can_build_now){
-//		if (building_conveyors_dir){
-//			var _len = grid_x - building_conveyor_pos[0]
-//			var _dir = -sign(_len) + 2;
-//			if (_len == 0){ _dir = selected_dir}
-//	
-//			for (var _x=min(grid_x, building_conveyor_pos[0]); _x <= max(grid_x, building_conveyor_pos[0]); _x++){
-//	
-//				var _y = building_conveyor_pos[1];
-//				var _room_x = grid_to_pos_x(_x, _y);
-//				var _room_y = grid_to_pos_y(_x, _y);
-//				
-//				build(_x, _y, buildings.conveyor, _dir)
-//			}
-//		}
-//		else{
-//			var _len = grid_y - building_conveyor_pos[1]
-//			var _dir = sign(_len) + 1;
-//			if (_len == 0){ _dir = selected_dir}
-//			
-//			for (var _y=min(grid_y, building_conveyor_pos[1]); _y <= max(grid_y, building_conveyor_pos[1]); _y++){
-//				
-//				var _x = building_conveyor_pos[0];
-//				var _room_x = grid_to_pos_x(_x, _y);
-//				var _room_y = grid_to_pos_y(_x, _y);
-//				
-//				build(_x, _y, buildings.conveyor, _dir)
-//			}
-//		}
-//	}
-//}
+if (mouse_p_l && selected_building == buildings.conveyor){
+	building_conveyors = true;
+	building_conveyor_pos = [grid_x, grid_y];
+	building_conveyors_dir = selected_dir;
+}
+
+
+if (mouse_r_l && building_conveyors_prev){
+	if (building_state == building_states.building && can_build_now){
+		if (building_conveyors_dir){
+			var _len = grid_x - building_conveyor_pos[0]
+			var _dir = -sign(_len) + 2;
+			if (_len == 0){ _dir = selected_dir}
+	
+			for (var _x=min(grid_x, building_conveyor_pos[0]); _x <= max(grid_x, building_conveyor_pos[0]); _x++){
+	
+				var _y = building_conveyor_pos[1];
+				var _room_x = grid_to_pos_x(_x, _y);
+				var _room_y = grid_to_pos_y(_x, _y);
+				
+				build(_x, _y, buildings.conveyor, _dir)
+			}
+		}
+		else{
+			var _len = grid_y - building_conveyor_pos[1]
+			var _dir = sign(_len) + 1;
+			if (_len == 0){ _dir = selected_dir}
+			
+			for (var _y=min(grid_y, building_conveyor_pos[1]); _y <= max(grid_y, building_conveyor_pos[1]); _y++){
+				
+				var _x = building_conveyor_pos[0];
+				var _room_x = grid_to_pos_x(_x, _y);
+				var _room_y = grid_to_pos_y(_x, _y);
+				
+				build(_x, _y, buildings.conveyor, _dir)
+			}
+		}
+	}
+}
 
 if (mouse_p_l){
 	switch (building_state)

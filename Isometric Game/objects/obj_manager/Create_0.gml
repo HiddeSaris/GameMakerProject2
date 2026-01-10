@@ -36,6 +36,7 @@ sea_level = 30;
 tree_level = 60;
 
 surface_tiles = -1; // surface for all tiles to draw them all at once for performance
+update_surface = false;
 
 cam_width = camera_get_view_width(view_camera[0]);
 cam_height = camera_get_view_height(view_camera[0]); 
@@ -52,6 +53,8 @@ mouse_y_prev = mouse_y;
 
 indicator_x = -1;
 indicator_y = -1;
+
+inv_items = array_create(items.COUNT, 0);
 
 can_build_now = true;
 
@@ -72,9 +75,9 @@ global.middle = [-1, 4];
 
 //object_mineables = [obj_tree];
 sprite_items = [spr_wood];
-sprite_buildings = [spr_spawner, spr_conveyor, spr_tree];
-object_buildings = [obj_spawner, obj_conveyor];
-conveyor_buildings = [obj_conveyor];
+sprite_buildings = [spr_spawner, spr_conveyor, spr_warehouse, spr_tree];
+object_buildings = [obj_spawner, obj_conveyor, obj_warehouse];
+conveyor_buildings = [buildings.conveyor, buildings.warehouse]; // buildings that can input items
 
 mining_dur = 60;
 mining_time = 0;
@@ -90,6 +93,7 @@ enum buildings{
 	
 	spawner,
 	conveyor, 
+	warehouse,
 	tree,
 	COUNT,
 	NONE,
@@ -101,6 +105,8 @@ enum items{
 	//meat,
 	//fiber,
 	//iron,
+	COUNT,
+	NONE,
 }
 
 enum dir{

@@ -23,7 +23,8 @@ debug_fps_real = fps_real;
 
 if (keyboard_check_pressed(ord("I"))){
 	if (not dbg_view_exists(inspector)){
-		inspector = dbg_view("Debug View", true, -1, -1, 200, 200);
+		inspector = dbg_view("Debug View", true, -1, -1, 200, 240);
+		// section variables
 		dbg_section("Variables");
 	
 		dbg_text("FPS:");
@@ -50,6 +51,10 @@ if (keyboard_check_pressed(ord("I"))){
 		dbg_text("Gui height:");
 		dbg_same_line();
 		dbg_text(ref_create(self, "gui_height"));
+		
+		// section inventory
+		dbg_section("Inventory");
+		dbg_text_input(ref_create(self, "inv_items", items.wood), "Wood:", "i");
 	}
 	else {
 		dbg_view_delete(inspector)

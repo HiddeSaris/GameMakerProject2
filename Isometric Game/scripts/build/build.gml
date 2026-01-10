@@ -52,19 +52,14 @@ function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1){
 			
 			var _room_x = grid_to_pos_x(_xx, _yy);
 			var _room_y = grid_to_pos_y(_xx, _yy);
-			var objects_build = [];
-			var objects_mine = [];
 			
-			array_copy(objects_build, 0, obj_manager.object_buildings, 0, array_length(obj_manager.object_buildings));
-			array_pop(objects_build);
+			var object = obj_manager.ds_buildings[# _xx, _yy];
 			
-			var _inst_build = instance_position(_room_x, _room_y, objects_build);
+			var can_place_on_conveyor = [buildings.conveyor, buildings.spawner];
 			
-			if (_inst_build != noone){
-				return false;
-			}
-			
-			if (_inst_build != noone && _building = buildings.conveyor && object_get_name(_inst_build.object_index) != "obj_conveyor"){
+			if (object[0] != buildings.NONE 
+				and (object[0] != buildings.conveyor or not array_contains(can_place_on_conveyor, _building)) ){
+				
 				return false;
 			}
 		}
@@ -80,8 +75,11 @@ function build(_x, _y, _building, _dir){
 	
 	if (can_build(_building, _x, _y)){
 		
-		var _inst = instance_position(_room_x, _room_y, all);
-		instance_destroy(_inst)
+		var object = obj_manager.ds_buildings[# _x, _y]
+		if (object[0] != buildings.NONE){
+			instance_destroy(object[1])
+			obj_manager.ds_buildings[# _x, _y] = [buildings.NONE, 0];
+		}
 		obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, obj_manager.object_buildings[_building], {output_dir: _dir}) ];
 		//obj_manager.ds_veg_index[# _x, _y] = 0;
 	}
@@ -93,11 +91,12 @@ function build(_x, _y, _building, _dir){
 function mine(_x, _y){
 	var _object = obj_manager.ds_buildings[# _x, _y];
 	
-	switch (_object){
+	switch (_object[0]){
 		case buildings.tree:
-			obj_manager.ds_buildings[# _x, _y] = 0;
+			obj_manager.ds_buildings[# _x, _y] = [buildings.NONE, 0];
+			obj_manager.inv_items[items.wood]++;
 		break;
 	}
 	
-	obj_manager.update_draw_surface();
+	obj_manager.update_surface = true;
 }

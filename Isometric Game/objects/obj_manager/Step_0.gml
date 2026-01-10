@@ -16,6 +16,48 @@ var mouse_r_r = mouse_check_button_released(mb_right)&&can_click_terrain;
 
 #endregion
 
+#region DEBUG VIEW
+
+debug_fps = fps;
+debug_fps_real = fps_real;
+
+if (keyboard_check_pressed(ord("I"))){
+	if (not dbg_view_exists(inspector)){
+		inspector = dbg_view("Debug View", true, -1, -1, 200, 200);
+		dbg_section("Variables");
+	
+		dbg_text("FPS:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "debug_fps"));
+		dbg_text("Real FPS:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "debug_fps_real"));
+	
+		dbg_text("Seed:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "seed"));
+	
+		dbg_text("Grid x:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "grid_x"));
+		dbg_text("Grid y:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "grid_y"));
+	
+		dbg_text("Gui width:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "gui_width"));
+		dbg_text("Gui height:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "gui_height"));
+	}
+	else {
+		dbg_view_delete(inspector)
+	}
+}
+
+#endregion
+
 #region CAN BUILD
 
 if (building_conveyors){

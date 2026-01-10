@@ -11,7 +11,13 @@ var _draw_y = grid_to_pos_y(grid_x, grid_y);
 
 
 // draw indicator
-draw_sprite(spr_indicator, 0, _draw_x, _draw_y)
+if (indicator_x == -1 && indicator_y == -1){
+	indicator_x = mouse_x; // begin game
+	indicator_y = mouse_y; // init variables
+}
+indicator_x = lerp(indicator_x, _draw_x, 0.3);
+indicator_y = lerp(indicator_y, _draw_y, 0.3);
+draw_sprite(spr_indicator, 0, indicator_x, indicator_y);
 
 // draw preview
 var col;
@@ -55,5 +61,5 @@ if (mouse_check_button(mb_left)){
 	}
 }
 else if (building_state == building_states.building){ // draw preview
-	draw_sprite_ext(object_get_sprite(object_buildings[selected_building]), selected_dir, _draw_x, _draw_y, 1, 1, 0, col, 1);
+	draw_sprite_ext(object_get_sprite(object_buildings[selected_building]), selected_dir, indicator_x, indicator_y, 1, 1, 0, col, 1);
 }

@@ -1,8 +1,16 @@
 #region EXTRA VARIABLES
 
 randomise();
-//show_debug_overlay(true, false)
-display_set_gui_size(960, 540)
+
+show_debug_overlay(false, false);
+inspector = undefined;
+debug_fps = fps;
+debug_fps_real = fps_real;
+
+gui_width = 960;
+gui_height = 540;
+
+display_set_gui_size(gui_width, gui_height);
 cursor_sprite = spr_cursor;
 
 global.can_scroll = true;
@@ -16,13 +24,13 @@ seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add 
 octaves = 4;
 frequency = 0.03;
 
-#macro hcells 300
-#macro vcells 300
+#macro hcells 100
+#macro vcells 100
 #macro iso_width 32 // width of the top of the spr_iso_floor (minus 2 because of stacking)
 #macro iso_height 16 // height of the top of the spr_iso_floor (minus 1 because of stacking)
 
-grid_x = 0; //Where is the mouse on the grid?
-grid_y = 0; //Where is the mouse on the grid?
+grid_x = pos_to_grid_x(mouse_x, mouse_y); //Where is the mouse on the grid?
+grid_y = pos_to_grid_y(mouse_x, mouse_y); //Where is the mouse on the grid?
 
 sea_level = 30;
 tree_level = 60;
@@ -41,6 +49,9 @@ cam_goto_x = cam_x;
 cam_goto_y = cam_y;
 mouse_x_prev = mouse_x;
 mouse_y_prev = mouse_y;
+
+indicator_x = -1;
+indicator_y = -1;
 
 can_build_now = true;
 

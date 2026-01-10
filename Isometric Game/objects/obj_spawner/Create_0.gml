@@ -8,7 +8,7 @@ dist_items = 8.05;
 conveyor_speed = 0.03;
 
 spawn_timer = 0;
-spawn_dur = 3 * 60;
+spawn_dur = 6 * 60;
 
 spawn_item = items.wood;
 inv_items = [];

@@ -150,14 +150,11 @@ function update_draw_surface(){
 				draw_sprite(spr_water, 1, _draw_x, _draw_y);
 			}
 			else{
-				draw_sprite(spr_dried_ground, 1, _draw_x, _draw_y);
+				draw_sprite(spr_grass, 1, _draw_x, _draw_y);
 			}
 			
 			switch (_building[0]){
-				case buildings.tree:
-					//draw_sprite(sprite_buildings[_building[0]], _hydration_index, _draw_x, _draw_y);
-				break;
-				default:
+				case buildings.NONE:
 					draw_sprite(spr_vegitation, _veg_index, _draw_x, _draw_y);
 				break;
 			}

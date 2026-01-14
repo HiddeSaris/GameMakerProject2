@@ -6,7 +6,7 @@ image_index = output_dir;
 
 
 dist_items = 8.05;
-conveyor_speed = 0.03;
+conveyor_speed = 0.06;
 
 inv_items = [];
 
@@ -38,6 +38,13 @@ function can_add_item(_input_dir){
 
 function add_item(item, _input_dir){
 	array_push(inv_items, [item[0], dir_coords[_input_dir][0], dir_coords[_input_dir][1]]);
+}
+
+function get_data() {
+	return {
+		output_dir : output_dir,
+		inv_items : inv_items,
+	}
 }
 
 function move_items(){

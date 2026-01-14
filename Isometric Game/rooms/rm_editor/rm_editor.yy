@@ -13,11 +13,13 @@
     {"name":"inst_1B3A74F9","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_603944C","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_5F118FF4","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_621E46B6","path":"rooms/rm_editor/rm_editor.yy",},
   ],
   "isDnd":false,
   "layers":[
     {"$GMRInstanceLayer":"","%Name":"Instances","depth":0,"effectEnabled":true,"effectType":"_filter_vignette","gridX":16,"gridY":16,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_1EEE8282","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1EEE8282","objectId":{"name":"obj_manager","path":"objects/obj_manager/obj_manager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":128.0,"y":-160.0,},
+        {"$GMRInstance":"v4","%Name":"inst_621E46B6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_621E46B6","objectId":{"name":"obj_indicator","path":"objects/obj_indicator/obj_indicator.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":112.0,"y":-96.0,},
       ],"layers":[],"name":"Instances","properties":[
         {"name":"g_VignetteEdges","type":0,"value":"0.9",},
         {"name":"g_VignetteEdges","type":0,"value":"2",},

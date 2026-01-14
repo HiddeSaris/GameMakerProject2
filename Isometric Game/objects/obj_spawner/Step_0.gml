@@ -1,4 +1,3 @@
-// spawn timer
 spawn_timer++;
 
 if (spawn_timer > spawn_dur && array_length(inv_items) = 0){

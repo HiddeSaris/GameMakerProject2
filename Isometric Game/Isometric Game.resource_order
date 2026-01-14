@@ -5,7 +5,6 @@
     {"name":"_old","order":8,"path":"folders/Objects/_old.yy",},
     {"name":"buildings","order":4,"path":"folders/Objects/buildings.yy",},
     {"name":"gui","order":7,"path":"folders/Objects/gui.yy",},
-    {"name":"mineables","order":5,"path":"folders/Objects/mineables.yy",},
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
     {"name":"Scripts","order":5,"path":"folders/Scripts.yy",},
     {"name":"Sounds","order":3,"path":"folders/Sounds.yy",},
@@ -15,7 +14,10 @@
   ],
   "ResourceOrderSettings":[
     {"name":"obj_build_menu","order":1,"path":"objects/obj_build_menu/obj_build_menu.yy",},
+    {"name":"obj_indicator","order":4,"path":"objects/obj_indicator/obj_indicator.yy",},
+    {"name":"obj_lumberjack_shack","order":3,"path":"objects/obj_lumberjack_shack/obj_lumberjack_shack.yy",},
     {"name":"obj_spawner","order":1,"path":"objects/obj_spawner/obj_spawner.yy",},
+    {"name":"obj_tree","order":5,"path":"objects/obj_tree/obj_tree.yy",},
     {"name":"obj_warehouse","order":2,"path":"objects/obj_warehouse/obj_warehouse.yy",},
     {"name":"RoomUI","order":16,"path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"build","order":1,"path":"scripts/build/build.yy",},

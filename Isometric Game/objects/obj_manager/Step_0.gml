@@ -20,6 +20,7 @@ var mouse_r_r = mouse_check_button_released(mb_right)&&can_click_terrain;
 
 debug_fps = fps;
 debug_fps_real = fps_real;
+debug_num_instances = instance_number(all);
 
 if (keyboard_check_pressed(ord("I"))){
 	if (not dbg_view_exists(inspector)){
@@ -33,6 +34,10 @@ if (keyboard_check_pressed(ord("I"))){
 		dbg_text("Real FPS:");
 		dbg_same_line();
 		dbg_text(ref_create(self, "debug_fps_real"));
+	
+		dbg_text("Instances:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "debug_num_instances"));
 	
 		dbg_text("Seed:");
 		dbg_same_line();
@@ -74,7 +79,7 @@ if (building_conveyors){
 	}
 }
 else{
-	can_build_now = can_build(buildings.conveyor, grid_x, grid_y)
+	can_build_now = can_build(selected_building, grid_x, grid_y)
 }
 
 #endregion

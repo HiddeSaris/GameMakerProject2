@@ -93,6 +93,7 @@ function mine(_x, _y){
 	
 	switch (_object[0]){
 		case buildings.tree:
+			instance_destroy(_object[1]);
 			obj_manager.ds_buildings[# _x, _y] = [buildings.NONE, 0];
 			obj_manager.inv_items[items.wood]++;
 		break;

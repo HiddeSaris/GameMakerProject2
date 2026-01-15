@@ -80,7 +80,7 @@ function build(_x, _y, _building, _dir){
 			instance_destroy(object[1])
 			obj_manager.ds_buildings[# _x, _y] = [buildings.NONE, 0];
 		}
-		obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, obj_manager.object_buildings[_building], {output_dir: _dir}) ];
+		obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, object_buildings[_building], {output_dir: _dir}) ];
 		//obj_manager.ds_veg_index[# _x, _y] = 0;
 	}
 	else {

@@ -10,7 +10,7 @@ conveyor_speed = 0.06;
 
 inv_items = [];
 
-dir_coords = [global.up, global.right, global.down, global.left];
+dir_coords = [UP, RIGHT, DOWN, LEFT];
 
 function item_can_move(item){
 	var _x = item[1];
@@ -72,7 +72,7 @@ function move_items(){
 			var _next_conveyor = obj_manager.ds_buildings[# _grid_x + _dif[0], _grid_y + _dif[1]];
 			var _next_conveyor_input = (output_dir+2) % 4
 			
-			var is_conveyor_building = array_contains(obj_manager.conveyor_buildings, _next_conveyor[0]);
+			var is_conveyor_building = array_contains(conveyor_buildings, _next_conveyor[0]);
 			
 			if (is_conveyor_building && _next_conveyor[1].can_add_item(_next_conveyor_input)){
 				show_debug_message(string(_grid_x) + ", " + string(_grid_y))

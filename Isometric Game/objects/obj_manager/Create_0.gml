@@ -65,17 +65,17 @@ building_state = building_states.selecting;
 selected_building = buildings.spawner;
 selected_dir = dir.up
 
-global.up = [11, -2];
-global.right = [3, 6];
-global.down = [-5, 6];
-global.left = [-13, -2];
-global.middle = [-1, 4];
+#macro UP [11, -2]
+#macro RIGHT [3, 6]
+#macro DOWN [-5, 6]
+#macro LEFT [-13, -2]
+#macro MIDDLE [-1, 4]
 
-//object_mineables = [obj_tree];
-sprite_items = [spr_wood];
-sprite_buildings = [spr_spawner, spr_conveyor, spr_warehouse, spr_tree];
-object_buildings = [obj_spawner, obj_conveyor, obj_warehouse, obj_tree];
-conveyor_buildings = [buildings.conveyor, buildings.warehouse]; // buildings that can input items
+#macro sprite_items [spr_wood]
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_warehouse, spr_tree]
+#macro object_buildings [obj_spawner, obj_conveyor, obj_warehouse, obj_tree]
+#macro size_buildings [[1, 1], [1, 1], [1, 1], [1, 1], [2, 1]]
+#macro conveyor_buildings [buildings.conveyor, buildings.warehouse] // buildings that can input items
 
 mining_dur = 60;
 mining_time = 0;
@@ -92,8 +92,10 @@ enum buildings{
 	spawner,
 	conveyor, 
 	warehouse,
+	lumberjack,
 	tree,
 	COUNT,
+	ref,
 	NONE,
 }
 
@@ -207,6 +209,20 @@ function create_terrain(){
 	}
 }
 
+function get_building(_x, _y){
+	var _building = ds_buildings[# _x, _y];
+	var _type = _building[0];
+	
+	if (_type != buildings.ref){
+		return _building;
+	}
+	
+	var _xx = _building[1][0];
+	var _yy = _building[1][1];
+	
+	return ds_buildings[# _xx, _yy];
+}
+
 function remove_objects(){
 	for (var _yy = 0; _yy < vcells; _yy ++){
 		for (var _xx = 0; _xx < hcells; _xx ++){
@@ -256,6 +272,7 @@ function save(_filename = "savedata.json"){
 	save_objects();
 	
 	var _data_manager = {
+		Date : date_current_datetime(),
 		Seed : seed,
 		Inv_items : inv_items,
 	}
@@ -272,8 +289,19 @@ function save(_filename = "savedata.json"){
 	buffer_delete(_buffer);
 }
 
+function save_get_date(_filename = "savedata.json"){
+	var _buffer = buffer_load(_filename);
+	var _str_data = buffer_read(_buffer, buffer_string);
+	buffer_delete(_buffer);
+	
+	var _load_data = json_parse(_str_data);
+	
+	var _data_manager = _load_data[0];
+	
+	return _data_manager.Date;
+}
+
 function load(_filename = "savedata.json"){
-	var _start_time = current_time;
 	var _buffer = buffer_load(_filename);
 	var _str_data = buffer_read(_buffer, buffer_string);
 	buffer_delete(_buffer);
@@ -300,5 +328,7 @@ function load(_filename = "savedata.json"){
 	update_draw_surface();
 	load_objects();
 }
+
+show_debug_message("date: " + date_datetime_string(save_get_date()))
 
 #endregion

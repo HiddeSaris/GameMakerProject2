@@ -6,6 +6,7 @@ show_debug_overlay(false, false);
 inspector = undefined;
 debug_fps = fps;
 debug_fps_real = fps_real;
+debug_num_instances = instance_number(all);
 
 gui_width = 960;
 gui_height = 540;
@@ -22,10 +23,10 @@ seed_x =  seed & 0b0000000011111111; // get first 8 bits of seed
 seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
 
 octaves = 4;
-frequency = 0.03;
+frequency = 0.04;
 
-#macro hcells 100
-#macro vcells 100
+#macro hcells 150
+#macro vcells 150
 #macro iso_width 32 // width of the top of the spr_iso_floor (minus 2 because of stacking)
 #macro iso_height 16 // height of the top of the spr_iso_floor (minus 1 because of stacking)
 
@@ -51,9 +52,6 @@ cam_goto_y = cam_y;
 mouse_x_prev = mouse_x;
 mouse_y_prev = mouse_y;
 
-indicator_x = -1;
-indicator_y = -1;
-
 inv_items = array_create(items.COUNT, 0);
 
 can_build_now = true;
@@ -76,7 +74,7 @@ global.middle = [-1, 4];
 //object_mineables = [obj_tree];
 sprite_items = [spr_wood];
 sprite_buildings = [spr_spawner, spr_conveyor, spr_warehouse, spr_tree];
-object_buildings = [obj_spawner, obj_conveyor, obj_warehouse];
+object_buildings = [obj_spawner, obj_conveyor, obj_warehouse, obj_tree];
 conveyor_buildings = [buildings.conveyor, buildings.warehouse]; // buildings that can input items
 
 mining_dur = 60;
@@ -152,14 +150,11 @@ function update_draw_surface(){
 				draw_sprite(spr_water, 1, _draw_x, _draw_y);
 			}
 			else{
-				draw_sprite(spr_dried_ground, 1, _draw_x, _draw_y);
+				draw_sprite(spr_grass, 1, _draw_x, _draw_y);
 			}
 			
 			switch (_building[0]){
-				case buildings.tree:
-					draw_sprite(sprite_buildings[_building[0]], _hydration_index, _draw_x, _draw_y);
-				break;
-				default:
+				case buildings.NONE:
 					draw_sprite(spr_vegitation, _veg_index, _draw_x, _draw_y);
 				break;
 			}
@@ -203,10 +198,46 @@ function create_terrain(){
 			var room_y = grid_to_pos_y(_xx, _yy);
 			
 			if (_result>=tree_level && random(1) < 0.5){
-				ds_buildings[# _xx, _yy] = [buildings.tree, 0];
+				ds_buildings[# _xx, _yy] = [buildings.tree, instance_create_depth(room_x, room_y, -room_y, obj_tree), {}];
 			}
 			else {
-				ds_buildings[# _xx, _yy] = [buildings.NONE, 0];
+				ds_buildings[# _xx, _yy] = [buildings.NONE, 0, {}];
+			}
+		}
+	}
+}
+
+function remove_objects(){
+	for (var _yy = 0; _yy < vcells; _yy ++){
+		for (var _xx = 0; _xx < hcells; _xx ++){
+			instance_destroy(ds_buildings[# _xx, _yy][1]);
+			ds_buildings[# _xx, _yy] = [buildings.NONE, 0];
+		}
+	}
+}
+
+function save_objects(){
+	for (var _yy = 0; _yy < vcells; _yy ++){
+		for (var _xx = 0; _xx < hcells; _xx ++){
+			var _object = ds_buildings[# _xx, _yy];
+			if (_object[0] != buildings.NONE){
+				var _data = _object[1].get_data();
+				ds_buildings[# _xx, _yy][2] = _data;
+			}
+		}
+	}
+}
+
+function load_objects(){
+	for (var _yy = 0; _yy < vcells; _yy ++){
+		for (var _xx = 0; _xx < hcells; _xx ++){
+			
+			var room_x = grid_to_pos_x(_xx, _yy);
+			var room_y = grid_to_pos_y(_xx, _yy);
+			
+			var _object = ds_buildings[# _xx, _yy];
+			if (_object[0] != buildings.NONE){
+				ds_buildings[# _xx, _yy][1] = instance_create_depth(room_x, room_y, -room_y, object_buildings[_object[0]], _object[2]);
 			}
 		}
 	}
@@ -219,11 +250,14 @@ update_draw_surface();
 
 #region SAVE
 
-function save(){
+function save(_filename = "savedata.json"){
 	var _data = array_create(0);
+	
+	save_objects();
 	
 	var _data_manager = {
 		Seed : seed,
+		Inv_items : inv_items,
 	}
 	array_push(_data, _data_manager);
 	array_push(_data, grid_to_struct(ds_data));
@@ -231,7 +265,6 @@ function save(){
 	array_push(_data, grid_to_struct(ds_veg_index));
 	array_push(_data, grid_to_struct(ds_buildings));
 	
-	var _filename = "savedata.json"
 	var _str_data = json_stringify(_data);
 	var _buffer = buffer_create(string_byte_length(_str_data)+1, buffer_fixed, 1);
 	buffer_write(_buffer, buffer_string, _str_data);
@@ -239,14 +272,15 @@ function save(){
 	buffer_delete(_buffer);
 }
 
-function load(){
+function load(_filename = "savedata.json"){
 	var _start_time = current_time;
-	var _filename = "savedata.json"
 	var _buffer = buffer_load(_filename);
 	var _str_data = buffer_read(_buffer, buffer_string);
 	buffer_delete(_buffer);
 	
 	var _load_data = json_parse(_str_data);
+	
+	remove_objects();
 	
 	var _data_manager = _load_data[0];
 	
@@ -256,12 +290,15 @@ function load(){
 	seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
 	building_state = building_states.selecting;
 	
+	inv_items = _data_manager.Inv_items;
+	
 	ds_grid_copy(ds_data, struct_to_grid(_load_data[1]));
 	ds_grid_copy(ds_hydration_index, struct_to_grid(_load_data[2]));
 	ds_grid_copy(ds_veg_index, struct_to_grid(_load_data[3]));
 	ds_grid_copy(ds_buildings, struct_to_grid(_load_data[4]));
 	
 	update_draw_surface();
+	load_objects();
 }
 
 #endregion

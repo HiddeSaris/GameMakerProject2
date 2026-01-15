@@ -31,6 +31,7 @@
     {"name":"spr_indicator","order":10,"path":"sprites/spr_indicator/spr_indicator.yy",},
     {"name":"spr_iso_sand","order":2,"path":"sprites/spr_iso_sand/spr_iso_sand.yy",},
     {"name":"spr_iso_water","order":3,"path":"sprites/spr_iso_water/spr_iso_water.yy",},
+    {"name":"spr_lumberjackshack","order":17,"path":"sprites/spr_lumberjackshack/spr_lumberjackshack.yy",},
     {"name":"spr_spawner","order":12,"path":"sprites/spr_spawner/spr_spawner.yy",},
     {"name":"spr_tree","order":9,"path":"sprites/spr_tree/spr_tree.yy",},
     {"name":"spr_ui_button_navigator","order":1,"path":"sprites/spr_ui_button_navigator/spr_ui_button_navigator.yy",},

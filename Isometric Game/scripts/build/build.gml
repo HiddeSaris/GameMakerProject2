@@ -16,6 +16,32 @@ function dir_to_move(_dir){
 	}
 }
 
+function building_begin_x(_x, _y, _building, _dir){
+	switch (_dir){
+	case dir.up:
+		return _x + placement_building[_building][0] - size_buildings[_building][0];
+	case dir.right:
+		return _x + 1 - placement_building[_building][1];
+	case dir.down:
+		return _x + 1 - placement_building[_building][0];
+	case dir.left:
+		return _x + placement_building[_building][1] - size_buildings[_building][1];
+	}
+}
+
+function building_begin_y(_x, _y, _building, _dir){
+	switch (_dir){
+	case dir.up:
+		return _y + placement_building[_building][1] - size_buildings[_building][1];
+	case dir.right:
+		return _y + 1 - placement_building[_building][0];
+	case dir.down:
+		return _y + 1 - placement_building[_building][1];
+	case dir.left:
+		return _y + placement_building[_building][0] - size_buildings[_building][0];
+	}
+}
+
 function grid_to_pos_x(_x, _y){
 
 	return (_x - _y) * (iso_width / 2);
@@ -73,40 +99,14 @@ function build(_x, _y, _building, _dir){
 	if (not can_build(_building, _x, _y)){
 		return;
 	}
-	var x_beg = -1;
-	var y_beg = -1;
-	var x_size = -1;
-	var y_size = -1;
-	switch (_dir){
-	case dir.up:
-		x_beg = _x + placement_building[_building][0] - size_buildings[_building][0];
-		y_beg = _y + placement_building[_building][1] - size_buildings[_building][1];
-		x_size = size_buildings[_building][0];
-		y_size = size_buildings[_building][1];
-	break;
-	case dir.right:
-		x_beg = _x + 1 - placement_building[_building][1];
-		y_beg = _y + 1 - placement_building[_building][0];
-		x_size = size_buildings[_building][1];
-		y_size = size_buildings[_building][0];
-	break;
-	case dir.down:
-		x_beg = _x + 1 - placement_building[_building][0];
-		y_beg = _y + 1 - placement_building[_building][1];
-		x_size = size_buildings[_building][0];
-		y_size = size_buildings[_building][1];
-	break;
-	case dir.left:
-		x_beg = _x + placement_building[_building][1] - size_buildings[_building][1];
-		y_beg = _y + placement_building[_building][0] - size_buildings[_building][0];
-		x_size = size_buildings[_building][1];
-		y_size = size_buildings[_building][0];
-	break;
-	}
+	var x_beg = building_begin_x(_x, _y, _building, _dir);
+	var y_beg = building_begin_y(_x, _y, _building, _dir);
+	var x_size = size_buildings[_building][_dir%2];
+	var y_size = size_buildings[_building][(_dir+1)%2];
+	
 	for (var _xx = x_beg; _xx < x_beg + x_size; _xx++){
 		for (var _yy = y_beg; _yy < y_beg + y_size; _yy++){
-			
-			var object = obj_manager.ds_buildings[# _x, _y]
+			var object = obj_manager.ds_buildings[# _xx, _yy]
 			if (object[0] != buildings.NONE){
 				destroy_building(_xx, _yy);
 			}
@@ -117,10 +117,10 @@ function build(_x, _y, _building, _dir){
 			}
 			else{
 				obj_manager.ds_buildings[# _xx, _yy] = [ buildings.ref,  [_x, _y], {}]
-				show_debug_message(string(_xx) + string(_yy));
 			}
 		}
 	}
+	obj_manager.update_draw_surface(); ////////////////////////////////////////////
 }
 
 function destroy_building(_x, _y) {

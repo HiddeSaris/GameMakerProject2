@@ -161,6 +161,9 @@ function update_draw_surface(){
 				case buildings.NONE:
 					draw_sprite(spr_vegitation, _veg_index, _draw_x, _draw_y);
 				break;
+				case buildings.ref:
+					draw_sprite(spr_indicator, 0, _draw_x, _draw_y)
+				break;
 			}
 			
 		}
@@ -269,6 +272,10 @@ update_draw_surface();
 #region SAVE
 
 function save(_filename = "savedata.json"){
+	if (os_type == os_gxgames or os_browser != browser_not_a_browser){
+		return false;
+	}
+	
 	var _data = array_create(0);
 	
 	save_objects();
@@ -292,6 +299,9 @@ function save(_filename = "savedata.json"){
 }
 
 function save_get_date(_filename = "savedata.json"){
+	if (os_type == os_gxgames or os_browser != browser_not_a_browser){
+		return false;
+	}
 	var _buffer = buffer_load(_filename);
 	var _str_data = buffer_read(_buffer, buffer_string);
 	buffer_delete(_buffer);
@@ -304,6 +314,9 @@ function save_get_date(_filename = "savedata.json"){
 }
 
 function load(_filename = "savedata.json"){
+	if (os_type == os_gxgames or os_browser != browser_not_a_browser){
+		return false;
+	}
 	var _buffer = buffer_load(_filename);
 	var _str_data = buffer_read(_buffer, buffer_string);
 	buffer_delete(_buffer);
@@ -330,7 +343,5 @@ function load(_filename = "savedata.json"){
 	update_draw_surface();
 	load_objects();
 }
-
-show_debug_message("date: " + date_datetime_string(save_get_date()))
 
 #endregion

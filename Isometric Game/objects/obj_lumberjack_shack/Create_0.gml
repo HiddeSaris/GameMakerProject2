@@ -23,8 +23,8 @@ dir_coords = [UP, RIGHT, DOWN, LEFT];
 function chop_wood(){
 	var begin_x = clamp(grid_x - chop_radius, 0, hcells);
 	var begin_y = clamp(grid_y - chop_radius, 0, vcells);
-	var end_x = clamp(grid_x + chop_radius, 0, hcells);
-	var end_y = clamp(grid_y + chop_radius, 0, vcells);
+	var end_x = clamp(grid_x + chop_radius + 1, 0, hcells);
+	var end_y = clamp(grid_y + chop_radius + 1, 0, vcells);
 	
 	var trees = []; // find all trees
 	for (var _x = begin_x; _x < end_x; _x++){

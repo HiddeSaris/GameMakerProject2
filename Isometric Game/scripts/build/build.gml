@@ -79,8 +79,8 @@ function build(_x, _y, _building, _dir){
 	var y_size = -1;
 	switch (_dir){
 	case dir.up:
-		x_beg = _x + 1 - placement_building[_building][0];
-		y_beg = _y + 1 - placement_building[_building][1];
+		x_beg = _x + placement_building[_building][0] - size_buildings[_building][0];
+		y_beg = _y + placement_building[_building][1] - size_buildings[_building][1];
 		x_size = size_buildings[_building][0];
 		y_size = size_buildings[_building][1];
 	break;
@@ -91,8 +91,8 @@ function build(_x, _y, _building, _dir){
 		y_size = size_buildings[_building][0];
 	break;
 	case dir.down:
-		x_beg = _x + placement_building[_building][0] - size_buildings[_building][0];
-		y_beg = _y + placement_building[_building][1] - size_buildings[_building][1];
+		x_beg = _x + 1 - placement_building[_building][0];
+		y_beg = _y + 1 - placement_building[_building][1];
 		x_size = size_buildings[_building][0];
 		y_size = size_buildings[_building][1];
 	break;

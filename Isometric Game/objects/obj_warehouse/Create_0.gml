@@ -1,6 +1,4 @@
-//inv_items = array_create(items.COUNT, 0);
-
-
+output_dir = real(_dir);
 
 
 function can_add_item(_input_dir){

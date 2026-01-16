@@ -1,4 +1,4 @@
-output_dir = real(output_dir);
+output_dir = real(_dir);
 input_dir = [];
 
 image_speed = 0;
@@ -13,7 +13,7 @@ spawn_dur = 6 * 60;
 spawn_item = items.wood;
 inv_items = [];
 
-dir_coords = [global.up, global.right, global.down, global.left];
+dir_coords = [UP, RIGHT, DOWN, LEFT];
 
 
 

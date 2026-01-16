@@ -70,21 +70,73 @@ function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1){
 
 function build(_x, _y, _building, _dir){
 	
-	var _room_x = grid_to_pos_x(_x, _y);
-	var _room_y = grid_to_pos_y(_x, _y);
-	
-	if (can_build(_building, _x, _y)){
-		
-		var object = obj_manager.ds_buildings[# _x, _y]
-		if (object[0] != buildings.NONE){
-			instance_destroy(object[1])
-			obj_manager.ds_buildings[# _x, _y] = [buildings.NONE, 0];
+	if (not can_build(_building, _x, _y)){
+		return;
+	}
+	var x_beg = -1;
+	var y_beg = -1;
+	var x_size = -1;
+	var y_size = -1;
+	switch (_dir){
+	case dir.up:
+		x_beg = _x + 1 - placement_building[_building][0];
+		y_beg = _y + 1 - placement_building[_building][1];
+		x_size = size_buildings[_building][0];
+		y_size = size_buildings[_building][1];
+	break;
+	case dir.right:
+		x_beg = _x + 1 - placement_building[_building][1];
+		y_beg = _y + 1 - placement_building[_building][0];
+		x_size = size_buildings[_building][1];
+		y_size = size_buildings[_building][0];
+	break;
+	case dir.down:
+		x_beg = _x + placement_building[_building][0] - size_buildings[_building][0];
+		y_beg = _y + placement_building[_building][1] - size_buildings[_building][1];
+		x_size = size_buildings[_building][0];
+		y_size = size_buildings[_building][1];
+	break;
+	case dir.left:
+		x_beg = _x + placement_building[_building][1] - size_buildings[_building][1];
+		y_beg = _y + placement_building[_building][0] - size_buildings[_building][0];
+		x_size = size_buildings[_building][1];
+		y_size = size_buildings[_building][0];
+	break;
+	}
+	for (var _xx = x_beg; _xx < x_beg + x_size; _xx++){
+		for (var _yy = y_beg; _yy < y_beg + y_size; _yy++){
+			
+			var object = obj_manager.ds_buildings[# _x, _y]
+			if (object[0] != buildings.NONE){
+				destroy_building(_xx, _yy);
+			}
+			if (_xx == _x and _yy == _y){
+				var _room_x = grid_to_pos_x(_x, _y);
+				var _room_y = grid_to_pos_y(_x, _y);
+				obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, object_buildings[_building], {_dir: _dir}), {}];
+			}
+			else{
+				obj_manager.ds_buildings[# _xx, _yy] = [ buildings.ref,  [_x, _y], {}]
+				show_debug_message(string(_xx) + string(_yy));
+			}
 		}
-		obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, object_buildings[_building], {output_dir: _dir}) ];
-		//obj_manager.ds_veg_index[# _x, _y] = 0;
+	}
+}
+
+function destroy_building(_x, _y) {
+	var _building = obj_manager.ds_buildings[# _x, _y];
+	if (_building[0] != buildings.ref) {
+		instance_destroy(_building[1]);
 	}
 	else {
-		// cannot build
+		var pos = _building[1];
+		var building = obj_manager.ds_buildings[# pos[0], pos[1]];
+		var size = size_buildings[building[0]];
+		for (var _xx = pos[0]; _xx < pos[0] + size[0]; _xx++){
+			for (var _yy = pos[1]; _yy < pos[1] + size[1]; _yy++){
+				obj_manager.ds_buildings[# _xx, _yy] = [buildings.NONE, 0, {}];
+			}
+		}
 	}
 }
 

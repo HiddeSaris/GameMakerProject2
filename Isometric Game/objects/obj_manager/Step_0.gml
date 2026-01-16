@@ -21,6 +21,7 @@ var mouse_r_r = mouse_check_button_released(mb_right)&&can_click_terrain;
 debug_fps = fps;
 debug_fps_real = fps_real;
 debug_num_instances = instance_number(all);
+debug_building = ds_buildings[# grid_x, grid_y];
 
 if (keyboard_check_pressed(ord("I"))){
 	if (not dbg_view_exists(inspector)){
@@ -42,6 +43,10 @@ if (keyboard_check_pressed(ord("I"))){
 		dbg_text("Seed:");
 		dbg_same_line();
 		dbg_text(ref_create(self, "seed"));
+		
+		dbg_text("Building:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "debug_building"));
 	
 		dbg_text("Grid x:");
 		dbg_same_line();

@@ -31,7 +31,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_lumberjackshack",
+    "path":"sprites/spr_lumberjackshack/spr_lumberjackshack.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

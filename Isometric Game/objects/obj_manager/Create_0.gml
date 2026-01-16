@@ -7,6 +7,7 @@ inspector = undefined;
 debug_fps = fps;
 debug_fps_real = fps_real;
 debug_num_instances = instance_number(all);
+debug_building = [];
 
 gui_width = 960;
 gui_height = 540;
@@ -72,9 +73,10 @@ selected_dir = dir.up
 #macro MIDDLE [-1, 4]
 
 #macro sprite_items [spr_wood]
-#macro sprite_buildings [spr_spawner, spr_conveyor, spr_warehouse, spr_tree]
-#macro object_buildings [obj_spawner, obj_conveyor, obj_warehouse, obj_tree]
-#macro size_buildings [[1, 1], [1, 1], [1, 1], [1, 1], [2, 1]]
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_warehouse, spr_lumberjackshack, spr_tree]
+#macro object_buildings [obj_spawner, obj_conveyor, obj_warehouse, obj_lumberjack_shack, obj_tree]
+#macro size_buildings     [[1, 1], [1, 1], [1, 1], [1, 2], [1, 1]]
+#macro placement_building [[1, 1], [1, 1], [1, 1], [1, 2], [1, 1]]
 #macro conveyor_buildings [buildings.conveyor, buildings.warehouse] // buildings that can input items
 
 mining_dur = 60;
@@ -200,7 +202,7 @@ function create_terrain(){
 			var room_y = grid_to_pos_y(_xx, _yy);
 			
 			if (_result>=tree_level && random(1) < 0.5){
-				ds_buildings[# _xx, _yy] = [buildings.tree, instance_create_depth(room_x, room_y, -room_y, obj_tree), {}];
+				ds_buildings[# _xx, _yy] = [buildings.tree, instance_create_depth(room_x, room_y, -room_y, obj_tree, {_dir: 0}), {}];
 			}
 			else {
 				ds_buildings[# _xx, _yy] = [buildings.NONE, 0, {}];

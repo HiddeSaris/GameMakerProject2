@@ -1,4 +1,4 @@
-output_dir = real(output_dir);
+output_dir = real(_dir);
 input_dir = [];
 
 image_speed = 0;

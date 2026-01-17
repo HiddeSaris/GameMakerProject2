@@ -99,28 +99,36 @@ function build(_x, _y, _building, _dir){
 	if (not can_build(_building, _x, _y)){
 		return;
 	}
-	var x_beg = building_begin_x(_x, _y, _building, _dir);
-	var y_beg = building_begin_y(_x, _y, _building, _dir);
+	
 	var x_size = size_buildings[_building][_dir%2];
 	var y_size = size_buildings[_building][(_dir+1)%2];
 	
-	for (var _xx = x_beg; _xx < x_beg + x_size; _xx++){
-		for (var _yy = y_beg; _yy < y_beg + y_size; _yy++){
-			var object = obj_manager.ds_buildings[# _xx, _yy]
-			if (object[0] != buildings.NONE){
-				destroy_building(_xx, _yy);
-			}
-			if (_xx == _x and _yy == _y){
-				var _room_x = grid_to_pos_x(_x, _y);
-				var _room_y = grid_to_pos_y(_x, _y);
-				obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, object_buildings[_building], {_dir: _dir}), {}];
-			}
-			else{
-				obj_manager.ds_buildings[# _xx, _yy] = [ buildings.ref,  [_x, _y], {}]
+	if (x_size == 1 and y_size == 1){
+		var _room_x = grid_to_pos_x(_x, _y);
+		var _room_y = grid_to_pos_y(_x, _y);
+		obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, object_buildings[_building], {_dir: _dir}), {}];
+	}
+	else {
+		var x_beg = building_begin_x(_x, _y, _building, _dir);
+		var y_beg = building_begin_y(_x, _y, _building, _dir);
+		
+		for (var _xx = x_beg; _xx < x_beg + x_size; _xx++){
+			for (var _yy = y_beg; _yy < y_beg + y_size; _yy++){
+				var object = obj_manager.ds_buildings[# _xx, _yy]
+				if (object[0] != buildings.NONE){
+					destroy_building(_xx, _yy);
+				}
+				if (_xx == _x and _yy == _y){
+					var _room_x = grid_to_pos_x(_x, _y);
+					var _room_y = grid_to_pos_y(_x, _y);
+					obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, object_buildings[_building], {_dir: _dir}), {}];
+				}
+				else{
+					obj_manager.ds_buildings[# _xx, _yy] = [ buildings.ref,  [_x, _y], {}]
+				}
 			}
 		}
 	}
-	obj_manager.update_draw_surface(); ////////////////////////////////////////////
 }
 
 function destroy_building(_x, _y) {

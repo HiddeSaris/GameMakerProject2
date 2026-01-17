@@ -5,8 +5,3 @@ for (var i=0; i<array_length(inv_items); i++){
 	draw_circle(x+inv_items[i][1], y+inv_items[i][2], 1, false);
 	//draw_text(x+inv_items[i][1], y+inv_items[i][2], string(inv_items[i][1])+ " " + string(inv_items[i][2]))
 }
-
-for (var i=0; i<array_length(dir_coords); i++){
-	draw_circle(x+dir_coords[i][0], y+dir_coords[i][1], 0.5, false);
-	//draw_text(x+inv_items[i][1], y+inv_items[i][2], string(inv_items[i][1])+ " " + string(inv_items[i][2]))
-}

@@ -205,7 +205,7 @@ function create_terrain(){
 			var room_y = grid_to_pos_y(_xx, _yy);
 			
 			if (_result>=tree_level && random(1) < 0.5){
-				ds_buildings[# _xx, _yy] = [buildings.tree, instance_create_depth(room_x, room_y, -room_y, obj_tree, {_dir: 0}), {}];
+				ds_buildings[# _xx, _yy] = [buildings.tree, instance_create_depth(room_x, room_y, -room_y, obj_tree, {_dir: 0, alive: true}), {}];
 			}
 			else {
 				ds_buildings[# _xx, _yy] = [buildings.NONE, 0, {}];

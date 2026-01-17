@@ -29,7 +29,8 @@ function chop_wood(){
 	var trees = []; // find all trees
 	for (var _x = begin_x; _x < end_x; _x++){
 		for (var _y = begin_y; _y < end_y; _y++){
-			if (obj_manager.ds_buildings[# _x, _y][0] == buildings.tree){
+			var _building = obj_manager.ds_buildings[# _x, _y];
+			if (_building[0] == buildings.tree and _building[1].is_choppable()){
 				array_push(trees, [_x, _y]);
 			}
 		}

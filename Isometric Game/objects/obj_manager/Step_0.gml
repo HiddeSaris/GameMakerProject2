@@ -21,6 +21,7 @@ var mouse_r_r = mouse_check_button_released(mb_right)&&can_click_terrain;
 debug_fps = fps;
 debug_fps_real = fps_real;
 debug_num_instances = instance_number(all);
+debug_building = ds_buildings[# grid_x, grid_y];
 
 if (keyboard_check_pressed(ord("I"))){
 	if (not dbg_view_exists(inspector)){
@@ -42,6 +43,10 @@ if (keyboard_check_pressed(ord("I"))){
 		dbg_text("Seed:");
 		dbg_same_line();
 		dbg_text(ref_create(self, "seed"));
+		
+		dbg_text("Building:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "debug_building"));
 	
 		dbg_text("Grid x:");
 		dbg_same_line();
@@ -79,7 +84,18 @@ if (building_conveyors){
 	}
 }
 else{
-	can_build_now = can_build(selected_building, grid_x, grid_y)
+	switch (selected_building){	
+	case buildings.lumberjack:
+		var beg_x = building_begin_x(grid_x, grid_y, buildings.lumberjack, selected_dir);
+		var beg_y = building_begin_y(grid_x, grid_y, buildings.lumberjack, selected_dir);
+		var size_x = size_buildings[buildings.lumberjack][selected_dir%2];
+		var size_y = size_buildings[buildings.lumberjack][(selected_dir+1)%2];
+		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1)
+	break;
+	default:
+		can_build_now = can_build(selected_building, grid_x, grid_y)
+	break;
+	}
 }
 
 #endregion

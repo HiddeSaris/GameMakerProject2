@@ -1,21 +1,50 @@
-output_dir = real(output_dir);
+output_dir = real(_dir);
 input_dir = [];
 
 image_speed = 0;
 image_index = output_dir;
 
+grid_x = pos_to_grid_x(x, y);
+grid_y = pos_to_grid_y(x, y);
+
 dist_items = 8.05;
 conveyor_speed = 0.06;
 
-spawn_timer = 0;
-spawn_dur = 6 * 60;
+chop_radius = 5;
+
+chop_timer = 0;
+chop_dur = 1 * 60;
 
 spawn_item = items.wood;
 inv_items = [];
 
-dir_coords = [global.up, global.right, global.down, global.left];
+dir_coords = [UP, RIGHT, DOWN, LEFT];
 
-
+function chop_wood(){
+	var begin_x = clamp(grid_x - chop_radius, 0, hcells);
+	var begin_y = clamp(grid_y - chop_radius, 0, vcells);
+	var end_x = clamp(grid_x + chop_radius + 1, 0, hcells);
+	var end_y = clamp(grid_y + chop_radius + 1, 0, vcells);
+	
+	var trees = []; // find all trees
+	for (var _x = begin_x; _x < end_x; _x++){
+		for (var _y = begin_y; _y < end_y; _y++){
+			var _building = obj_manager.ds_buildings[# _x, _y];
+			if (_building[0] == buildings.tree and _building[1].is_choppable()){
+				array_push(trees, [_x, _y]);
+			}
+		}
+	}
+	if (array_length(trees) == 0) {
+		return false; // no trees found
+	}
+	
+	var random_index = irandom(array_length(trees)-1);
+	var pos = trees[random_index];
+	destroy_building(pos[0], pos[1]);
+	obj_manager.ds_buildings[# pos[0], pos[1]] = [buildings.NONE, 0, {}];
+	return true;
+}
 
 function item_can_move(item){
 	var _x = item[1];
@@ -70,7 +99,7 @@ function move_items(){
 			var _next_conveyor = obj_manager.ds_buildings[# _grid_x + _dif[0], _grid_y + _dif[1]];
 			var _next_conveyor_input = (output_dir+2) % 4
 			
-			var is_conveyor_building = array_contains(obj_manager.conveyor_buildings, _next_conveyor[0]);
+			var is_conveyor_building = array_contains(conveyor_buildings, _next_conveyor[0]);
 			
 			if (is_conveyor_building && _next_conveyor[1].can_add_item(_next_conveyor_input)){
 				show_debug_message(string(_grid_x) + ", " + string(_grid_y))

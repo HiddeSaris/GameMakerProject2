@@ -81,6 +81,10 @@ function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1){
 			
 			var object = obj_manager.ds_buildings[# _xx, _yy];
 			
+			if (clamp(_xx, 0, hcells-1) != _xx or clamp(_yy, 0, vcells-1) != _yy){
+				return false;
+			}
+			
 			var can_place_on_conveyor = [buildings.conveyor, buildings.spawner];
 			
 			if (object[0] != buildings.NONE 

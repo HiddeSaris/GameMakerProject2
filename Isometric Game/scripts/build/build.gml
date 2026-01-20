@@ -108,6 +108,9 @@ function build(_x, _y, _building, _dir){
 	var y_size = size_buildings[_building][(_dir+1)%2];
 	
 	if (x_size == 1 and y_size == 1){
+		if (obj_manager.ds_buildings[# _x, _y][0] != buildings.NONE){
+			destroy_building(_x, _y);
+		}
 		var _room_x = grid_to_pos_x(_x, _y);
 		var _room_y = grid_to_pos_y(_x, _y);
 		obj_manager.ds_buildings[# _x, _y] = [ _building, instance_create_depth(_room_x, _room_y, -_room_y, object_buildings[_building], {_dir: _dir}), {}];

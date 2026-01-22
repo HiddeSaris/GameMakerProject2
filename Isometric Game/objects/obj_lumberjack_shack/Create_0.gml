@@ -74,6 +74,13 @@ function add_item(item, input_dir){
 	array_push(inv_items, [item[0], dir_coords[input_dir][0], dir_coords[input_dir][1]]);
 }
 
+function get_data() {
+	return {
+		output_dir : output_dir,
+		inv_items : inv_items,
+	}
+}
+
 function move_items(){
 	for (var i=array_length(inv_items)-1; i>=0; i--){
 		var item = inv_items[i];

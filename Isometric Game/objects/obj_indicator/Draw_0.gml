@@ -40,5 +40,11 @@ if (mouse_check_button(mb_left)){
 	}
 }
 else if (m.building_state == building_states.building){ // draw preview
+	switch(m.selected_building){
+	case buildings.lumberjack:
+		draw_area(lumberjack_get_area(grid_x, grid_y, 5, m.selected_dir), spr_indicator, c_white);
+	break;
+	}
 	draw_sprite_ext(sprite_buildings[m.selected_building], m.selected_dir, x, y, 1, 1, 0, col, 1);
+	
 }

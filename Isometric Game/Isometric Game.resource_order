@@ -14,6 +14,8 @@
   ],
   "ResourceOrderSettings":[
     {"name":"obj_build_menu","order":1,"path":"objects/obj_build_menu/obj_build_menu.yy",},
+    {"name":"obj_farm","order":7,"path":"objects/obj_farm/obj_farm.yy",},
+    {"name":"obj_garden","order":6,"path":"objects/obj_garden/obj_garden.yy",},
     {"name":"obj_indicator","order":4,"path":"objects/obj_indicator/obj_indicator.yy",},
     {"name":"obj_lumberjack_shack","order":3,"path":"objects/obj_lumberjack_shack/obj_lumberjack_shack.yy",},
     {"name":"obj_spawner","order":1,"path":"objects/obj_spawner/obj_spawner.yy",},

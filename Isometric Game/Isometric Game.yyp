@@ -54,6 +54,8 @@
     {"id":{"name":"obj_build_menu","path":"objects/obj_build_menu/obj_build_menu.yy",},},
     {"id":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},},
     {"id":{"name":"obj_conveyor","path":"objects/obj_conveyor/obj_conveyor.yy",},},
+    {"id":{"name":"obj_farm","path":"objects/obj_farm/obj_farm.yy",},},
+    {"id":{"name":"obj_garden","path":"objects/obj_garden/obj_garden.yy",},},
     {"id":{"name":"obj_gui","path":"objects/obj_gui/obj_gui.yy",},},
     {"id":{"name":"obj_indicator","path":"objects/obj_indicator/obj_indicator.yy",},},
     {"id":{"name":"obj_lumberjack_shack","path":"objects/obj_lumberjack_shack/obj_lumberjack_shack.yy",},},

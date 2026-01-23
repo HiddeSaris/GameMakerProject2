@@ -16,6 +16,46 @@ function dir_to_move(_dir){
 	}
 }
 
+function lumberjack_get_area(_x, _y, radius, _dir) {
+	var area = [];
+	switch(_dir){
+	case dir.up:
+		area = [clamp(_x - radius, 0, hcells),
+				clamp(_y + 2, 0, vcells),
+				clamp(_x + radius + 1, 0, hcells),
+				clamp(_y + 2*radius + 3, 0, vcells)];
+	break;
+	case dir.right:
+		area = [clamp(_x - 2*radius - 2, 0, hcells),
+				clamp(_y - radius, 0, vcells),
+				clamp(_x - 1, 0, hcells),
+				clamp(_y + radius + 1, 0, vcells)];
+	break;
+	case dir.down:
+		area = [clamp(_x - radius, 0, hcells),
+				clamp(_y - 2*radius - 2, 0, vcells),
+				clamp(_x + radius + 1, 0, hcells),
+				clamp(_y - 1, 0, vcells)];
+	break;
+	case dir.left:
+		area = [clamp(_x + 2, 0, hcells),
+				clamp(_y - radius, 0, vcells),
+				clamp(_x + 2*radius + 3, 0, hcells),
+				clamp(_y + radius + 1, 0, vcells)];
+	break;
+	}
+	return area;
+}
+
+function draw_area(area, sprite, color) {
+	for (var _x = area[0]; _x < area[2]; _x++){
+		for (var _y = area[1]; _y < area[3]; _y++){
+			draw_sprite_ext(sprite, 0, grid_to_pos_x(_x, _y), grid_to_pos_y(_x, _y), 1, 1, 0, color, 1);
+		}
+	}
+	show_debug_message(area)
+}
+
 function building_begin_x(_x, _y, _building, _dir){
 	switch (_dir){
 	case dir.up:
@@ -106,6 +146,10 @@ function build(_x, _y, _building, _dir){
 	
 	var x_size = size_buildings[_building][_dir%2];
 	var y_size = size_buildings[_building][(_dir+1)%2];
+	
+	if (_building == buildings.farm){
+		array_push(obj_manager.farming_positions, [_x, _y]);
+	}
 	
 	if (x_size == 1 and y_size == 1){
 		if (obj_manager.ds_buildings[# _x, _y][0] != buildings.NONE){

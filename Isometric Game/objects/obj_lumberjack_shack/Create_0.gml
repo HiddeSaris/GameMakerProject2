@@ -20,15 +20,12 @@ inv_items = [];
 
 dir_coords = [UP, RIGHT, DOWN, LEFT];
 
-function chop_wood(){
-	var begin_x = clamp(grid_x - chop_radius, 0, hcells);
-	var begin_y = clamp(grid_y - chop_radius, 0, vcells);
-	var end_x = clamp(grid_x + chop_radius + 1, 0, hcells);
-	var end_y = clamp(grid_y + chop_radius + 1, 0, vcells);
-	
+area = lumberjack_get_area(grid_x, grid_y, chop_radius, output_dir);
+
+function chop_wood(){	
 	var trees = []; // find all trees
-	for (var _x = begin_x; _x < end_x; _x++){
-		for (var _y = begin_y; _y < end_y; _y++){
+	for (var _x = area[0]; _x < area[2]; _x++){
+		for (var _y = area[1]; _y < area[3]; _y++){
 			var _building = obj_manager.ds_buildings[# _x, _y];
 			if (_building[0] == buildings.tree and _building[1].is_choppable()){
 				array_push(trees, [_x, _y]);

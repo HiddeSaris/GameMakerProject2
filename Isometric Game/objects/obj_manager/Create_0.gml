@@ -73,15 +73,18 @@ selected_dir = dir.up
 #macro MIDDLE [-1, 4]
 
 #macro sprite_items [spr_wood]
-#macro sprite_buildings [spr_spawner, spr_conveyor, spr_warehouse, spr_lumberjackshack, spr_tree]
-#macro object_buildings [obj_spawner, obj_conveyor, obj_warehouse, obj_lumberjack_shack, obj_tree]
-#macro size_buildings     [[1, 1], [1, 1], [1, 1], [1, 2], [1, 1]]
-#macro placement_building [[1, 1], [1, 1], [1, 1], [1, 2], [1, 1]]
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_warehouse, spr_lumberjackshack, spr_farmskack, spr_garden, spr_tree]
+#macro object_buildings [obj_spawner, obj_conveyor, obj_warehouse, obj_lumberjack_shack, obj_farm    , obj_garden, obj_tree]
+#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],         [1, 2],             [1, 2],        [1, 1],       [1, 1]]
+#macro placement_building [[1, 1],     [1, 1],       [1, 1],         [1, 2],             [1, 2],        [1, 1],       [1, 1]]
 #macro conveyor_buildings [buildings.conveyor, buildings.warehouse] // buildings that can input items
 
 mining_dur = 60;
 mining_time = 0;
 mining_coord = [-1, -1];
+
+farming_positions = [];
+farm_radius = 5;
 
 enum building_states{
 	selecting,
@@ -95,6 +98,8 @@ enum buildings{
 	conveyor, 
 	warehouse,
 	lumberjack,
+	farm,
+	garden,
 	tree,
 	COUNT,
 	ref,
@@ -103,6 +108,7 @@ enum buildings{
 
 enum items{
 	wood,
+	seed,
 	//stone,
 	//meat,
 	//fiber,
@@ -284,6 +290,7 @@ function save(_filename = "savedata.json"){
 		Date : date_current_datetime(),
 		Seed : seed,
 		Inv_items : inv_items,
+		farming_positions: farming_positions,
 	}
 	array_push(_data, _data_manager);
 	array_push(_data, grid_to_struct(ds_data));
@@ -334,6 +341,7 @@ function load(_filename = "savedata.json"){
 	building_state = building_states.selecting;
 	
 	inv_items = _data_manager.Inv_items;
+	farming_positions = _data_manager.farming_positions;
 	
 	ds_grid_copy(ds_data, struct_to_grid(_load_data[1]));
 	ds_grid_copy(ds_hydration_index, struct_to_grid(_load_data[2]));

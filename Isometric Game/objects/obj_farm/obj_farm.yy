@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_farmskack",
-    "path":"sprites/spr_farmskack/spr_farmskack.yy",
+    "name":"spr_farmshack",
+    "path":"sprites/spr_farmshack/spr_farmshack.yy",
   },
   "spriteMaskId":null,
   "visible":true,

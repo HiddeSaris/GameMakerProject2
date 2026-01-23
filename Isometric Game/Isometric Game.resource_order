@@ -32,7 +32,7 @@
     {"name":"spr_conveyor","order":11,"path":"sprites/spr_conveyor/spr_conveyor.yy",},
     {"name":"spr_cursor","order":4,"path":"sprites/spr_cursor/spr_cursor.yy",},
     {"name":"spr_dried_ground","order":15,"path":"sprites/spr_dried_ground/spr_dried_ground.yy",},
-    {"name":"spr_farmskack","order":20,"path":"sprites/spr_farmskack/spr_farmskack.yy",},
+    {"name":"spr_farmshack","order":20,"path":"sprites/spr_farmshack/spr_farmshack.yy",},
     {"name":"spr_garden","order":19,"path":"sprites/spr_garden/spr_garden.yy",},
     {"name":"spr_grass","order":5,"path":"sprites/spr_grass/spr_grass.yy",},
     {"name":"spr_indicator","order":10,"path":"sprites/spr_indicator/spr_indicator.yy",},

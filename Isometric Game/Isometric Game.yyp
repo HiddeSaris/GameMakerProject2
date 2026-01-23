@@ -74,7 +74,7 @@
     {"id":{"name":"spr_conveyor","path":"sprites/spr_conveyor/spr_conveyor.yy",},},
     {"id":{"name":"spr_cursor","path":"sprites/spr_cursor/spr_cursor.yy",},},
     {"id":{"name":"spr_dried_ground","path":"sprites/spr_dried_ground/spr_dried_ground.yy",},},
-    {"id":{"name":"spr_farmskack","path":"sprites/spr_farmskack/spr_farmskack.yy",},},
+    {"id":{"name":"spr_farmshack","path":"sprites/spr_farmshack/spr_farmshack.yy",},},
     {"id":{"name":"spr_garden","path":"sprites/spr_garden/spr_garden.yy",},},
     {"id":{"name":"spr_grass","path":"sprites/spr_grass/spr_grass.yy",},},
     {"id":{"name":"spr_indicator","path":"sprites/spr_indicator/spr_indicator.yy",},},

@@ -47,6 +47,13 @@ function lumberjack_get_area(_x, _y, radius, _dir) {
 	return area;
 }
 
+function farm_get_area(_x, _y, radius, _dir) {
+	area = [];
+	for (var xx = _x-radius; xx < _x+radius; xx++) {
+		
+	}
+}
+
 function draw_area(area, sprite, color) {
 	for (var _x = area[0]; _x < area[2]; _x++){
 		for (var _y = area[1]; _y < area[3]; _y++){

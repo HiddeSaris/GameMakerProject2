@@ -47,11 +47,16 @@ function lumberjack_get_area(_x, _y, radius, _dir) {
 	return area;
 }
 
-function farm_get_area(_x, _y, radius, _dir) {
-	area = [];
-	for (var xx = _x-radius; xx < _x+radius; xx++) {
-		
+function farm_get_area(_x, _y, radius) {
+	var area = [];
+	for (var xx = _x-radius; xx < _x+radius+1; xx++) {
+		for (var yy = _y-radius; yy < _y+radius+1; yy++) {
+			if (point_distance(_x, _y, xx, yy) <= radius) { // in circle
+				array_push(area, [xx, yy]);
+			}
+		}
 	}
+	return area;
 }
 
 function draw_area(area, sprite, color) {
@@ -61,6 +66,14 @@ function draw_area(area, sprite, color) {
 		}
 	}
 	show_debug_message(area)
+}
+
+function draw_circle_area(area, sprite, color) {
+	for (var i = 0; i < array_length(area); i++){
+		var _x = area[i][0];
+		var _y = area[i][1];
+		draw_sprite_ext(sprite, 0, grid_to_pos_x(_x, _y), grid_to_pos_y(_x, _y), 1, 1, 0, color, 1);
+	}
 }
 
 function building_begin_x(_x, _y, _building, _dir){

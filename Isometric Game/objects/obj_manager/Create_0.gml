@@ -72,7 +72,7 @@ selected_dir = dir.up
 #macro LEFT [-13, -2]
 #macro MIDDLE [-1, 4]
 
-#macro sprite_items [spr_wood]
+#macro sprite_items [spr_wood, spr_wood]
 #macro sprite_buildings [spr_spawner, spr_conveyor, spr_warehouse, spr_lumberjackshack, spr_farmshack, spr_garden, spr_tree]
 #macro object_buildings [obj_spawner, obj_conveyor, obj_warehouse, obj_lumberjack_shack, obj_farm    , obj_garden, obj_tree]
 #macro size_buildings     [[1, 1],     [1, 1],       [1, 1],         [1, 2],             [1, 2],        [1, 1],       [1, 1]]
@@ -84,7 +84,7 @@ mining_time = 0;
 mining_coord = [-1, -1];
 
 farming_positions = [];
-farm_radius = 5;
+farm_radius = 6;
 
 enum building_states{
 	selecting,

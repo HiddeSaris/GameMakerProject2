@@ -22,7 +22,7 @@ function update_farm_pos() {
 		farm.remove_garden(grid_x, grid_y);
 	}
 	
-	if (farm_min_dist != obj_manager.farm_radius) {
+	if (farm_min_dist <= obj_manager.farm_radius) {
 		farm = obj_manager.ds_buildings[# farm_min_pos[0], farm_min_pos[1]][1];
 		farm.add_garden(grid_x, grid_y); 
 	}

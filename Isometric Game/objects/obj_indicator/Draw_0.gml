@@ -44,6 +44,8 @@ else if (m.building_state == building_states.building){ // draw preview
 	case buildings.lumberjack:
 		draw_area(lumberjack_get_area(grid_x, grid_y, 5, m.selected_dir), spr_indicator, c_white);
 	break;
+	case buildings.farm:
+		draw_circle_area(farm_get_area(grid_x, grid_y, m.farm_radius), spr_indicator, c_white);
 	}
 	draw_sprite_ext(sprite_buildings[m.selected_building], m.selected_dir, x, y, 1, 1, 0, col, 1);
 	

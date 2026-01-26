@@ -37,7 +37,8 @@ function item_can_move(item){
 	return true;
 }
 
-function can_add_item(_input_dir){
+function can_add_item(item, _input_dir){
+	if (item != items.wood or item != items.seed) return false;
 	return item_can_move([items.wood, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
 }
 

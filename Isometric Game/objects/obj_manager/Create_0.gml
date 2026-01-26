@@ -72,12 +72,12 @@ selected_dir = dir.up
 #macro LEFT [-13, -2]
 #macro MIDDLE [-1, 4]
 
-#macro sprite_items [spr_wood, spr_wood]
-#macro sprite_buildings [spr_spawner, spr_conveyor, spr_warehouse, spr_lumberjackshack, spr_farmshack, spr_garden, spr_tree]
-#macro object_buildings [obj_spawner, obj_conveyor, obj_warehouse, obj_lumberjack_shack, obj_farm    , obj_garden, obj_tree]
-#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],         [1, 2],             [1, 2],        [1, 1],       [1, 1]]
-#macro placement_building [[1, 1],     [1, 1],       [1, 1],         [1, 2],             [1, 2],        [1, 1],       [1, 1]]
-#macro conveyor_buildings [buildings.conveyor, buildings.warehouse] // buildings that can input items
+#macro sprite_items [spr_wood, spr_wood, spr_wood]
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_conveyor, spr_warehouse, spr_lumberjackshack, spr_farmshack, spr_garden, spr_tree]
+#macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_farm    , obj_garden, obj_tree]
+#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],               [1, 2],        [1, 1],       [1, 1]]
+#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],               [1, 2],        [1, 1],       [1, 1]]
+#macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm] // buildings that can input items
 
 mining_dur = 60;
 mining_time = 0;
@@ -96,6 +96,7 @@ enum buildings{
 	
 	spawner,
 	conveyor, 
+	pipe,
 	warehouse,
 	lumberjack,
 	farm,
@@ -109,10 +110,7 @@ enum buildings{
 enum items{
 	wood,
 	seed,
-	//stone,
-	//meat,
-	//fiber,
-	//iron,
+	water,
 	COUNT,
 	NONE,
 }

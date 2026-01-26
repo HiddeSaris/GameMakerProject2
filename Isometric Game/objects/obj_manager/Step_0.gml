@@ -84,12 +84,20 @@ if (building_conveyors){
 	}
 }
 else{
+	var beg_x, beg_y, size_x, size_y;
 	switch (selected_building){	
 	case buildings.lumberjack:
-		var beg_x = building_begin_x(grid_x, grid_y, buildings.lumberjack, selected_dir);
-		var beg_y = building_begin_y(grid_x, grid_y, buildings.lumberjack, selected_dir);
-		var size_x = size_buildings[buildings.lumberjack][selected_dir%2];
-		var size_y = size_buildings[buildings.lumberjack][(selected_dir+1)%2];
+		beg_x = building_begin_x(grid_x, grid_y, buildings.lumberjack, selected_dir);
+		beg_y = building_begin_y(grid_x, grid_y, buildings.lumberjack, selected_dir);
+		size_x = size_buildings[buildings.lumberjack][selected_dir%2];
+		size_y = size_buildings[buildings.lumberjack][(selected_dir+1)%2];
+		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1)
+	break;
+	case buildings.farm:
+		beg_x = building_begin_x(grid_x, grid_y, buildings.lumberjack, selected_dir);
+		beg_y = building_begin_y(grid_x, grid_y, buildings.lumberjack, selected_dir);
+		size_x = size_buildings[buildings.lumberjack][selected_dir%2];
+		size_y = size_buildings[buildings.lumberjack][(selected_dir+1)%2];
 		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1)
 	break;
 	default:

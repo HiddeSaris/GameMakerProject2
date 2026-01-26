@@ -1,51 +1,16 @@
 output_dir = real(_dir);
-input_dir = [];
+input_dir = array_filter([dir.up, dir.right, dir.down, dir.left], function(val, ind){return val != output_dir});
 
 image_speed = 0;
 image_index = output_dir;
 
-grid_x = pos_to_grid_x(x, y);
-grid_y = pos_to_grid_y(x, y);
-
-if (output_dir == dir.up or output_dir == dir.left) {
-	depth = grid_to_pos_y(grid_x+1, grid_y);
-}
 
 dist_items = 8.05;
 conveyor_speed = 0.06;
 
-chop_radius = 5;
-
-chop_timer = 0;
-chop_dur = 1 * 60;
-
-spawn_item = items.wood;
 inv_items = [];
 
 dir_coords = [UP, RIGHT, DOWN, LEFT];
-
-area = lumberjack_get_area(grid_x, grid_y, chop_radius, output_dir);
-
-function chop_wood(){	
-	var trees = []; // find all trees
-	for (var _x = area[0]; _x < area[2]; _x++){
-		for (var _y = area[1]; _y < area[3]; _y++){
-			var _building = obj_manager.ds_buildings[# _x, _y];
-			if (_building[0] == buildings.tree and _building[1].is_choppable()){
-				array_push(trees, [_x, _y]);
-			}
-		}
-	}
-	if (array_length(trees) == 0) {
-		return false; // no trees found
-	}
-	
-	var random_index = irandom(array_length(trees)-1);
-	var pos = trees[random_index];
-	destroy_building(pos[0], pos[1]);
-	obj_manager.ds_buildings[# pos[0], pos[1]] = [buildings.NONE, 0, {}];
-	return true;
-}
 
 function item_can_move(item){
 	var _x = item[1];
@@ -68,11 +33,12 @@ function item_can_move(item){
 }
 
 function can_add_item(item, _input_dir){
+	if (item != items.water) return false;
 	return item_can_move([items.wood, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
 }
 
-function add_item(item, input_dir){
-	array_push(inv_items, [item[0], dir_coords[input_dir][0], dir_coords[input_dir][1]]);
+function add_item(item, _input_dir){
+	array_push(inv_items, [item[0], dir_coords[_input_dir][0], dir_coords[_input_dir][1]]);
 }
 
 function get_data() {
@@ -91,7 +57,7 @@ function move_items(){
 		var _x_goal = dir_coords[output_dir][0];
 		var _y_goal = dir_coords[output_dir][1];
 		
-		if (not item_can_move(item)){
+		if (not item_can_move(item)){ // should not be necessary because it only has one item
 			continue;
 		}
 		

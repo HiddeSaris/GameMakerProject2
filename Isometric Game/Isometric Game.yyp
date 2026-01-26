@@ -83,6 +83,7 @@
     {"id":{"name":"spr_iso_sand","path":"sprites/spr_iso_sand/spr_iso_sand.yy",},},
     {"id":{"name":"spr_iso_water","path":"sprites/spr_iso_water/spr_iso_water.yy",},},
     {"id":{"name":"spr_lumberjackshack","path":"sprites/spr_lumberjackshack/spr_lumberjackshack.yy",},},
+    {"id":{"name":"spr_pluming","path":"sprites/spr_pluming/spr_pluming.yy",},},
     {"id":{"name":"spr_spawner","path":"sprites/spr_spawner/spr_spawner.yy",},},
     {"id":{"name":"spr_tree","path":"sprites/spr_tree/spr_tree.yy",},},
     {"id":{"name":"spr_ui_bg","path":"sprites/spr_ui_bg/spr_ui_bg.yy",},},

@@ -1,9 +1,12 @@
 output_dir = real(_dir);
+input_dir = [(output_dir-1)%4, (output_dir+1)%4];
+
 grid_x = pos_to_grid_x(x, y);
 grid_y = pos_to_grid_y(x, y);
 
 inv_items = [];
 conveyor_speed = 0.06;
+dist_items = 8.05;
 
 num_gardens = 0;
 water_level = 0;
@@ -43,6 +46,15 @@ function get_data() {
 	return {
 		output_dir : output_dir,
 	}
+}
+
+function can_add_item(item, _input_dir){
+	if (item != items.water) return false;
+	return item_can_move([items.wood, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
+}
+
+function add_item(item, _input_dir){
+	array_push(inv_items, [item[0], dir_coords[_input_dir][0], dir_coords[_input_dir][1]]);
 }
 
 function item_can_move(item){

@@ -22,7 +22,8 @@
   "height":17,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"ebaf69e5-2115-4ac9-9ab5-0b8a01c9aba9","blendMode":0,"displayName":"default","isLocked":false,"name":"ebaf69e5-2115-4ac9-9ab5-0b8a01c9aba9","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"ebaf69e5-2115-4ac9-9ab5-0b8a01c9aba9","blendMode":0,"displayName":"main","isLocked":false,"name":"ebaf69e5-2115-4ac9-9ab5-0b8a01c9aba9","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"b1752657-5e14-4a3f-bb74-f44bff444775","blendMode":0,"displayName":"color","isLocked":false,"name":"b1752657-5e14-4a3f-bb74-f44bff444775","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":false,},
   ],
   "name":"spr_conveyor",
   "nineSlice":null,

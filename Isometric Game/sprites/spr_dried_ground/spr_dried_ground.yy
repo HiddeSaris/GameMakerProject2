@@ -19,7 +19,8 @@
   "height":32,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"d2975110-4fc3-4f7c-aa41-827f5b729dc8","blendMode":0,"displayName":"default","isLocked":false,"name":"d2975110-4fc3-4f7c-aa41-827f5b729dc8","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"d2975110-4fc3-4f7c-aa41-827f5b729dc8","blendMode":0,"displayName":"main","isLocked":false,"name":"d2975110-4fc3-4f7c-aa41-827f5b729dc8","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"18697ed0-877b-4ac5-b045-e910c4bb8d82","blendMode":0,"displayName":"color","isLocked":false,"name":"18697ed0-877b-4ac5-b045-e910c4bb8d82","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":false,},
   ],
   "name":"spr_dried_ground",
   "nineSlice":null,

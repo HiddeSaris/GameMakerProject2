@@ -119,7 +119,7 @@ if (mining_coord[0] != grid_x or mining_coord[1] != grid_y){
 
 #region CONTROLS
 
-if (mouse_p_l && selected_building == buildings.conveyor){
+if (mouse_p_l && (selected_building == buildings.conveyor or selected_building == buildings.pipe)){
 	building_conveyors = true;
 	building_conveyor_pos = [grid_x, grid_y];
 	building_conveyors_dir = selected_dir;
@@ -139,7 +139,7 @@ if (mouse_r_l && building_conveyors_prev){
 				var _room_x = grid_to_pos_x(_x, _y);
 				var _room_y = grid_to_pos_y(_x, _y);
 				
-				build(_x, _y, buildings.conveyor, _dir)
+				build(_x, _y, selected_building, _dir)
 			}
 		}
 		else{
@@ -153,7 +153,7 @@ if (mouse_r_l && building_conveyors_prev){
 				var _room_x = grid_to_pos_x(_x, _y);
 				var _room_y = grid_to_pos_y(_x, _y);
 				
-				build(_x, _y, buildings.conveyor, _dir)
+				build(_x, _y, selected_building, _dir)
 			}
 		}
 	}
@@ -201,7 +201,7 @@ else{
 	mining_coord = [-1, -1]
 }
 
-if (mouse_r_l or selected_building != buildings.conveyor){
+if (mouse_r_l or (selected_building != buildings.conveyor and selected_building != buildings.pipe)){
 	building_conveyors = false;
 	building_conveyor_pos = [-1, -1]
 }

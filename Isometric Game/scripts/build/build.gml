@@ -145,10 +145,11 @@ function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1){
 				return false;
 			}
 			
-			var can_place_on_conveyor = [buildings.conveyor, buildings.spawner];
+			// buildings that you can place on top of conveyors or pipes
+			var can_place_on_conveyor = [buildings.conveyor, buildings.spawner, buildings.pipe];
 			
 			if (object[0] != buildings.NONE 
-				and (object[0] != buildings.conveyor or not array_contains(can_place_on_conveyor, _building)) ){
+				and ((object[0] != buildings.conveyor and object[0] != buildings.pipe) or not array_contains(can_place_on_conveyor, _building)) ){
 				
 				return false;
 			}

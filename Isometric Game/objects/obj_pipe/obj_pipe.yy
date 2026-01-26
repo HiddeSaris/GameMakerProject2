@@ -31,7 +31,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_plumbing",
+    "path":"sprites/spr_plumbing/spr_plumbing.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

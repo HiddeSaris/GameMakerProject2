@@ -43,6 +43,8 @@
     {"name":"spr_lumberjackshack","order":17,"path":"sprites/spr_lumberjackshack/spr_lumberjackshack.yy",},
     {"name":"spr_plumbing","order":22,"path":"sprites/spr_plumbing/spr_plumbing.yy",},
     {"name":"spr_plumding","order":23,"path":"sprites/spr_plumding/spr_plumding.yy",},
+    {"name":"spr_seed","order":25,"path":"sprites/spr_seed/spr_seed.yy",},
+    {"name":"spr_seedshack","order":26,"path":"sprites/spr_seedshack/spr_seedshack.yy",},
     {"name":"spr_spawner","order":12,"path":"sprites/spr_spawner/spr_spawner.yy",},
     {"name":"spr_tree","order":9,"path":"sprites/spr_tree/spr_tree.yy",},
     {"name":"spr_ui_button_navigator","order":1,"path":"sprites/spr_ui_button_navigator/spr_ui_button_navigator.yy",},

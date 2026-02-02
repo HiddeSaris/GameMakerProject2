@@ -87,6 +87,8 @@
     {"id":{"name":"spr_lumberjackshack","path":"sprites/spr_lumberjackshack/spr_lumberjackshack.yy",},},
     {"id":{"name":"spr_plumbing","path":"sprites/spr_plumbing/spr_plumbing.yy",},},
     {"id":{"name":"spr_plumding","path":"sprites/spr_plumding/spr_plumding.yy",},},
+    {"id":{"name":"spr_seed","path":"sprites/spr_seed/spr_seed.yy",},},
+    {"id":{"name":"spr_seedshack","path":"sprites/spr_seedshack/spr_seedshack.yy",},},
     {"id":{"name":"spr_spawner","path":"sprites/spr_spawner/spr_spawner.yy",},},
     {"id":{"name":"spr_tree","path":"sprites/spr_tree/spr_tree.yy",},},
     {"id":{"name":"spr_ui_bg","path":"sprites/spr_ui_bg/spr_ui_bg.yy",},},

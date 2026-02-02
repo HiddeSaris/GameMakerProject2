@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_plumbing",
-    "path":"sprites/spr_plumbing/spr_plumbing.yy",
+    "name":"spr_plumding",
+    "path":"sprites/spr_plumding/spr_plumding.yy",
   },
   "spriteMaskId":null,
   "visible":true,

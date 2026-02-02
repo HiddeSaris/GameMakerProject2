@@ -235,7 +235,10 @@ function get_building(_x, _y){
 function remove_objects(){
 	for (var _yy = 0; _yy < vcells; _yy ++){
 		for (var _xx = 0; _xx < hcells; _xx ++){
-			instance_destroy(ds_buildings[# _xx, _yy][1]);
+			var _object = ds_buildings[# _xx, _yy];
+			if (_object[0] != buildings.NONE and _object[0] != buildings.ref){
+				instance_destroy(ds_buildings[# _xx, _yy][1]);
+			}
 			ds_buildings[# _xx, _yy] = [buildings.NONE, 0];
 		}
 	}
@@ -245,7 +248,7 @@ function save_objects(){
 	for (var _yy = 0; _yy < vcells; _yy ++){
 		for (var _xx = 0; _xx < hcells; _xx ++){
 			var _object = ds_buildings[# _xx, _yy];
-			if (_object[0] != buildings.NONE){
+			if (_object[0] != buildings.NONE and _object[0] != buildings.ref){
 				var _data = _object[1].get_data();
 				ds_buildings[# _xx, _yy][2] = _data;
 			}
@@ -261,7 +264,7 @@ function load_objects(){
 			var room_y = grid_to_pos_y(_xx, _yy);
 			
 			var _object = ds_buildings[# _xx, _yy];
-			if (_object[0] != buildings.NONE){
+			if (_object[0] != buildings.NONE and _object[0] != buildings.ref){
 				ds_buildings[# _xx, _yy][1] = instance_create_depth(room_x, room_y, -room_y, object_buildings[_object[0]], _object[2]);
 			}
 		}

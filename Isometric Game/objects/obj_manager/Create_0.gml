@@ -73,7 +73,7 @@ selected_dir = dir.up
 #macro MIDDLE [-1, 4]
 
 #macro sprite_items [spr_wood, spr_wood, spr_wood]
-#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack, spr_farmshack, spr_garden, spr_tree]
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack, spr_farmshack_1, spr_garden, spr_tree]
 #macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_farm    , obj_garden, obj_tree]
 #macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],               [1, 2],        [1, 1],       [1, 1]]
 #macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],               [1, 2],        [1, 1],       [1, 1]]
@@ -321,6 +321,14 @@ function save_get_date(_filename = "savedata.json"){
 	return _data_manager.Date;
 }
 
+function update_farms() {
+	for (var i=0; i < array_length(farming_positions); i++) {
+		var pos = farming_positions[i];
+		var farm = ds_buildings[# pos[0], pos[1]][1];
+		farm.reload_gardens();
+	}
+}
+
 function load(_filename = "savedata.json"){
 	if (os_type == os_gxgames or os_browser != browser_not_a_browser){
 		return false;
@@ -351,6 +359,7 @@ function load(_filename = "savedata.json"){
 	
 	update_draw_surface();
 	load_objects();
+	update_farms();
 }
 
 #endregion

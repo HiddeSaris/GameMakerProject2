@@ -20,7 +20,14 @@ dir_coords = [UP, RIGHT, DOWN, LEFT];
 image_speed = 0;
 image_index = output_dir;
 
-reload_gardens();
+if (output_dir == dir.up or output_dir == dir.left) {
+	depth = -grid_to_pos_y(grid_x+1, grid_y);
+}
+depth += 5
+
+if (num_gardens == -1){
+	reload_gardens();
+}
 
 function reload_gardens() {
 	num_gardens = 0;
@@ -44,7 +51,8 @@ function remove_garden(_x, _y) {
 
 function get_data() {
 	return {
-		output_dir : output_dir,
+		_dir : _dir,
+		num_gardens : num_gardens,
 	}
 }
 

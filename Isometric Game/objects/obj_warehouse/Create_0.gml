@@ -13,5 +13,7 @@ function add_item(item, _input_dir){
 }
 
 function get_data() {
-	return {};
+	return {
+		_dir: _dir,
+	};
 }

@@ -3,7 +3,7 @@ grid_y = pos_to_grid_y(x, y);
 
 farm_min_pos = [-1, -1];
 farm_min_dist = infinity;
-farm = noone;
+farm = [];
 
 update_farm_pos();
 
@@ -19,12 +19,16 @@ function update_farm_pos() {
 	}
 	
 	if (old_pos[0] != farm_min_pos[0] or old_pos[1] != farm_min_pos[1]) and old_pos[0] != -1{
-		farm.remove_garden(grid_x, grid_y);
+		if (update_farm) {
+			farm[1].remove_garden(grid_x, grid_y);
+		}
 	}
 	
 	if (farm_min_dist <= obj_manager.farm_radius) {
-		farm = obj_manager.ds_buildings[# farm_min_pos[0], farm_min_pos[1]][1];
-		farm.add_garden(grid_x, grid_y); 
+		farm = obj_manager.ds_buildings[# farm_min_pos[0], farm_min_pos[1]];
+		if (update_farm){
+			farm[1].add_garden(grid_x, grid_y); 
+		}
 	}
 }
 
@@ -33,5 +37,6 @@ function get_data() {
 		farm_min_pos: farm_min_pos,
 		farm_min_dist: farm_min_dist,
 		farm: farm,
+		update_farm: false,
 	}
 }

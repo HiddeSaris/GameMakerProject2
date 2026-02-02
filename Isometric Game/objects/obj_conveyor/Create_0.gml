@@ -43,7 +43,7 @@ function add_item(item, _input_dir){
 
 function get_data() {
 	return {
-		output_dir : output_dir,
+		_dir : _dir,
 		inv_items : inv_items,
 	}
 }

@@ -8,8 +8,9 @@ grid_x = pos_to_grid_x(x, y);
 grid_y = pos_to_grid_y(x, y);
 
 if (output_dir == dir.up or output_dir == dir.left) {
-	depth = grid_to_pos_y(grid_x+1, grid_y);
+	depth = -grid_to_pos_y(grid_x+1, grid_y);
 }
+depth += 5
 
 dist_items = 8.05;
 conveyor_speed = 0.06;
@@ -77,7 +78,7 @@ function add_item(item, input_dir){
 
 function get_data() {
 	return {
-		output_dir : output_dir,
+		_dir : _dir,
 		inv_items : inv_items,
 	}
 }

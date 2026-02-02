@@ -1,15 +1,11 @@
 output_dir = real(_dir);
 image_speed = 0;
 
-if (alive){
+if (alive && image_index == 0){
 	image_index = 1;
-}
-else{
-	image_index = 0;
 }
 
 growth_chance = 0.001;
-growth_level = 0;
 growth_number = 4;
 
 change_color_chance = 0.0001;
@@ -18,7 +14,10 @@ grid_x = pos_to_grid_x(x, y);
 grid_y = pos_to_grid_y(x, y);
 
 function get_data(){
-	return {image_index: image_index};
+	return {
+		image_index: image_index,
+		growth_level: growth_level,
+	};
 }
 
 function is_grown(){

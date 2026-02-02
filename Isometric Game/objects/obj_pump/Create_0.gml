@@ -1,74 +1,21 @@
 output_dir = real(_dir);
-input_dir = [(output_dir-1)%4, (output_dir+1)%4];
-
-grid_x = pos_to_grid_x(x, y);
-grid_y = pos_to_grid_y(x, y);
-
-inv_items = [];
-conveyor_speed = 0.06;
-dist_items = 8.05;
-
-num_gardens = 0;
-water_level = 0;
-
-spawn_timer = 0;
-spawn_dur = 100 * 60;
-spawn_item = items.seed;
-
-dir_coords = [UP, RIGHT, DOWN, LEFT];
+input_dir = [];
 
 image_speed = 0;
 image_index = output_dir;
 
-if (output_dir == dir.up or output_dir == dir.left) {
-	depth = -grid_to_pos_y(grid_x+1, grid_y);
-}
-depth += 5
+dist_items = 8.05;
+conveyor_speed = 0.06;
 
-if (num_gardens == -1){
-	reload_gardens();
-}
+spawn_timer = 0;
+spawn_dur = 6 * 60;
 
-function reload_gardens() {
-	num_gardens = 0;
-	var area = farm_get_area(grid_x, grid_y, obj_manager.farm_radius);
-	for (var i = 0; i < array_length(area); i++) {
-		var pos = area[i];
-		var _building = obj_manager.ds_buildings[# pos[0], pos[1]];
-		if (_building[0] == buildings.garden) {
-			num_gardens++;
-		}
-	}
-}
+spawn_item = items.water;
+inv_items = [];
 
-function add_garden(_x, _y) {
-	num_gardens++;
-}
+dir_coords = [UP, RIGHT, DOWN, LEFT];
 
-function remove_garden(_x, _y) {
-	num_gardens--;
-}
 
-function get_data() {
-	return {
-		_dir : _dir,
-		num_gardens : num_gardens,
-	}
-}
-
-function can_add_item(item, _input_dir){
-	if (item != items.water) return false;
-	return item_can_move([items.water, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
-}
-
-function add_item(item, _input_dir){
-	if (item[0] == items.water) {
-		water_level++;
-	}
-	else {
-		array_push(inv_items, [item[0], dir_coords[_input_dir][0], dir_coords[_input_dir][1]]);
-	}
-}
 
 function item_can_move(item){
 	var _x = item[1];
@@ -88,6 +35,22 @@ function item_can_move(item){
 		}
 	}
 	return true;
+}
+
+function can_add_item(item, _input_dir){
+	if (item != items.wood or item != items.seed) return false;
+	return item_can_move([items.wood, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
+}
+
+function add_item(item, input_dir){
+	array_push(inv_items, [item[0], dir_coords[input_dir][0], dir_coords[input_dir][1]]);
+}
+
+function get_data() {
+	return {
+		_dir : _dir,
+		inv_items : inv_items,
+	}
 }
 
 function move_items(){

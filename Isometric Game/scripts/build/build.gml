@@ -122,18 +122,22 @@ function pos_to_grid_y(_x, _y){
 	return clamp(_grid_y, 0, vcells - 1);
 }
 
-function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1){
-	
-	var _can_build = true;
+function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1, _dir = dir.up){
 	
 	for (var _xx=min(_x1, _x2); _xx <= max(_x1, _x2); _xx++){
 		for (var _yy=min(_y1, _y2); _yy <= max(_y1, _y2); _yy++){
 			
 			var height = obj_manager.ds_data[# _xx, _yy];
-			//var m_index = ed.ds_mineable_index[# _xx, _yy];
 			
 			if (height < obj_manager.sea_level){
 				return false;
+			}
+			
+			if (_building == buildings.pump) {
+				var offset = dir_to_move((_dir+2)%4)
+				if (obj_manager.ds_data[# _xx + offset[0], _yy + offset[1]] >= obj_manager.sea_level) {
+					return false;
+				}
 			}
 			
 			var _room_x = grid_to_pos_x(_xx, _yy);
@@ -161,7 +165,7 @@ function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1){
 
 function build(_x, _y, _building, _dir){
 	
-	if (not can_build(_building, _x, _y)){
+	if (not can_build(_building, _x, _y, _x, _y, _dir)){
 		return;
 	}
 	

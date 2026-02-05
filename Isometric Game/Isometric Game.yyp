@@ -87,6 +87,7 @@
     {"id":{"name":"spr_iso_water","path":"sprites/spr_iso_water/spr_iso_water.yy",},},
     {"id":{"name":"spr_lumberjackshack","path":"sprites/spr_lumberjackshack/spr_lumberjackshack.yy",},},
     {"id":{"name":"spr_plumbing","path":"sprites/spr_plumbing/spr_plumbing.yy",},},
+    {"id":{"name":"spr_plumbshack","path":"sprites/spr_plumbshack/spr_plumbshack.yy",},},
     {"id":{"name":"spr_plumding","path":"sprites/spr_plumding/spr_plumding.yy",},},
     {"id":{"name":"spr_seed","path":"sprites/spr_seed/spr_seed.yy",},},
     {"id":{"name":"spr_seedshack","path":"sprites/spr_seedshack/spr_seedshack.yy",},},

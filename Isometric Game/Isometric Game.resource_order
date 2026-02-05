@@ -43,6 +43,7 @@
     {"name":"spr_iso_water","order":3,"path":"sprites/spr_iso_water/spr_iso_water.yy",},
     {"name":"spr_lumberjackshack","order":17,"path":"sprites/spr_lumberjackshack/spr_lumberjackshack.yy",},
     {"name":"spr_plumbing","order":22,"path":"sprites/spr_plumbing/spr_plumbing.yy",},
+    {"name":"spr_plumbshack","order":27,"path":"sprites/spr_plumbshack/spr_plumbshack.yy",},
     {"name":"spr_plumding","order":23,"path":"sprites/spr_plumding/spr_plumding.yy",},
     {"name":"spr_seed","order":25,"path":"sprites/spr_seed/spr_seed.yy",},
     {"name":"spr_seedshack","order":26,"path":"sprites/spr_seedshack/spr_seedshack.yy",},

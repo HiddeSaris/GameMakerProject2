@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_spawner",
-    "path":"sprites/spr_spawner/spr_spawner.yy",
+    "name":"spr_plumbshack",
+    "path":"sprites/spr_plumbshack/spr_plumbshack.yy",
   },
   "spriteMaskId":null,
   "visible":true,

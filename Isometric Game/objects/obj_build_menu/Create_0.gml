@@ -7,6 +7,6 @@ scroll_speed = 0;
 scroll_acceleration = 2;
 scroll_value = 0;
 
-node_width = 75;
+node_width = 65;
 gap_width = 4;
 row_width = 474;

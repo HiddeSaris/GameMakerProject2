@@ -1,0 +1,1 @@
+if draw_screen {draw_sprite_stretched(spr_ui_tablet_off, current_sprite, xNow, yNow, 450, 600)}

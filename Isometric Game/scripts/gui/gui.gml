@@ -30,6 +30,18 @@ function show_flexpanel(node_id) {
     }
 }
 
+function hide_build_menu() {
+	var ui_flexpanels = layer_get_flexpanel_node("ui_build_menu")
+	var flexpanel = flexpanel_node_get_child(ui_flexpanels, "build_menu");
+	hide_flexpanel(flexpanel);
+}
+
+function show_build_menu() {
+	var ui_flexpanels = layer_get_flexpanel_node("ui_build_menu")
+	var flexpanel = flexpanel_node_get_child(ui_flexpanels, "build_menu");
+	show_flexpanel(flexpanel);
+}
+
 // bron: https://gamemaker.io/en/blog/coding-gui-elements-using-structs
 function GUIElementController() constructor {
 

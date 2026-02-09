@@ -44,6 +44,10 @@ if (keyboard_check_pressed(ord("I"))){
 		dbg_same_line();
 		dbg_text(ref_create(self, "seed"));
 		
+		dbg_text("save:");
+		dbg_same_line();
+		dbg_text(ref_create(global, "current_save"));
+		
 		dbg_text("Building:");
 		dbg_same_line();
 		dbg_text(ref_create(self, "debug_building"));
@@ -232,10 +236,6 @@ if keyboard_check_pressed(ord("L")){
 	load();
 }
 
-if keyboard_check_pressed(vk_escape){
-	game_end();
-}
-
 #endregion
 
 #region CAMERA
@@ -244,7 +244,7 @@ if keyboard_check_pressed(vk_escape){
 
 var wheel = (mouse_wheel_down() - mouse_wheel_up())*can_scroll;
 
-if (wheel != 0){
+if (wheel != 0 && not global.main_menu && not obj_pause_manager.tablet_on){
 
 	wheel *= 0.1
 
@@ -266,10 +266,12 @@ if (wheel != 0){
 var _hor = ((keyboard_check(vk_right) or keyboard_check(ord("D"))) - (keyboard_check(vk_left) or keyboard_check(ord("A")))) * delta_time / game_get_speed(gamespeed_microseconds);
 var _ver = ((keyboard_check(vk_down) or keyboard_check(ord("S"))) - (keyboard_check(vk_up) or keyboard_check(ord("W")))) * delta_time / game_get_speed(gamespeed_microseconds);
 
-cam_goto_x = cam_goto_x + (_hor * cam_width / 109);
-cam_goto_y = cam_goto_y + (_ver * cam_height / 123);
+if (not global.main_menu && not obj_pause_manager.tablet_on){
+	cam_goto_x = cam_goto_x + (_hor * cam_width / 109);
+	cam_goto_y = cam_goto_y + (_ver * cam_height / 123);
+}
 	
-if (mouse_r){
+if (mouse_r && not global.main_menu && not obj_pause_manager.tablet_on){
 	cam_x += (mouse_x_prev - mouse_x) * 0.5;
 	cam_y += (mouse_y_prev - mouse_y) * 0.5;
 	cam_goto_x += (mouse_x_prev - mouse_x) * 1.5;

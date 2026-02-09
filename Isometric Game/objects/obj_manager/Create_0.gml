@@ -9,8 +9,10 @@ debug_fps_real = fps_real;
 debug_num_instances = instance_number(all);
 debug_building = [];
 
-gui_width = 960;
-gui_height = 540;
+gui_width = 1920//960;
+gui_height = 1080//540;
+
+hide_build_menu();
 
 display_set_gui_size(gui_width, gui_height);
 cursor_sprite = spr_cursor;
@@ -22,6 +24,14 @@ seed = irandom(65535);
 random_set_seed(seed);
 seed_x =  seed & 0b0000000011111111; // get first 8 bits of seed
 seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
+
+
+function new_seed(s = irandom(65535)){
+	seed = s; 
+	random_set_seed(seed);
+	seed_x =  seed & 0b0000000011111111; // get first 8 bits of seed
+	seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
+}
 
 octaves = 4;
 frequency = 0.04;
@@ -178,6 +188,7 @@ function update_draw_surface(){
 }
 
 function create_terrain(){
+	remove_objects();
 	for (var _yy = 0; _yy < vcells; _yy ++){
 		for (var _xx = 0; _xx < hcells; _xx ++){
 		
@@ -205,6 +216,9 @@ function create_terrain(){
 			if (_result > sea_level && irandom(100) < 65){
 				ds_veg_index[# _xx, _yy] = (sqrt(_veg_height) + random(_veg_variance)) * sprite_get_number(spr_vegitation) * ds_hydration_index[# _xx, _yy];
 			}
+			else {
+				ds_veg_index[# _xx, _yy] = 0;
+			}
 			
 			var room_x = grid_to_pos_x(_xx, _yy);
 			var room_y = grid_to_pos_y(_xx, _yy);
@@ -217,6 +231,7 @@ function create_terrain(){
 			}
 		}
 	}
+	update_draw_surface();
 }
 
 function get_building(_x, _y){
@@ -237,6 +252,9 @@ function remove_objects(){
 	for (var _yy = 0; _yy < vcells; _yy ++){
 		for (var _xx = 0; _xx < hcells; _xx ++){
 			var _object = ds_buildings[# _xx, _yy];
+			if (_object == 0){
+				return;
+			}
 			if (_object[0] != buildings.NONE and _object[0] != buildings.ref){
 				instance_destroy(ds_buildings[# _xx, _yy][1]);
 			}
@@ -273,7 +291,6 @@ function load_objects(){
 }
 
 create_terrain();
-update_draw_surface();
 
 #endregion
 
@@ -305,6 +322,7 @@ function save(_filename = "savedata.json"){
 	buffer_write(_buffer, buffer_string, _str_data);
 	buffer_save(_buffer, _filename);
 	buffer_delete(_buffer);
+	return true;
 }
 
 function save_get_date(_filename = "savedata.json"){
@@ -312,6 +330,9 @@ function save_get_date(_filename = "savedata.json"){
 		return false;
 	}
 	var _buffer = buffer_load(_filename);
+	if (_buffer == -1) {
+		return false;
+	}
 	var _str_data = buffer_read(_buffer, buffer_string);
 	buffer_delete(_buffer);
 	
@@ -335,6 +356,9 @@ function load(_filename = "savedata.json"){
 		return false;
 	}
 	var _buffer = buffer_load(_filename);
+	if (_buffer == -1) {
+		return false;
+	}
 	var _str_data = buffer_read(_buffer, buffer_string);
 	buffer_delete(_buffer);
 	
@@ -361,6 +385,31 @@ function load(_filename = "savedata.json"){
 	update_draw_surface();
 	load_objects();
 	update_farms();
+	return true;
+}
+
+function load_latest() {
+	var latest = -1;
+	var latest_date = date_create_datetime(2000, 1, 1, 1, 1, 1);
+	for (var i = 1; i <= 6; i++) {
+		var date = save_get_date("SaveGame" + string(i) + ".json");
+		if date == false
+			continue;
+		
+		if (date_compare_datetime(date, latest_date) == 1) {
+			latest_date = date; // new latest
+			latest = i;
+		}
+	}
+	
+	if (date_compare_datetime(latest_date, date_create_datetime(2000, 1, 1, 1, 1, 1)) != 0) {
+		load("SaveGame" + string(latest) + ".json");
+		global.current_save = latest;
+		return true;
+	}
+	else {
+		return false; // there is no save
+	}
 }
 
 #endregion

@@ -25,7 +25,6 @@ random_set_seed(seed);
 seed_x =  seed & 0b0000000011111111; // get first 8 bits of seed
 seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
 
-
 function new_seed(s = irandom(65535)){
 	seed = s; 
 	random_set_seed(seed);
@@ -87,7 +86,7 @@ selected_dir = dir.up
 #macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_farm    ,   obj_garden, obj_pump,       obj_tree]
 #macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],               [1, 2],        [1, 1],     [1, 1],         [1, 1]]
 #macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],               [1, 2],        [1, 1],     [1, 1],         [1, 1]]
-#macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm] // buildings that can input items
+#macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm, buildings.pipe] // buildings that can input items
 
 mining_dur = 60;
 mining_time = 0;

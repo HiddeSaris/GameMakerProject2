@@ -123,6 +123,13 @@ if (mining_coord[0] != grid_x or mining_coord[1] != grid_y){
 
 #region CONTROLS
 
+if (building_state == building_states.destroying) {
+	cursor_sprite = spr_ui_icon3;
+}
+else {
+	cursor_sprite = spr_cursor;
+}
+
 if (mouse_p_l && (selected_building == buildings.conveyor or selected_building == buildings.pipe)){
 	building_conveyors = true;
 	building_conveyor_pos = [grid_x, grid_y];
@@ -175,7 +182,9 @@ if (mouse_p_l){
 		
 	break;
 	case building_states.destroying:
-	
+		if (ds_buildings[# grid_x, grid_y][0] != buildings.tree){
+			destroy_building(grid_x, grid_y);
+		}
 	break;
 	}
 }
@@ -229,10 +238,17 @@ if keyboard_check_pressed(ord("Q")){
 	}
 }
 
-if keyboard_check_pressed(ord("K")){
+if (keyboard_check_pressed(ord("X")) && !global.main_menu && !obj_pause_manager.tablet_on) {
+	if (building_state == building_states.destroying)
+		building_state = building_states.selecting;
+	else 
+		building_state = building_states.destroying;
+}
+
+if keyboard_check_pressed(ord("K")) && !global.main_menu && !obj_pause_manager.tablet_on{
 	save();
 }
-if keyboard_check_pressed(ord("L")){
+if keyboard_check_pressed(ord("L")) && !global.main_menu && !obj_pause_manager.tablet_on{
 	load();
 }
 

@@ -80,7 +80,7 @@ function move_items(){
 			
 			var is_conveyor_building = array_contains(conveyor_buildings, _next_conveyor[0]);
 			
-			if (is_conveyor_building && _next_conveyor[1].can_add_item(_next_conveyor_input)){
+			if (is_conveyor_building && _next_conveyor[1].can_add_item(spawn_item, _next_conveyor_input)){
 				show_debug_message(string(_grid_x) + ", " + string(_grid_y))
 				_next_conveyor[1].add_item(item, _next_conveyor_input);
 				array_delete(inv_items, i, 1);

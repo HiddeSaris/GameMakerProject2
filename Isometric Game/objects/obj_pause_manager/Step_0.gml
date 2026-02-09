@@ -3,6 +3,7 @@ if keyboard_check_pressed(vk_escape) and !layer_get_visible("Main_menuLayer") { 
 if (escape_pressed or global.resume_button_pressed)
 {
 	hide_build_menu();
+	obj_manager.building_state = building_states.selecting;
 	tablet_on = !tablet_on
 	global.resume_button_pressed = false
 	escape_pressed = false

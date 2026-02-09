@@ -346,8 +346,15 @@ function save_get_date(_filename = "savedata.json"){
 function update_farms() {
 	for (var i=0; i < array_length(farming_positions); i++) {
 		var pos = farming_positions[i];
-		var farm = ds_buildings[# pos[0], pos[1]][1];
-		farm.reload_gardens();
+		var farm = ds_buildings[# pos[0], pos[1]];
+		var inst;
+		if (farm[0] == buildings.ref){
+			inst = ds_buildings[# farm[1][0], farm[1][1]][1];
+		}
+		else {
+			inst = farm[1]
+		}
+		inst.reload_gardens();
 	}
 }
 

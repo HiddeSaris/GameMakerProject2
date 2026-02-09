@@ -31,6 +31,12 @@ switch (button_id)
 	break;
 	
 	case 5: // New Game
+		global.current_save = 0;
+		for (var i = 1; i <= 6; i++) {
+			if (!file_exists("SaveGame" + string(i) + ".json")) {
+				global.current_save = i;
+			}
+		}
 		obj_manager.new_seed();
 		obj_manager.create_terrain();
 		layer_set_visible("MMSettingsLayer", false)

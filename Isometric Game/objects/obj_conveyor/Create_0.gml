@@ -33,7 +33,7 @@ function item_can_move(item){
 }
 
 function can_add_item(item, _input_dir){
-	if (item != items.wood or item != items.seed) return false;
+	if (item != items.wood and item != items.seed) return false;
 	return item_can_move([items.wood, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
 }
 
@@ -75,7 +75,7 @@ function move_items(){
 			
 			var is_conveyor_building = array_contains(conveyor_buildings, _next_conveyor[0]);
 			
-			if (is_conveyor_building && _next_conveyor[1].can_add_item(_next_conveyor_input)){
+			if (is_conveyor_building && _next_conveyor[1].can_add_item(item[0], _next_conveyor_input)){
 				show_debug_message(string(_grid_x) + ", " + string(_grid_y))
 				_next_conveyor[1].add_item(item, _next_conveyor_input);
 				array_delete(inv_items, i, 1);

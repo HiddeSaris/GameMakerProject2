@@ -4,8 +4,8 @@ grid_x = pos_to_grid_x(mouse_x, mouse_y);
 grid_y = pos_to_grid_y(mouse_x, mouse_y);
 
 
-var can_click_terrain = global.can_click;
-var can_scroll = global.can_scroll
+var can_click_terrain = global.can_click && !global.main_menu && !obj_pause_manager.tablet_on;
+var can_scroll = global.can_scroll && !global.main_menu && !obj_pause_manager.tablet_on;
 
 var mouse_l   = mouse_check_button(mb_left)&&can_click_terrain;
 var mouse_r   = mouse_check_button(mb_right)&&can_click_terrain;

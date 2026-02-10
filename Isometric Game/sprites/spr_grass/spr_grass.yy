@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":1,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Sprites.yy",
+    "name":"world",
+    "path":"folders/Sprites/world.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

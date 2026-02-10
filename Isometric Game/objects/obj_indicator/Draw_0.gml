@@ -46,6 +46,9 @@ with obj_manager{
 		case buildings.lumberjack:
 			draw_area(lumberjack_get_area(grid_x, grid_y, 5, selected_dir), spr_indicator, c_white);
 		break;
+		case buildings.forester:
+			draw_area(lumberjack_get_area(grid_x, grid_y, 5, selected_dir), spr_indicator, c_white);
+		break;
 		case buildings.farm:
 			draw_circle_area(farm_get_area(grid_x, grid_y, farm_radius), spr_indicator, c_white);
 		}

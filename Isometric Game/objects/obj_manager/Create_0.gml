@@ -81,12 +81,12 @@ selected_dir = dir.up
 #macro LEFT [-13, -2]
 #macro MIDDLE [-1, 4]
 
-#macro sprite_items [spr_wood, spr_wood, spr_wood]
-#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree]
-#macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_farm    ,   obj_garden, obj_pump,       obj_tree]
-#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],               [1, 2],        [1, 1],     [1, 1],         [1, 1]]
-#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],               [1, 2],        [1, 1],     [1, 1],         [1, 1]]
-#macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm, buildings.pipe] // buildings that can input items
+#macro sprite_items [spr_wood, spr_wood, spr_wood, spr_wood]
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack,  spr_seedshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree]
+#macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_forester,  obj_farm    ,  obj_garden, obj_pump,       obj_tree]
+#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1]]
+#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1]]
+#macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm, buildings.pipe, buildings.forester] // buildings that can input items
 
 mining_dur = 60;
 mining_time = 0;
@@ -108,6 +108,7 @@ enum buildings{
 	pipe,
 	warehouse,
 	lumberjack,
+	forester,
 	farm,
 	garden,
 	pump,
@@ -119,6 +120,7 @@ enum buildings{
 
 enum items{
 	wood,
+	iron,
 	seed,
 	water,
 	COUNT,
@@ -176,7 +178,7 @@ function update_draw_surface(){
 					draw_sprite(spr_vegitation, _veg_index, _draw_x, _draw_y);
 				break;
 				case buildings.ref:
-					draw_sprite(spr_indicator, 0, _draw_x, _draw_y)
+					//draw_sprite(spr_indicator, 0, _draw_x, _draw_y)
 				break;
 			}
 			

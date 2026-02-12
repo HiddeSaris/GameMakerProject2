@@ -104,6 +104,13 @@ else{
 		size_y = size_buildings[buildings.lumberjack][(selected_dir+1)%2];
 		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1, selected_dir)
 	break;
+	case buildings.mineshack:
+		beg_x = building_begin_x(grid_x, grid_y, buildings.mineshack, selected_dir);
+		beg_y = building_begin_y(grid_x, grid_y, buildings.mineshack, selected_dir);
+		size_x = size_buildings[buildings.mineshack][selected_dir%2];
+		size_y = size_buildings[buildings.mineshack][(selected_dir+1)%2];
+		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1, selected_dir)
+	break;
 	default:
 		can_build_now = can_build(selected_building, grid_x, grid_y, grid_x, grid_y, selected_dir)
 	break;

@@ -64,6 +64,7 @@
     {"id":{"name":"obj_indicator","path":"objects/obj_indicator/obj_indicator.yy",},},
     {"id":{"name":"obj_lumberjack_shack","path":"objects/obj_lumberjack_shack/obj_lumberjack_shack.yy",},},
     {"id":{"name":"obj_manager","path":"objects/obj_manager/obj_manager.yy",},},
+    {"id":{"name":"obj_mine","path":"objects/obj_mine/obj_mine.yy",},},
     {"id":{"name":"obj_pause_manager","path":"objects/obj_pause_manager/obj_pause_manager.yy",},},
     {"id":{"name":"obj_pipe","path":"objects/obj_pipe/obj_pipe.yy",},},
     {"id":{"name":"obj_play_game","path":"objects/obj_play_game/obj_play_game.yy",},},

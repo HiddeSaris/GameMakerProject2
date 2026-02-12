@@ -2,5 +2,6 @@
   "FolderOrderSettings":[],
   "ResourceOrderSettings":[
     {"name":"obj_forester","order":1,"path":"objects/obj_forester/obj_forester.yy",},
+    {"name":"obj_mine","order":2,"path":"objects/obj_mine/obj_mine.yy",},
   ],
 }

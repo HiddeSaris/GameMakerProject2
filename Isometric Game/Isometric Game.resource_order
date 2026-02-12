@@ -1,4 +1,6 @@
 {
   "FolderOrderSettings":[],
-  "ResourceOrderSettings":[],
+  "ResourceOrderSettings":[
+    {"name":"obj_forester","order":1,"path":"objects/obj_forester/obj_forester.yy",},
+  ],
 }

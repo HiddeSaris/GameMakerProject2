@@ -1,73 +1,60 @@
 output_dir = real(_dir);
-input_dir = [(output_dir-1)%4, (output_dir+1)%4];
-
-grid_x = pos_to_grid_x(x, y);
-grid_y = pos_to_grid_y(x, y);
-
-inv_items = [];
-conveyor_speed = 0.06;
-dist_items = 8.05;
-
-num_gardens = 0;
-water_level = 0;
-
-spawn_timer = 20 * 60;
-spawn_dur = 50 * 60;
-spawn_item = items.seed;
-
-dir_coords = [UP, RIGHT, DOWN, LEFT];
+input_dir = [_dir];
 
 image_speed = 0;
 image_index = output_dir;
+
+grid_x = pos_to_grid_x(x, y);
+grid_y = pos_to_grid_y(x, y);
 
 if (output_dir == dir.up or output_dir == dir.left) {
 	depth = -grid_to_pos_y(grid_x+1, grid_y);
 }
 depth += 5
 
-if (num_gardens == -1){
-	reload_gardens();
-}
+dist_items = 8.05;
+conveyor_speed = 0.06;
 
-function reload_gardens() {
-	num_gardens = 0;
-	var area = farm_get_area(grid_x, grid_y, obj_manager.farm_radius);
-	for (var i = 0; i < array_length(area); i++) {
-		var pos = area[i];
-		var _building = obj_manager.ds_buildings[# pos[0], pos[1]];
-		if (_building[0] == buildings.garden) {
-			num_gardens++;
+seeds = 0
+
+plant_radius = 5;
+
+plant_timer = 0;
+plant_dur = 1 * 60;
+
+inv_items = [];
+
+dir_coords = [UP, RIGHT, DOWN, LEFT];
+
+area = lumberjack_get_area(grid_x, grid_y, plant_radius, output_dir);
+
+function plant_tree(){
+	/*
+	var trees = []; // find all trees
+	for (var _x = area[0]; _x < area[2]; _x++){
+		for (var _y = area[1]; _y < area[3]; _y++){
+			var _building = obj_manager.ds_buildings[# _x, _y];
+			if (_building[0] == buildings.tree){
+				array_push(trees, [_x, _y]);
+			}
 		}
 	}
-}
-
-function add_garden(_x, _y) {
-	num_gardens++;
-}
-
-function remove_garden(_x, _y) {
-	num_gardens--;
-}
-
-function get_data() {
-	return {
-		_dir : _dir,
-		num_gardens : num_gardens,
+	if (array_length(trees) == 0) {
+		return false; // no trees found
 	}
-}
-
-function can_add_item(item, _input_dir){
-	if (item != items.water) return false;
-	return item_can_move([items.water, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
-}
-
-function add_item(item, _input_dir){
-	if (item[0] == items.water) {
-		water_level++;
+	
+	var random_index = irandom(array_length(trees)-1);
+	var pos = trees[random_index];
+	*/
+	var pos = [irandom_range(area[0], area[2]-1), irandom_range(area[1], area[3]-1)];
+	if (obj_manager.ds_buildings[# pos[0], pos[1]][0] != buildings.NONE) {
+		return false;
 	}
-	else {
-		array_push(inv_items, [item[0], dir_coords[_input_dir][0], dir_coords[_input_dir][1]]);
-	}
+	var _x = grid_to_pos_x(pos[0], pos[1]);
+	var _y = grid_to_pos_y(pos[0], pos[1]);
+	var inst = instance_create_depth(_x, _y, -_y, obj_tree, {})
+	obj_manager.ds_buildings[# pos[0], pos[1]] = [buildings.tree, inst, {}];
+	return true;
 }
 
 function item_can_move(item){
@@ -90,6 +77,21 @@ function item_can_move(item){
 	return true;
 }
 
+function can_add_item(item, _input_dir){
+	return item == items.seed;
+}
+
+function add_item(item, input_dir){
+	seeds++;
+}
+
+function get_data() {
+	return {
+		_dir : _dir,
+		inv_items : inv_items,
+	}
+}
+
 function move_items(){
 	for (var i=array_length(inv_items)-1; i>=0; i--){
 		var item = inv_items[i];
@@ -99,7 +101,7 @@ function move_items(){
 		var _x_goal = dir_coords[output_dir][0];
 		var _y_goal = dir_coords[output_dir][1];
 		
-		if (not item_can_move(item)){ // should not be necessary because it only has one item
+		if (not item_can_move(item)){
 			continue;
 		}
 		

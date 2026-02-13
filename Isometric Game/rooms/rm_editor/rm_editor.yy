@@ -51,6 +51,8 @@
     {"name":"inst_3E3D3819","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_6024F1CA","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_5F32E968","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_13D2F26A","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_28F679E4","path":"rooms/rm_editor/rm_editor.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -59,6 +61,7 @@
         {"$GMRInstance":"v4","%Name":"inst_621E46B6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_621E46B6","objectId":{"name":"obj_indicator","path":"objects/obj_indicator/obj_indicator.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":112.0,"y":-96.0,},
         {"$GMRInstance":"v4","%Name":"inst_7FAD0DD5","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_7FAD0DD5","objectId":{"name":"obj_pause_manager","path":"objects/obj_pause_manager/obj_pause_manager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":16.0,"y":-32.0,},
         {"$GMRInstance":"v4","%Name":"inst_5AFAE20D","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5AFAE20D","objectId":{"name":"obj_sound","path":"objects/obj_sound/obj_sound.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":0.0,"y":-32.0,},
+        {"$GMRInstance":"v4","%Name":"inst_28F679E4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_28F679E4","objectId":{"name":"obj_draw_at_ground","path":"objects/obj_draw_at_ground/obj_draw_at_ground.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":0.0,"y":0.0,},
       ],"layers":[],"name":"Instances","properties":[
         {"name":"g_VignetteEdges","type":0,"value":"0.9",},
         {"name":"g_VignetteEdges","type":0,"value":"2",},

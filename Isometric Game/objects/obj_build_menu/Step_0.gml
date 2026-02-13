@@ -10,13 +10,12 @@ if ((scroll_up || scroll_down) && global.can_scroll && point_in_rectangle(device
 if ((mouse_check_button_released(mb_left) || mouse_check_button_pressed(mb_left)) && global.can_click 
 && point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), x, y, x + sprite_width, y + sprite_height)){
 	global.can_click = false;
-	//show_message("obj_build_menu set can_click to false")
 }
 
 scroll_speed *= 0.9;
 scroll_value += scroll_speed;
 
-var max_scroll = num_children * (node_width + gap_width) - gap_width - row_width;
+var max_scroll = num_children * (node_width + gap_width) - gap_width - row_width + side_padding;
 
 if (scroll_value < 0){
 	scroll_value = 0;

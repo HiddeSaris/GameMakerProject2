@@ -88,31 +88,24 @@ if (building_conveyors){
 	}
 }
 else{
-	var beg_x, beg_y, size_x, size_y;
 	switch (selected_building){	
-	case buildings.lumberjack:
-		beg_x = building_begin_x(grid_x, grid_y, buildings.lumberjack, selected_dir);
-		beg_y = building_begin_y(grid_x, grid_y, buildings.lumberjack, selected_dir);
-		size_x = size_buildings[buildings.lumberjack][selected_dir%2];
-		size_y = size_buildings[buildings.lumberjack][(selected_dir+1)%2];
-		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1, selected_dir)
-	break;
-	case buildings.farm:
-		beg_x = building_begin_x(grid_x, grid_y, buildings.lumberjack, selected_dir);
-		beg_y = building_begin_y(grid_x, grid_y, buildings.lumberjack, selected_dir);
-		size_x = size_buildings[buildings.lumberjack][selected_dir%2];
-		size_y = size_buildings[buildings.lumberjack][(selected_dir+1)%2];
-		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1, selected_dir)
-	break;
-	case buildings.mineshack:
-		beg_x = building_begin_x(grid_x, grid_y, buildings.mineshack, selected_dir);
-		beg_y = building_begin_y(grid_x, grid_y, buildings.mineshack, selected_dir);
-		size_x = size_buildings[buildings.mineshack][selected_dir%2];
-		size_y = size_buildings[buildings.mineshack][(selected_dir+1)%2];
-		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1, selected_dir)
+	case buildings.garden:
+		var near_farm = false;
+		for (var i = 0; i < array_length(farming_positions); i++) {
+			var pos = farming_positions[i];
+			if (point_distance(pos[0], pos[1], grid_x, grid_y) <= farm_radius) { // in circle
+				near_farm = true;
+				break;
+			}
+		}
+		can_build_now = near_farm && can_build(selected_building, grid_x, grid_y, grid_x, grid_y, selected_dir)
 	break;
 	default:
-		can_build_now = can_build(selected_building, grid_x, grid_y, grid_x, grid_y, selected_dir)
+		var beg_x = building_begin_x(grid_x, grid_y, selected_building, selected_dir);
+		var beg_y = building_begin_y(grid_x, grid_y, selected_building, selected_dir);
+		var size_x = size_buildings[selected_building][selected_dir%2];
+		var size_y = size_buildings[selected_building][(selected_dir+1)%2];
+		can_build_now = can_build(selected_building, beg_x, beg_y, beg_x+size_x-1, beg_y+size_y-1, selected_dir)
 	break;
 	}
 }

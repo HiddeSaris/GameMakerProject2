@@ -41,17 +41,34 @@ with obj_manager{
 			}
 		}
 	}
-	else if (building_state == building_states.building){ // draw preview
+	if (building_state == building_states.building){ // draw preview
 		switch(selected_building){
 		case buildings.lumberjack:
-			draw_area(lumberjack_get_area(grid_x, grid_y, 5, selected_dir), spr_indicator, c_white);
+			obj_draw_at_ground.add_func(function() {
+				draw_area(lumberjack_get_area(grid_x, grid_y, 5, selected_dir), spr_indicator, c_white);
+			});
 		break;
 		case buildings.forester:
-			draw_area(lumberjack_get_area(grid_x, grid_y, 5, selected_dir), spr_indicator, c_white);
+			obj_draw_at_ground.add_func(function() {
+				draw_area(lumberjack_get_area(grid_x, grid_y, 5, selected_dir), spr_indicator, c_white);
+			});
 		break;
 		case buildings.farm:
-			draw_circle_area(farm_get_area(grid_x, grid_y, farm_radius), spr_indicator, c_white);
+			obj_draw_at_ground.add_func(function() {
+				draw_circle_area(farm_get_area(grid_x, grid_y, farm_radius), spr_indicator, c_white);
+			});
+		break;
+		case buildings.garden:
+			obj_draw_at_ground.add_func(function() {
+				for (var i = 0; i < array_length(farming_positions); i++){
+					var pos = farming_positions[i];
+					draw_circle_area(farm_get_area(pos[0], pos[1], farm_radius), spr_indicator, c_lime);
+				}
+			});
+		break;
 		}
-		draw_sprite_ext(sprite_buildings[selected_building], selected_dir, other.x, other.y, 1, 1, 0, col, 1);
+		if (not mouse_check_button(mb_left)) {
+			draw_sprite_ext(sprite_buildings[selected_building], selected_dir, other.x, other.y, 1, 1, 0, col, 1);
+		}
 	}
 }

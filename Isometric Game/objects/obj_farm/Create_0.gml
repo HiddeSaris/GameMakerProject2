@@ -11,8 +11,9 @@ dist_items = 8.05;
 num_gardens = 0;
 water_level = 0;
 
-spawn_timer = 20 * 60;
-spawn_dur = 50 * 60;
+// 1 seed per 30 seconds per garden with a 1.0x to 2.0x multiplier with water (0 - 10 water)
+spawn_timer = 10 * 60;
+spawn_dur = 30 * 60;
 spawn_item = items.seed;
 
 dir_coords = [UP, RIGHT, DOWN, LEFT];
@@ -58,6 +59,7 @@ function get_data() {
 
 function can_add_item(item, _input_dir){
 	if (item != items.water) return false;
+	if (water_level >= 10) return false;
 	return item_can_move([items.water, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
 }
 

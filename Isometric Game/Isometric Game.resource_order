@@ -1,7 +1,12 @@
 {
-  "FolderOrderSettings":[],
+  "FolderOrderSettings":[
+    {"name":"buildings","order":2,"path":"folders/Objects/buildings.yy",},
+    {"name":"gui","order":3,"path":"folders/Objects/gui.yy",},
+  ],
   "ResourceOrderSettings":[
+    {"name":"obj_draw_at_ground","order":4,"path":"objects/obj_draw_at_ground/obj_draw_at_ground.yy",},
     {"name":"obj_forester","order":1,"path":"objects/obj_forester/obj_forester.yy",},
     {"name":"obj_mine","order":2,"path":"objects/obj_mine/obj_mine.yy",},
+    {"name":"obj_sound","order":1,"path":"objects/obj_sound/obj_sound.yy",},
   ],
 }

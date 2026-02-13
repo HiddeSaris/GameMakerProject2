@@ -57,6 +57,7 @@
     {"id":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},},
     {"id":{"name":"obj_conveyor","path":"objects/obj_conveyor/obj_conveyor.yy",},},
     {"id":{"name":"obj_delete_save","path":"objects/obj_delete_save/obj_delete_save.yy",},},
+    {"id":{"name":"obj_draw_at_ground","path":"objects/obj_draw_at_ground/obj_draw_at_ground.yy",},},
     {"id":{"name":"obj_escapebutton","path":"objects/obj_escapebutton/obj_escapebutton.yy",},},
     {"id":{"name":"obj_farm","path":"objects/obj_farm/obj_farm.yy",},},
     {"id":{"name":"obj_forester","path":"objects/obj_forester/obj_forester.yy",},},

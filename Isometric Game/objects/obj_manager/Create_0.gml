@@ -76,12 +76,12 @@ selected_building = buildings.spawner;
 selected_dir = dir.up
 
 #macro UP [11, -2] // conveyor input/output positions
-#macro RIGHT [3, 6]
+#macro RIGHT [3, 6] // relative to sprite origin
 #macro DOWN [-5, 6]
 #macro LEFT [-13, -2]
 #macro MIDDLE [-1, 4]
 
-#macro sprite_items [spr_wood, spr_wood, spr_wood, spr_wood]
+#macro sprite_items [spr_wood, spr_wood, spr_seed, spr_wood]
 #macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack,  spr_seedshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree, spr_mineshack]
 #macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_forester,  obj_farm    ,  obj_garden, obj_pump,       obj_tree, obj_mine]
 #macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [3, 4]]
@@ -377,10 +377,8 @@ function load(_filename = "savedata.json"){
 	
 	var _data_manager = _load_data[0];
 	
-	seed = _data_manager.Seed;
-	random_set_seed(seed);
-	seed_x =  seed & 0b0000000011111111; // get first 8 bits of seed
-	seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
+	var s = _data_manager.Seed;
+	new_seed(s);
 	building_state = building_states.selecting;
 	
 	inv_items = _data_manager.Inv_items;

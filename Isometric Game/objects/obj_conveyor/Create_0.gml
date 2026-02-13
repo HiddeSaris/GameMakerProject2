@@ -1,4 +1,4 @@
-output_dir = real(_dir);
+output_dir = _dir;
 input_dir = array_filter([dir.up, dir.right, dir.down, dir.left], function(val, ind){return val != output_dir});
 
 image_speed = 0;

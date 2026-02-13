@@ -59,6 +59,10 @@ function farm_get_area(_x, _y, radius) {
 	return area;
 }
 
+function sprinkler_get_area(_x, _y, radius) {
+	return farm_get_area(_x, _y, radius);
+}
+
 function draw_area(area, sprite, color) {
 	for (var _x = area[0]; _x < area[2]; _x++){
 		for (var _y = area[1]; _y < area[3]; _y++){

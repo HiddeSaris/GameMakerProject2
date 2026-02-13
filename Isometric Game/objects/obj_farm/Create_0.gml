@@ -1,4 +1,4 @@
-output_dir = real(_dir);
+output_dir = _dir;
 input_dir = [(output_dir-1)%4, (output_dir+1)%4];
 
 grid_x = pos_to_grid_x(x, y);

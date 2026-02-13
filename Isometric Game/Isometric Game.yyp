@@ -72,6 +72,7 @@
     {"id":{"name":"obj_pump","path":"objects/obj_pump/obj_pump.yy",},},
     {"id":{"name":"obj_sound","path":"objects/obj_sound/obj_sound.yy",},},
     {"id":{"name":"obj_spawner","path":"objects/obj_spawner/obj_spawner.yy",},},
+    {"id":{"name":"obj_sprinkler","path":"objects/obj_sprinkler/obj_sprinkler.yy",},},
     {"id":{"name":"obj_tree","path":"objects/obj_tree/obj_tree.yy",},},
     {"id":{"name":"obj_ui_button","path":"objects/obj_ui_button/obj_ui_button.yy",},},
     {"id":{"name":"obj_ui_checkbox","path":"objects/obj_ui_checkbox/obj_ui_checkbox.yy",},},

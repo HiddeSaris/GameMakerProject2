@@ -12,3 +12,6 @@ if (alive){
 		}
 	}
 }
+else {
+	image_index = 0;
+}

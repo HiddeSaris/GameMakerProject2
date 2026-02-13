@@ -22,6 +22,8 @@ debug_fps = fps;
 debug_fps_real = fps_real;
 debug_num_instances = instance_number(all);
 debug_building = ds_buildings[# grid_x, grid_y];
+debug_data = ds_data[# grid_x, grid_y];
+debug_hydration = ds_hydration_index[# grid_x, grid_y];
 
 if (keyboard_check_pressed(ord("I"))){
 	if (not dbg_view_exists(inspector)){
@@ -47,6 +49,18 @@ if (keyboard_check_pressed(ord("I"))){
 		dbg_text("save:");
 		dbg_same_line();
 		dbg_text(ref_create(global, "current_save"));
+		
+		dbg_text("Building:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "debug_building"));
+		
+		dbg_text("Data:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "debug_data"));
+		
+		dbg_text("Hydration:");
+		dbg_same_line();
+		dbg_text(ref_create(self, "debug_hydration"));
 		
 		dbg_text("Building:");
 		dbg_same_line();

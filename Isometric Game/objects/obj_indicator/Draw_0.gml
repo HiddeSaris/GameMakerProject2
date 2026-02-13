@@ -58,6 +58,11 @@ with obj_manager{
 				draw_circle_area(farm_get_area(grid_x, grid_y, farm_radius), spr_indicator, c_white);
 			});
 		break;
+		case buildings.sprinkler:
+			obj_draw_at_ground.add_func(function() {
+				draw_circle_area(sprinkler_get_area(grid_x, grid_y, sprinkler_radius), spr_indicator, c_white);
+			});
+		break;
 		case buildings.garden:
 			obj_draw_at_ground.add_func(function() {
 				for (var i = 0; i < array_length(farming_positions); i++){

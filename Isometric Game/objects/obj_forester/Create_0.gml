@@ -1,4 +1,4 @@
-output_dir = real(_dir);
+output_dir = _dir;
 input_dir = [_dir];
 
 image_speed = 0;
@@ -29,25 +29,14 @@ dir_coords = [UP, RIGHT, DOWN, LEFT];
 area = lumberjack_get_area(grid_x, grid_y, plant_radius, output_dir);
 
 function plant_tree(){
-	/*
-	var trees = []; // find all trees
-	for (var _x = area[0]; _x < area[2]; _x++){
-		for (var _y = area[1]; _y < area[3]; _y++){
-			var _building = obj_manager.ds_buildings[# _x, _y];
-			if (_building[0] == buildings.tree){
-				array_push(trees, [_x, _y]);
-			}
-		}
-	}
-	if (array_length(trees) == 0) {
-		return false; // no trees found
-	}
-	
-	var random_index = irandom(array_length(trees)-1);
-	var pos = trees[random_index];
-	*/
 	var pos = [irandom_range(area[0], area[2]-1), irandom_range(area[1], area[3]-1)];
 	if (obj_manager.ds_buildings[# pos[0], pos[1]][0] != buildings.NONE) {
+		return false;
+	}
+	if (obj_manager.ds_hydration_index[# pos[0], pos[1] == 0]) {
+		return false;
+	}
+	if (obj_manager.ds_data[# pos[0], pos[1]] < obj_manager.sea_level) {
 		return false;
 	}
 	var _x = grid_to_pos_x(pos[0], pos[1]);

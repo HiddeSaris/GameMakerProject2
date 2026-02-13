@@ -75,6 +75,15 @@ building_state = building_states.selecting;
 selected_building = buildings.spawner;
 selected_dir = dir.up
 
+mining_dur = 60;
+mining_time = 0;
+mining_coord = [-1, -1];
+
+farming_positions = [];
+farm_radius = 6;
+
+sprinkler_radius = 6;
+
 #macro UP [11, -2] // conveyor input/output positions
 #macro RIGHT [3, 6] // relative to sprite origin
 #macro DOWN [-5, 6]
@@ -82,18 +91,11 @@ selected_dir = dir.up
 #macro MIDDLE [-1, 4]
 
 #macro sprite_items [spr_wood, spr_wood, spr_seed, spr_wood]
-#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack,  spr_seedshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree, spr_mineshack]
-#macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_forester,  obj_farm    ,  obj_garden, obj_pump,       obj_tree, obj_mine]
-#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [3, 4]]
-#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [2, 4]]
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack,  spr_seedshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree, spr_mineshack, spr_beeshack]
+#macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_forester,  obj_farm    ,  obj_garden, obj_pump,       obj_tree, obj_mine,      obj_sprinkler]
+#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [3, 4],        [1, 1]]
+#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [2, 4],        [1, 1]]
 #macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm, buildings.pipe, buildings.forester] // buildings that can input items
-
-mining_dur = 60;
-mining_time = 0;
-mining_coord = [-1, -1];
-
-farming_positions = [];
-farm_radius = 6;
 
 enum building_states{
 	selecting,
@@ -114,6 +116,7 @@ enum buildings{
 	pump,
 	tree,
 	mineshack,
+	sprinkler,
 	COUNT,
 	ref,
 	NONE,
@@ -168,21 +171,25 @@ function update_draw_surface(){
 			
 			
 			if (height < sea_level){
-				draw_sprite(spr_water, 0, _draw_x, _draw_y);
+				if (_hydration_index == 1) {
+					draw_sprite(spr_water, 0, _draw_x, _draw_y);
+				}
+				else {
+					draw_sprite(spr_water, 1, _draw_x, _draw_y);
+				}
 			}
 			else{
-				draw_sprite(spr_grass, 0, _draw_x, _draw_y);
+				if (_hydration_index == 1) {
+					draw_sprite(spr_grass, 0, _draw_x, _draw_y);
+				}
+				else {
+					draw_sprite(spr_grass, 2, _draw_x, _draw_y);
+				}
 			}
 			
-			switch (_building[0]){
-				case buildings.NONE:
-					draw_sprite(spr_vegitation, _veg_index, _draw_x, _draw_y);
-				break;
-				case buildings.ref:
-					//draw_sprite(spr_indicator, 0, _draw_x, _draw_y)
-				break;
+			if (_building[0] == buildings.NONE && _hydration_index == 1){
+				draw_sprite(spr_vegitation, _veg_index, _draw_x, _draw_y);
 			}
-			
 		}
 	}
 	
@@ -209,12 +216,11 @@ function create_terrain(){
 			_result *= 100
 			
 			ds_data[# _xx, _yy] = _result; 
-			ds_hydration_index[# _xx, _yy] = 1
-			//ds_buildings[# _xx, _yy] =
+			ds_hydration_index[# _xx, _yy] = 0;
 			
 			var _veg_height = (_result - sea_level) / (100 - sea_level);
 			var _veg_variance = 0.5;
-			//ds_veg_index[# _xx, _yy] = irandom(1) * irandom(sprite_get_number(spr_vegitation)) * (_result < tree_level && _result > sea_level) * ds_hydration_index[# _xx, _yy];
+			
 			if (_result > sea_level && irandom(100) < 65){
 				ds_veg_index[# _xx, _yy] = (sqrt(_veg_height) + random(_veg_variance)) * sprite_get_number(spr_vegitation) * ds_hydration_index[# _xx, _yy];
 			}
@@ -226,7 +232,7 @@ function create_terrain(){
 			var room_y = grid_to_pos_y(_xx, _yy);
 			
 			if (_result>=tree_level && random(1) < 0.5){
-				ds_buildings[# _xx, _yy] = [buildings.tree, instance_create_depth(room_x, room_y, -room_y, obj_tree, {_dir: 0, alive: true}), {}];
+				ds_buildings[# _xx, _yy] = [buildings.tree, instance_create_depth(room_x, room_y, -room_y, obj_tree, {_dir: 0, alive: false}), {}];
 			}
 			else {
 				ds_buildings[# _xx, _yy] = [buildings.NONE, 0, {}];

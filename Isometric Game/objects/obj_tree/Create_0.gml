@@ -1,4 +1,4 @@
-output_dir = real(_dir);
+output_dir = _dir;
 image_speed = 0;
 
 if (alive && image_index == 0){
@@ -17,6 +17,7 @@ function get_data(){
 	return {
 		image_index: image_index,
 		growth_level: growth_level,
+		alive: alive,
 	};
 }
 

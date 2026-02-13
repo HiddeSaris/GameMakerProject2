@@ -174,7 +174,7 @@ if (mouse_p_l){
 	switch (building_state)
 	{
 	case building_states.building:
-		if (!building_conveyors){
+		if (!building_conveyors && can_build_now){
 			build(grid_x, grid_y, selected_building, selected_dir);
 		}
 	break;

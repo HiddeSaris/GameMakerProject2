@@ -214,6 +214,7 @@ function destroy_building(_x, _y) {
 	if (_building[0] == buildings.NONE) {
 		return;
 	}
+	
 	if (_building[0] == buildings.ref) {
 		pos = _building[1];
 		building = obj_manager.ds_buildings[# pos[0], pos[1]];
@@ -222,6 +223,7 @@ function destroy_building(_x, _y) {
 		pos = [_x, _y];
 		building = _building;
 	}
+	
 	if (building[0] == buildings.farm) {
 		var arr = obj_manager.farming_positions;
 		var arr_ind;
@@ -232,10 +234,13 @@ function destroy_building(_x, _y) {
 		}
 		array_delete(arr, arr_ind, 1);
 	}
-	instance_destroy(building[1]);
 	var size = size_buildings[building[0]];
-	for (var _xx = pos[0]; _xx < pos[0] + size[0]; _xx++){
-		for (var _yy = pos[1]; _yy < pos[1] + size[1]; _yy++){
+	var begin_x = building_begin_x(pos[0], pos[1], building[0], building[1]._dir);
+	var begin_y = building_begin_y(pos[0], pos[1], building[0], building[1]._dir);
+	
+	instance_destroy(building[1]);
+	for (var _xx = begin_x; _xx < begin_x + size[0]; _xx++){
+		for (var _yy = begin_y; _yy < begin_y + size[1]; _yy++){
 			obj_manager.ds_buildings[# _xx, _yy] = [buildings.NONE, 0, {}];
 		}
 	}

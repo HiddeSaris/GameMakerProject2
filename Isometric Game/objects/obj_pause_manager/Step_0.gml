@@ -11,6 +11,7 @@ if (escape_pressed or global.resume_button_pressed)
 
 if tablet_on
 {
+	layer_set_visible("MainuiLayer", false)
 	var dist = point_distance(xNow, yNow, xTo, yTo);
 	if (dist <= 1)
 	{

@@ -1,6 +1,7 @@
 switch (button_id)
 {
 	case 0: // Resume
+		layer_set_visible("MainuiLayer", true)
 		global.resume_button_pressed = true;
 	break;
 	
@@ -23,6 +24,7 @@ switch (button_id)
 		if (not succes) {
 			// no save found
 		}
+		layer_set_visible("MainuiLayer", true)
 		layer_set_visible("MMSettingsLayer", false)
 		layer_set_visible("MMLoadGameLayer", false)
 		layer_set_visible("Main_menuLayer", false)
@@ -39,6 +41,7 @@ switch (button_id)
 		}
 		obj_manager.new_seed();
 		obj_manager.create_terrain();
+		layer_set_visible("MainuiLayer", true)
 		layer_set_visible("MMSettingsLayer", false)
 		layer_set_visible("MMLoadGameLayer", false)
 		layer_set_visible("Main_menuLayer", false)

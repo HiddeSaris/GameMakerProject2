@@ -7,7 +7,11 @@
     {"name":"obj_draw_at_ground","order":4,"path":"objects/obj_draw_at_ground/obj_draw_at_ground.yy",},
     {"name":"obj_forester","order":1,"path":"objects/obj_forester/obj_forester.yy",},
     {"name":"obj_mine","order":2,"path":"objects/obj_mine/obj_mine.yy",},
+<<<<<<< Updated upstream
     {"name":"obj_sound","order":1,"path":"objects/obj_sound/obj_sound.yy",},
     {"name":"obj_sprinkler","order":3,"path":"objects/obj_sprinkler/obj_sprinkler.yy",},
+=======
+    {"name":"spr_watershack","order":1,"path":"sprites/spr_watershack/spr_watershack.yy",},
+>>>>>>> Stashed changes
   ],
 }

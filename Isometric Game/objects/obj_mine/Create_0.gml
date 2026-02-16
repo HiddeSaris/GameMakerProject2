@@ -16,7 +16,6 @@ inv_items = [];
 dir_coords = [UP, RIGHT, DOWN, LEFT];
 
 
-
 function item_can_move(item){
 	var _x = item[1];
 	var _y = item[2];
@@ -38,8 +37,7 @@ function item_can_move(item){
 }
 
 function can_add_item(item, _input_dir){
-	if (item != items.wood or item != items.seed) return false;
-	return item_can_move([items.wood, dir_coords[_input_dir][0], dir_coords[_input_dir][1]]) and array_contains(input_dir, _input_dir);
+	return false;
 }
 
 function add_item(item, input_dir){

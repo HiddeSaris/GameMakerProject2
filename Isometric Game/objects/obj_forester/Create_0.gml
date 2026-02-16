@@ -67,7 +67,7 @@ function item_can_move(item){
 }
 
 function can_add_item(item, _input_dir){
-	return item == items.seed;
+	return item == items.seed and array_contains(input_dirs, _input_dir);
 }
 
 function add_item(item, input_dir){

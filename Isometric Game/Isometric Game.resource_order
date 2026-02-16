@@ -1,4 +1,6 @@
 {
   "FolderOrderSettings":[],
-  "ResourceOrderSettings":[],
+  "ResourceOrderSettings":[
+    {"name":"spr_waterplumb","order":1,"path":"sprites/spr_waterplumb/spr_waterplumb.yy",},
+  ],
 }

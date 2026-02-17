@@ -1,13 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_pump",
+  "%Name":"obj_ground_water_pump",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_pump",
+  "name":"obj_ground_water_pump",
   "overriddenProperties":[],
   "parent":{
     "name":"buildings",
@@ -27,16 +26,13 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[
-    {"$GMObjectProperty":"v2","%Name":"_dir","filters":[],"listItems":[],"multiselect":false,"name":"_dir","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
-    {"$GMObjectProperty":"v2","%Name":"water_level","filters":[],"listItems":[],"multiselect":false,"name":"water_level","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
-  ],
+  "properties":[],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_plumbshack",
-    "path":"sprites/spr_plumbshack/spr_plumbshack.yy",
+    "name":"spr_beeshack",
+    "path":"sprites/spr_beeshack/spr_beeshack.yy",
   },
   "spriteMaskId":null,
   "visible":true,

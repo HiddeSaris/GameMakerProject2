@@ -91,11 +91,11 @@ sprinkler_radius = 6;
 #macro MIDDLE [-1, 4]
 
 #macro sprite_items [spr_wood, spr_wood, spr_seed, spr_wood]
-#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack,  spr_seedshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree, spr_mineshack, spr_watershack]
-#macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_forester,  obj_farm    ,  obj_garden, obj_pump,       obj_tree, obj_mine,      obj_sprinkler]
-#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [3, 4],        [1, 1]]
-#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [2, 4],        [1, 1]]
-#macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm, buildings.pipe, buildings.forester] // buildings that can input items
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack,  spr_seedshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree, spr_mineshack, spr_watershack, spr_beeshack]
+#macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_forester,  obj_farm    ,  obj_garden, obj_pump,       obj_tree, obj_mine,      obj_sprinkler,  obj_ground_water_pump]
+#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [3, 4],        [1, 1],         [1, 1]]
+#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [2, 4],        [1, 1],         [1, 1]]
+#macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm, buildings.pipe, buildings.forester, buildings.sprinkler] // buildings that can input items
 
 enum building_states{
 	selecting,
@@ -117,6 +117,7 @@ enum buildings{
 	tree,
 	mineshack,
 	sprinkler,
+	groundwaterpump,
 	COUNT,
 	ref,
 	NONE,

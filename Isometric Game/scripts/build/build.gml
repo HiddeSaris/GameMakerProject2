@@ -5,13 +5,13 @@ function dir_to_move(_dir){
 	if (_dir == dir.up){
 		return [0, -1];
 	}
-	if (_dir == dir.right){
+	else if (_dir == dir.right){
 		return [1, 0];
 	}
-	if (_dir == dir.down){
+	else if (_dir == dir.down){
 		return [0, 1];
 	}
-	if (_dir == dir.left){
+	else if (_dir == dir.left){
 		return [-1, 0];
 	}
 }
@@ -133,7 +133,11 @@ function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1, _dir = dir.up){
 			
 			var height = obj_manager.ds_data[# _xx, _yy];
 			
-			if (height < obj_manager.sea_level){
+			if (height < obj_manager.sea_level && _building != buildings.groundwaterpump){
+				return false;
+			}
+			
+			if (height >= obj_manager.sea_level && _building == buildings.groundwaterpump){
 				return false;
 			}
 			

@@ -5,16 +5,18 @@ image_speed = 0;
 image_index = output_dir;
 
 dist_items = 8.05;
-conveyor_speed = 0.06;
+conveyor_speed = 0.15;
 
 spawn_timer = 0;
-spawn_dur = 6 * 60;
+spawn_dur = 5 * 60;
 
 spawn_item = items.water;
 inv_items = [];
 
 dir_coords = [UP, RIGHT, DOWN, LEFT];
 
+grid_x = pos_to_grid_x(x, y);
+grid_y = pos_to_grid_y(x, y);
 
 
 function item_can_move(item){

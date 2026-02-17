@@ -63,6 +63,7 @@
     {"id":{"name":"obj_farm","path":"objects/obj_farm/obj_farm.yy",},},
     {"id":{"name":"obj_forester","path":"objects/obj_forester/obj_forester.yy",},},
     {"id":{"name":"obj_garden","path":"objects/obj_garden/obj_garden.yy",},},
+    {"id":{"name":"obj_ground_water_pump","path":"objects/obj_ground_water_pump/obj_ground_water_pump.yy",},},
     {"id":{"name":"obj_indicator","path":"objects/obj_indicator/obj_indicator.yy",},},
     {"id":{"name":"obj_lumberjack_shack","path":"objects/obj_lumberjack_shack/obj_lumberjack_shack.yy",},},
     {"id":{"name":"obj_manager","path":"objects/obj_manager/obj_manager.yy",},},

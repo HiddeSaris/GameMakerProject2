@@ -61,10 +61,6 @@ if (keyboard_check_pressed(ord("I"))){
 		dbg_text("Hydration:");
 		dbg_same_line();
 		dbg_text(ref_create(self, "debug_hydration"));
-		
-		dbg_text("Building:");
-		dbg_same_line();
-		dbg_text(ref_create(self, "debug_building"));
 	
 		dbg_text("Grid x:");
 		dbg_same_line();

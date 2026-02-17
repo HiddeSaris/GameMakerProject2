@@ -6,7 +6,7 @@ image_index = output_dir;
 
 
 dist_items = 8.05;
-conveyor_speed = 0.06;
+conveyor_speed = 0.15;
 
 inv_items = [];
 

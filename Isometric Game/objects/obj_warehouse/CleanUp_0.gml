@@ -1,0 +1,1 @@
+obj_manager.building_costs[buildings.warehouse][items.wood] -= 20;

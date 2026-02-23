@@ -24,10 +24,12 @@ debug_num_instances = instance_number(all);
 debug_building = ds_buildings[# grid_x, grid_y];
 debug_data = ds_data[# grid_x, grid_y];
 debug_hydration = ds_hydration_index[# grid_x, grid_y];
+debug_warehouse_cost = building_costs[buildings.warehouse];
 
-if (keyboard_check_pressed(ord("I"))){
+if (toggle_debug){
+	toggle_debug = false;
 	if (not dbg_view_exists(inspector)){
-		inspector = dbg_view("Debug View", true, -1, -1, 200, 240);
+		inspector = dbg_view("Debug View", true, -1, -1, 400, 350);
 		// section variables
 		dbg_section("Variables");
 	
@@ -76,12 +78,16 @@ if (keyboard_check_pressed(ord("I"))){
 		dbg_same_line();
 		dbg_text(ref_create(self, "gui_height"));
 		
+		dbg_text_input(ref_create(self, "debug_warehouse_cost", items.wood), "warehouse cost:", "i");
+		
 		// section inventory
 		dbg_section("Inventory");
 		dbg_text_input(ref_create(self, "inv_items", items.wood), "Wood:", "i");
+		dbg_text_input(ref_create(self, "inv_items", items.iron), "Steel:", "i");
 	}
 	else {
-		dbg_view_delete(inspector)
+		dbg_view_delete(inspector);
+		show_debug_overlay(false, false);
 	}
 }
 
@@ -199,7 +205,7 @@ if (mouse_p_l){
 	break;
 	case building_states.destroying:
 		if (ds_buildings[# grid_x, grid_y][0] != buildings.tree){
-			destroy_building(grid_x, grid_y);
+			destroy_building(grid_x, grid_y, true);
 		}
 	break;
 	}

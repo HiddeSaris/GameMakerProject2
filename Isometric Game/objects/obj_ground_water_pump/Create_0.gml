@@ -40,7 +40,7 @@ function update_flood() {
 	array_delete(tiles, 0, 1);
 	show_debug_message(string(tile))
 	obj_manager.ds_hydration_index[# tile[0], tile[1]] = 1;
-	obj_manager.update_draw_surface();
+	obj_manager.update_surface = true;
 	
 	// check neighboring tiles, and if can be filled add to queue to fill later
 	var offsets = [[0, 1], [1, 0], [0, -1], [-1, 0]];
@@ -59,7 +59,6 @@ function update_flood() {
 			obj_manager.ds_hydration_index[# new_tile[0], new_tile[1]] == 0)
 		{
 			array_push(tiles, new_tile);
-			//show_debug_message(string(tiles))
 		}
 	}
 }

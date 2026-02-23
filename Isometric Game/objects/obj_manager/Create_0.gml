@@ -4,6 +4,7 @@ randomise();
 
 show_debug_overlay(false, false);
 inspector = undefined;
+toggle_debug = false;
 debug_fps = fps;
 debug_fps_real = fps_real;
 debug_num_instances = instance_number(all);
@@ -20,10 +21,7 @@ cursor_sprite = spr_cursor;
 global.can_scroll = true;
 global.can_click = true;
 
-seed = irandom(65535); 
-random_set_seed(seed);
-seed_x =  seed & 0b0000000011111111; // get first 8 bits of seed
-seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
+new_seed();
 
 function new_seed(s = irandom(65535)){
 	seed = s; 
@@ -89,16 +87,17 @@ sprinkler_radius = 6;
 building_costs = array_create(buildings.COUNT);
 building_costs[buildings.spawner] = [0, 0];
 building_costs[buildings.conveyor] = [1, 0];
-building_costs[buildings.pipe] = [0, 1];
-building_costs[buildings.warehouse] = [20, 0];
+building_costs[buildings.pipe] = [0, 2];
+building_costs[buildings.warehouse] = [5, 0];
 building_costs[buildings.lumberjack] = [10, 0];
 building_costs[buildings.forester] = [15, 5];
 building_costs[buildings.farm] = [8, 2];
 building_costs[buildings.garden] = [4, 0];
 building_costs[buildings.pump] = [2, 2];
+building_costs[buildings.tree] = [0, 0];
 building_costs[buildings.mineshack] = [17, 0];
 building_costs[buildings.sprinkler] = [3, 5];
-building_costs[buildings.groundwaterpump] = [2, 3];
+building_costs[buildings.groundwaterpump] = [5, 20];
 
 #endregion
 
@@ -108,11 +107,11 @@ building_costs[buildings.groundwaterpump] = [2, 3];
 #macro LEFT [-13, -2]
 #macro MIDDLE [-1, 4]
 
-#macro sprite_items [spr_wood, spr_wood, spr_seed, spr_wood]
-#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack,  spr_seedshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree, spr_mineshack, spr_watershack, spr_beeshack]
+#macro sprite_items [spr_wood, spr_steel, spr_seed, spr_wood]
+#macro sprite_buildings [spr_spawner, spr_conveyor, spr_plumding, spr_warehouse, spr_lumberjackshack,  spr_seedshack, spr_farmshack, spr_garden, spr_plumbshack, spr_tree, spr_mineshack, spr_watershack, spr_waterplumb]
 #macro object_buildings [obj_spawner, obj_conveyor, obj_pipe,     obj_warehouse, obj_lumberjack_shack, obj_forester,  obj_farm    ,  obj_garden, obj_pump,       obj_tree, obj_mine,      obj_sprinkler,  obj_ground_water_pump]
-#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [3, 4],        [1, 1],         [1, 1]]
-#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [2, 4],        [1, 1],         [1, 1]]
+#macro size_buildings     [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [3, 4],        [1, 1],         [3, 3]]
+#macro placement_building [[1, 1],     [1, 1],       [1, 1],      [1, 1],         [1, 2],              [1, 2],        [1, 2],        [1, 1],     [1, 1],         [1, 1],   [2, 4],        [1, 1],         [2, 2]]
 #macro conveyor_buildings [buildings.conveyor, buildings.warehouse, buildings.farm, buildings.pipe, buildings.forester, buildings.sprinkler] // buildings that can input items
 
 enum building_states{
@@ -123,7 +122,7 @@ enum building_states{
 
 enum buildings{
 	
-	spawner,
+	spawner, // for debugging
 	conveyor, 
 	pipe,
 	warehouse,
@@ -217,6 +216,8 @@ function update_draw_surface(){
 
 function create_terrain(){
 	remove_objects();
+	inv_items = array_create(items.COUNT, 0);
+	building_costs[buildings.warehouse] = [5, 0];
 	for (var _yy = 0; _yy < vcells; _yy ++){
 		for (var _xx = 0; _xx < hcells; _xx ++){
 		
@@ -336,7 +337,7 @@ function save(_filename = "savedata.json"){
 		Date : date_current_datetime(),
 		Seed : seed,
 		Inv_items : inv_items,
-		farming_positions: farming_positions,
+		Farming_positions: farming_positions,
 	}
 	array_push(_data, _data_manager);
 	array_push(_data, grid_to_struct(ds_data));
@@ -356,6 +357,11 @@ function save_get_date(_filename = "savedata.json"){
 	if (os_type == os_gxgames or os_browser != browser_not_a_browser){
 		return false;
 	}
+	
+	if (!file_exists(_filename)) {
+		return false;
+	}
+	
 	var _buffer = buffer_load(_filename);
 	if (_buffer == -1) {
 		return false;
@@ -406,8 +412,8 @@ function load(_filename = "savedata.json"){
 	new_seed(s);
 	building_state = building_states.selecting;
 	
-	inv_items = _data_manager.Inv_items;
-	farming_positions = _data_manager.farming_positions;
+	array_copy(inv_items, 0, _data_manager.Inv_items, 0, 2);
+	farming_positions = _data_manager.Farming_positions;
 	
 	ds_grid_copy(ds_data, struct_to_grid(_load_data[1]));
 	ds_grid_copy(ds_hydration_index, struct_to_grid(_load_data[2]));
@@ -423,7 +429,7 @@ function load(_filename = "savedata.json"){
 function load_latest() {
 	var latest = -1;
 	var latest_date = date_create_datetime(2000, 1, 1, 1, 1, 1);
-	for (var i = 1; i <= 6; i++) {
+	for (var i = 0; i <= 6; i++) {
 		var date = save_get_date("SaveGame" + string(i) + ".json");
 		if date == false
 			continue;

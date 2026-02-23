@@ -1,7 +1,9 @@
 {
   "$GMObject":"",
   "%Name":"obj_destroy_buildings",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":7,"eventType":6,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"obj_destroy_buildings",
   "overriddenProperties":[],
@@ -23,11 +25,16 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[],
+  "properties":[
+    {"$GMObjectProperty":"v2","%Name":"destroybutton_id","filters":[],"listItems":[],"multiselect":false,"name":"destroybutton_id","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
+  ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_ui_icon4",
+    "path":"sprites/spr_ui_icon4/spr_ui_icon4.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

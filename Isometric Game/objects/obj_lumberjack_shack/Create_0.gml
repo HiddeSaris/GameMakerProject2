@@ -43,7 +43,7 @@ function chop_wood(){
 	
 	var random_index = irandom(array_length(trees)-1);
 	var pos = trees[random_index];
-	destroy_building(pos[0], pos[1]);
+	destroy_building(pos[0], pos[1], false);
 	obj_manager.ds_buildings[# pos[0], pos[1]] = [buildings.NONE, 0, {}];
 	return true;
 }

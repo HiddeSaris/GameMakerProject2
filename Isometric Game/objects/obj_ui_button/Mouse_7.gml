@@ -22,7 +22,7 @@ switch (button_id)
 	case 4: // Resume from MM
 		var succes = obj_manager.load_latest();
 		if (not succes) {
-			// no save found
+			global.current_save = 0;
 		}
 		layer_set_visible("MainuiLayer", true)
 		layer_set_visible("MMSettingsLayer", false)

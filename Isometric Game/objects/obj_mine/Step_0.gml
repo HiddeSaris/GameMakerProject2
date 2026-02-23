@@ -15,5 +15,5 @@ if (random(1) < pollute_chance) {
 	var _y = grid_y + irandom_range(-pollute_range, pollute_range);
 	
 	obj_manager.ds_hydration_index[# _x, _y] = 0;
-	obj_manager.update_draw_surface();
+	obj_manager.update_surface = true;
 }

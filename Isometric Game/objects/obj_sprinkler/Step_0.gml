@@ -5,7 +5,7 @@ if (random(1) < water_chance && water_level > 0) {
 	if (point_distance(grid_x, grid_y, _x, _y) <= range) { // in circle
 		if (obj_manager.ds_hydration_index[# _x, _y] == 0 && obj_manager.ds_data[# _x, _y] >= obj_manager.sea_level){
 			obj_manager.ds_hydration_index[# _x, _y] = 1;
-			obj_manager.update_draw_surface();
+			obj_manager.update_surface = true;
 		}
 	}
 }

@@ -128,11 +128,13 @@ function pos_to_grid_y(_x, _y){
 
 function can_buy(building) {
 	var cost = obj_manager.building_costs[building];
-	for (var i = 0; i < 2; i++) {
+	var item_count = 2;
+	for (var i = 0; i < item_count; i++) {
 		if (obj_manager.inv_items[i] < cost[i]) {
 			return false;
 		}
 	}
+	return true;
 }
 
 function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1, _dir = dir.up){
@@ -197,9 +199,14 @@ function build(_x, _y, _building, _dir){
 		array_push(obj_manager.farming_positions, [_x, _y]);
 	}
 	
+	var cost = obj_manager.building_costs[_building];
+	for (var i = 0; i < 2; i++) {
+		obj_manager.inv_items[i] -= cost[i];
+	}
+	
 	if (x_size == 1 and y_size == 1){
 		if (obj_manager.ds_buildings[# _x, _y][0] != buildings.NONE){
-			destroy_building(_x, _y);
+			destroy_building(_x, _y, true);
 		}
 		var _room_x = grid_to_pos_x(_x, _y);
 		var _room_y = grid_to_pos_y(_x, _y);
@@ -213,7 +220,7 @@ function build(_x, _y, _building, _dir){
 			for (var _yy = y_beg; _yy < y_beg + y_size; _yy++){
 				var object = obj_manager.ds_buildings[# _xx, _yy]
 				if (object[0] != buildings.NONE){
-					destroy_building(_xx, _yy);
+					destroy_building(_xx, _yy, true);
 				}
 				if (_xx == _x and _yy == _y){
 					var _room_x = grid_to_pos_x(_x, _y);
@@ -226,14 +233,9 @@ function build(_x, _y, _building, _dir){
 			}
 		}
 	}
-	
-	var cost = obj_manager.building_costs[_building];
-	for (var i = 0; i < 2; i++) {
-		obj_manager.inv_items[i] -= cost[i];
-	}
 }
 
-function destroy_building(_x, _y) {
+function destroy_building(_x, _y, refund) {
 	var _building = obj_manager.ds_buildings[# _x, _y];
 	var building;
 	var pos;
@@ -260,6 +262,15 @@ function destroy_building(_x, _y) {
 		}
 		array_delete(arr, arr_ind, 1);
 	}
+	
+	// refund
+	if (refund) {
+		var cost = obj_manager.building_costs[building[0]];
+		for (var i = 0; i < 2; i++) {
+			obj_manager.inv_items[i] += cost[i];
+		}
+	}
+	
 	var size = size_buildings[building[0]];
 	var begin_x = building_begin_x(pos[0], pos[1], building[0], building[1]._dir);
 	var begin_y = building_begin_y(pos[0], pos[1], building[0], building[1]._dir);

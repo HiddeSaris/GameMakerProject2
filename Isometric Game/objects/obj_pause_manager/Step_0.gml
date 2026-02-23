@@ -65,3 +65,24 @@ else
 		draw_screen = true
 	}
 }
+
+// Extra
+
+if !layer_get_visible("Main_menuLayer"){
+	layer_set_visible("MainuiLayer", true)
+	layer_set_visible("InventoryLayer", true)
+}
+else 
+{
+	layer_set_visible("MainuiLayer", false)
+	layer_set_visible("InventoryLayer", false)
+}
+
+// Inventory
+//changing the text
+
+var element_wood = layer_text_get_id("InventoryLayer", "text_735F6242")
+layer_text_text(element_wood, string(obj_manager.inv_items[items.wood])) //Amount of wood
+
+var element_steel = layer_text_get_id("InventoryLayer", "text_1EA9E8CF")
+layer_text_text(element_steel, string(obj_manager.inv_items[items.iron])) //Amount of steel

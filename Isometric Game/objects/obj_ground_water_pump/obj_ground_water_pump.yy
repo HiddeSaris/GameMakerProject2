@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_beeshack",
-    "path":"sprites/spr_beeshack/spr_beeshack.yy",
+    "name":"spr_waterplumb",
+    "path":"sprites/spr_waterplumb/spr_waterplumb.yy",
   },
   "spriteMaskId":null,
   "visible":true,

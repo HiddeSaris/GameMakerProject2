@@ -21,6 +21,43 @@ inv_items = [];
 
 dir_coords = [UP, RIGHT, DOWN, LEFT];
 
+//ParticleSystem
+var _ps = part_system_create_layer(layer_get_id("Smoke_part"), false);
+part_system_draw_order(_ps, true);
+
+//smoke
+var _ptype1 = part_type_create();
+part_type_shape(_ptype1, pt_shape_smoke);
+part_type_size(_ptype1, 0.2, 0.2, 0.01, 0);
+part_type_scale(_ptype1, 1, 1);
+part_type_speed(_ptype1, 1, 1, 0, 0);
+part_type_direction(_ptype1, 80, 100, 0, 0);
+part_type_gravity(_ptype1, 0.01, 0);
+part_type_orientation(_ptype1, 0, 0, 0, 0, false);
+part_type_colour3(_ptype1, $4B4B5E, $000000, $000000);
+part_type_alpha3(_ptype1, 0.188, 0.161, 0);
+part_type_blend(_ptype1, false);
+part_type_life(_ptype1, 80, 180);
+
+var _pemit1 = part_emitter_create(_ps);
+part_emitter_region(_ps, _pemit1, -8, 8, -1.0625, 13.0625, ps_shape_rectangle, ps_distr_linear);
+part_emitter_stream(_ps, _pemit1, _ptype1, 1);
+
+//part_system_position(_ps, room_width/2, room_height/2);
+switch (output_dir) {
+	case dir.up:
+		part_system_position(_ps, x-36, y-10);
+	break;
+	case dir.right:
+		part_system_position(_ps, x-54, y-54);
+	break;
+	case dir.down:
+		part_system_position(_ps, x+52, y-54);
+	break;
+	case dir.left:
+		part_system_position(_ps, x+34, y-10);
+	break;
+	}
 
 function item_can_move(item){
 	var _x = item[1];

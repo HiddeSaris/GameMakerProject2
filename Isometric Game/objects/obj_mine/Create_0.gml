@@ -43,7 +43,6 @@ var _pemit1 = part_emitter_create(_ps);
 part_emitter_region(_ps, _pemit1, -8, 8, -1.0625, 13.0625, ps_shape_rectangle, ps_distr_linear);
 part_emitter_stream(_ps, _pemit1, _ptype1, 1);
 
-//part_system_position(_ps, room_width/2, room_height/2);
 switch (output_dir) {
 	case dir.up:
 		part_system_position(_ps, x-36, y-10);

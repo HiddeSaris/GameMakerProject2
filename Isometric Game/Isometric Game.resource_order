@@ -1,7 +1,9 @@
 {
   "FolderOrderSettings":[],
   "ResourceOrderSettings":[
+    {"name":"obj_destroy_buildings","order":1,"path":"objects/obj_destroy_buildings/obj_destroy_buildings.yy",},
     {"name":"spr_steel","order":1,"path":"sprites/spr_steel/spr_steel.yy",},
+    {"name":"spr_ui_icon4","order":1,"path":"sprites/spr_ui_icon4/spr_ui_icon4.yy",},
     {"name":"spr_waterplumb","order":1,"path":"sprites/spr_waterplumb/spr_waterplumb.yy",},
   ],
 }

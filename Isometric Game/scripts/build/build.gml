@@ -128,7 +128,7 @@ function pos_to_grid_y(_x, _y){
 
 function can_buy(building) {
 	var cost = obj_manager.building_costs[building];
-	for (var i = 0; i < items.COUNT; i++) {
+	for (var i = 0; i < 2; i++) {
 		if (obj_manager.inv_items[i] < cost[i]) {
 			return false;
 		}
@@ -228,7 +228,7 @@ function build(_x, _y, _building, _dir){
 	}
 	
 	var cost = obj_manager.building_costs[_building];
-	for (var i = 0; i < items.COUNT; i++) {
+	for (var i = 0; i < 2; i++) {
 		obj_manager.inv_items[i] -= cost[i];
 	}
 }

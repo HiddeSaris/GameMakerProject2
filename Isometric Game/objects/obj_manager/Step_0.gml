@@ -125,6 +125,12 @@ else{
 #region MINING
 
 if (mining_coord[0] != grid_x or mining_coord[1] != grid_y){
+	if (mining_coord[0] != -1 && mining_coord[1] != -1){
+		var tree = ds_buildings[# mining_coord[0], mining_coord[1]];
+		if (tree[0] == buildings.tree) {
+			tree[1].image_angle = 0;
+		}
+	}
 	mining_time = 0;
 	mining_coord = [grid_x, grid_y];
 }
@@ -212,6 +218,12 @@ if (mouse_l){
 		}
 		else{
 			mining_time++;
+			var anim_speed = 0.2;
+			var anim_strength = 5;
+			var tree = ds_buildings[# grid_x, grid_y];
+			if (tree[0] == buildings.tree) {
+				tree[1].image_angle = (abs(sin(mining_time * anim_speed)) + sin(mining_time * anim_speed)) * anim_strength;
+			}
 		}
 	break;
 	case building_states.destroying:
@@ -220,6 +232,12 @@ if (mouse_l){
 	}
 }
 else{
+	if (mining_coord[0] != -1 && mining_coord[1] != -1){
+		var tree = ds_buildings[# mining_coord[0], mining_coord[1]];
+		if (tree[0] == buildings.tree) {
+			tree[1].image_angle = 0;
+		}
+	}
 	mining_time = 0;
 	mining_coord = [-1, -1]
 }
@@ -234,20 +252,6 @@ if keyboard_check_pressed(ord("R")){
 	selected_dir = selected_dir % 4;
 }
 
-if keyboard_check_pressed(ord("E")){
-	selected_building++;
-	if (selected_building >= buildings.COUNT){
-		selected_building = 0;
-	}
-}
-
-if keyboard_check_pressed(ord("Q")){
-	selected_building--;
-	if (selected_building < 0){
-		selected_building = buildings.COUNT-1;
-	}
-}
-
 if (keyboard_check_pressed(ord("X")) && !global.main_menu && !obj_pause_manager.tablet_on) {
 	if (building_state == building_states.destroying)
 		building_state = building_states.selecting;
@@ -255,12 +259,6 @@ if (keyboard_check_pressed(ord("X")) && !global.main_menu && !obj_pause_manager.
 		building_state = building_states.destroying;
 }
 
-if keyboard_check_pressed(ord("K")) && !global.main_menu && !obj_pause_manager.tablet_on{
-	save();
-}
-if keyboard_check_pressed(ord("L")) && !global.main_menu && !obj_pause_manager.tablet_on{
-	load();
-}
 
 #endregion
 

@@ -23,3 +23,11 @@ if (spawn_timer > spawn_dur && array_length(inv_items) == 0){
 
 move_items();
 
+
+if (random(1) < pollute_chance) {
+	var _x = grid_x + irandom_range(-pollute_range, pollute_range);
+	var _y = grid_y + irandom_range(-pollute_range, pollute_range);
+	
+	obj_manager.ds_hydration_index[# _x, _y] = 0;
+	obj_manager.update_draw_surface();
+}

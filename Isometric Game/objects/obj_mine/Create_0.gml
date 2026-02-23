@@ -4,8 +4,14 @@ input_dir = [];
 image_speed = 0;
 image_index = output_dir;
 
+grid_x = pos_to_grid_x(x, y);
+grid_y = pos_to_grid_y(x, y);
+
 dist_items = 8.05;
 conveyor_speed = 0.06;
+
+pollute_chance = 0.01;
+pollute_range = 7;
 
 spawn_timer = 0;
 spawn_dur = 6 * 60;

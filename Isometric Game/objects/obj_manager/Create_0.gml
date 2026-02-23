@@ -75,9 +75,9 @@ building_state = building_states.selecting;
 selected_building = buildings.spawner;
 selected_dir = dir.up
 
-mining_dur = 60;
+mining_dur = 70;
 mining_time = 0;
-mining_coord = [-1, -1];
+mining_coord = [0, 0];
 
 farming_positions = [];
 farm_radius = 6;
@@ -223,7 +223,7 @@ function create_terrain(){
 			var _veg_variance = 0.5;
 			
 			if (_result > sea_level && irandom(100) < 65){
-				ds_veg_index[# _xx, _yy] = (sqrt(_veg_height) + random(_veg_variance)) * sprite_get_number(spr_vegitation) * ds_hydration_index[# _xx, _yy];
+				ds_veg_index[# _xx, _yy] = (sqrt(_veg_height) + random(_veg_variance)) * sprite_get_number(spr_vegitation);
 			}
 			else {
 				ds_veg_index[# _xx, _yy] = 0;

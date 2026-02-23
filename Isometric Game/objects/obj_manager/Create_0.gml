@@ -21,6 +21,9 @@ cursor_sprite = spr_cursor;
 global.can_scroll = true;
 global.can_click = true;
 
+global.hovering = false;
+global.hovering_building = buildings.NONE;
+
 new_seed();
 
 function new_seed(s = irandom(65535)){
@@ -441,9 +444,14 @@ function load_latest() {
 	}
 	
 	if (date_compare_datetime(latest_date, date_create_datetime(2000, 1, 1, 1, 1, 1)) != 0) {
-		load("SaveGame" + string(latest) + ".json");
-		global.current_save = latest;
-		return true;
+		var succes = load("SaveGame" + string(latest) + ".json");
+		if (succes){
+			global.current_save = latest;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	else {
 		return false; // there is no save

@@ -10,7 +10,6 @@
     {"name":"inst_93D2135","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_6DBE0156","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_3B9B8BD7","path":"roomui/RoomUI/RoomUI.yy",},
-    {"name":"inst_1B3A74F9","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_603944C","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_5F118FF4","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_621E46B6","path":"rooms/rm_editor/rm_editor.yy",},
@@ -55,6 +54,7 @@
     {"name":"inst_3AC6E283","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_69031F2D","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_59748A80","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_3D9A7EFD","path":"rooms/rm_editor/rm_editor.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -66,6 +66,7 @@
         {"$GMRInstance":"v4","%Name":"inst_7FAD0DD5","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_7FAD0DD5","objectId":{"name":"obj_pause_manager","path":"objects/obj_pause_manager/obj_pause_manager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":16.0,"y":-32.0,},
         {"$GMRInstance":"v4","%Name":"inst_5AFAE20D","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5AFAE20D","objectId":{"name":"obj_sound","path":"objects/obj_sound/obj_sound.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":0.0,"y":-32.0,},
         {"$GMRInstance":"v4","%Name":"inst_28F679E4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_28F679E4","objectId":{"name":"obj_draw_at_ground","path":"objects/obj_draw_at_ground/obj_draw_at_ground.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":0.0,"y":0.0,},
+        {"$GMRInstance":"v4","%Name":"inst_3D9A7EFD","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3D9A7EFD","objectId":{"name":"obj_cost","path":"objects/obj_cost/obj_cost.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":48.0,"y":-64.0,},
       ],"layers":[],"name":"Instances","properties":[
         {"name":"g_VignetteEdges","type":0,"value":"0.9",},
         {"name":"g_VignetteEdges","type":0,"value":"2",},

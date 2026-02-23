@@ -1,6 +1,7 @@
 {
   "FolderOrderSettings":[],
   "ResourceOrderSettings":[
+    {"name":"obj_cost","order":1,"path":"objects/obj_cost/obj_cost.yy",},
     {"name":"obj_destroy_buildings","order":1,"path":"objects/obj_destroy_buildings/obj_destroy_buildings.yy",},
     {"name":"spr_bg_dark","order":10,"path":"sprites/spr_bg_dark/spr_bg_dark.yy",},
     {"name":"spr_bg_light","order":11,"path":"sprites/spr_bg_light/spr_bg_light.yy",},

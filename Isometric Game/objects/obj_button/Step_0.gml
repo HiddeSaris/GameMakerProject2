@@ -29,3 +29,10 @@ if (mouse_check_button_pressed(mb_left) //&& global.can_click
 	global.can_click = false;	
 	image_index = 1;
 }
+
+if (point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), x, y, x + sprite_width, y + sprite_height)) {
+	if (building_button) {
+		global.hovering = true;
+		global.hovering_building = button;
+	}
+}

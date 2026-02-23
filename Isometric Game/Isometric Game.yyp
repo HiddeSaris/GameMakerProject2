@@ -57,6 +57,7 @@
     {"id":{"name":"obj_build_menu","path":"objects/obj_build_menu/obj_build_menu.yy",},},
     {"id":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},},
     {"id":{"name":"obj_conveyor","path":"objects/obj_conveyor/obj_conveyor.yy",},},
+    {"id":{"name":"obj_cost","path":"objects/obj_cost/obj_cost.yy",},},
     {"id":{"name":"obj_delete_save","path":"objects/obj_delete_save/obj_delete_save.yy",},},
     {"id":{"name":"obj_destroy_buildings","path":"objects/obj_destroy_buildings/obj_destroy_buildings.yy",},},
     {"id":{"name":"obj_draw_at_ground","path":"objects/obj_draw_at_ground/obj_draw_at_ground.yy",},},

@@ -84,6 +84,24 @@ farm_radius = 6;
 
 sprinkler_radius = 6;
 
+#region BUILDING COSTS
+
+building_costs = array_create(buildings.COUNT);
+building_costs[buildings.spawner] = [0, 0];
+building_costs[buildings.conveyor] = [1, 0];
+building_costs[buildings.pipe] = [0, 1];
+building_costs[buildings.warehouse] = [20, 0];
+building_costs[buildings.lumberjack] = [10, 0];
+building_costs[buildings.forester] = [15, 5];
+building_costs[buildings.farm] = [8, 2];
+building_costs[buildings.garden] = [4, 0];
+building_costs[buildings.pump] = [2, 2];
+building_costs[buildings.mineshack] = [17, 0];
+building_costs[buildings.sprinkler] = [3, 5];
+building_costs[buildings.groundwaterpump] = [2, 3];
+
+#endregion
+
 #macro UP [11, -2] // conveyor input/output positions
 #macro RIGHT [3, 6] // relative to sprite origin
 #macro DOWN [-5, 6]

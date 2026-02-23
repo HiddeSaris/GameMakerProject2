@@ -110,6 +110,7 @@
     {"id":{"name":"spr_seed","path":"sprites/spr_seed/spr_seed.yy",},},
     {"id":{"name":"spr_seedshack","path":"sprites/spr_seedshack/spr_seedshack.yy",},},
     {"id":{"name":"spr_spawner","path":"sprites/spr_spawner/spr_spawner.yy",},},
+    {"id":{"name":"spr_steel","path":"sprites/spr_steel/spr_steel.yy",},},
     {"id":{"name":"spr_tree","path":"sprites/spr_tree/spr_tree.yy",},},
     {"id":{"name":"spr_ui_back_2","path":"sprites/spr_ui_back_2/spr_ui_back_2.yy",},},
     {"id":{"name":"spr_ui_back","path":"sprites/spr_ui_back/spr_ui_back.yy",},},

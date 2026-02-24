@@ -3,15 +3,17 @@
 randomise();
 
 show_debug_overlay(false, false);
-inspector = undefined;
+inspector = undefined; // debug menu
 toggle_debug = false;
+
+// variables in debug menu
 debug_fps = fps;
 debug_fps_real = fps_real;
 debug_num_instances = instance_number(all);
 debug_building = [];
 
-gui_width = 1920//960;
-gui_height = 1080//540;
+gui_width = 1920;
+gui_height = 1080;
 
 hide_build_menu();
 
@@ -33,7 +35,8 @@ function new_seed(s = irandom(65535)){
 	seed_y = (seed & 0b1111111100000000) >> 8; // get second 8 bits of seed and add bitwise right
 }
 
-octaves = 4;
+// Perlin Noise
+octaves = 4; 
 frequency = 0.04;
 
 #macro hcells 150
@@ -50,6 +53,7 @@ tree_level = 60;
 surface_tiles = -1; // surface for all tiles to draw them all at once for performance
 update_surface = false;
 
+// camera
 cam_width = camera_get_view_width(view_camera[0]);
 cam_height = camera_get_view_height(view_camera[0]); 
 min_cam_width = 160;
@@ -163,11 +167,15 @@ enum dir{
 
 #region SETUP GRID
 
-ds_data = ds_grid_create(hcells, vcells);
-ds_hydration_index = ds_grid_create(hcells, vcells);
-ds_veg_index = ds_grid_create(hcells, vcells);
-ds_buildings = ds_grid_create(hcells, vcells);
+ds_data = ds_grid_create(hcells, vcells); // terrain height at tile
+ds_hydration_index = ds_grid_create(hcells, vcells); // is tile hydrated (0) or not (1)
+ds_veg_index = ds_grid_create(hcells, vcells); // vegitation index at tile
 
+// format:     [buildings.{type}, {instance}, {data}]
+// or for ref: [buildings.ref, [{x_origin}, {y_origin}], {}]     (origin is tile where building is located)
+ds_buildings = ds_grid_create(hcells, vcells); // building at tile
+
+// function for updating the surface to draw all tile at once
 function update_draw_surface(){
 	var surface_w = (hcells + vcells) * iso_width/2;
 	var surface_h = (hcells + vcells+2) * iso_height/2;
@@ -221,6 +229,7 @@ function create_terrain(){
 	remove_objects();
 	inv_items = array_create(items.COUNT, 0);
 	building_costs[buildings.warehouse] = [5, 0];
+	
 	for (var _yy = 0; _yy < vcells; _yy ++){
 		for (var _xx = 0; _xx < hcells; _xx ++){
 		
@@ -236,7 +245,7 @@ function create_terrain(){
 			}
 			
 			_result += 0.5; // -0.5 <-> 0.5 to 0 <-> 1
-			_result *= 100
+			_result *= 100; //  0   <-> 1   to 0 <-> 100
 			
 			ds_data[# _xx, _yy] = _result; 
 			ds_hydration_index[# _xx, _yy] = 0;
@@ -244,6 +253,7 @@ function create_terrain(){
 			var _veg_height = (_result - sea_level) / (100 - sea_level);
 			var _veg_variance = 0.5;
 			
+			// vegitation
 			if (_result > sea_level && irandom(100) < 65){
 				ds_veg_index[# _xx, _yy] = (sqrt(_veg_height) + random(_veg_variance)) * sprite_get_number(spr_vegitation);
 			}
@@ -254,6 +264,7 @@ function create_terrain(){
 			var room_x = grid_to_pos_x(_xx, _yy);
 			var room_y = grid_to_pos_y(_xx, _yy);
 			
+			// trees
 			if (_result>=tree_level && random(1) < 0.5){
 				ds_buildings[# _xx, _yy] = [buildings.tree, instance_create_depth(room_x, room_y, -room_y, obj_tree, {_dir: 0, alive: false}), {}];
 			}
@@ -327,6 +338,8 @@ create_terrain();
 
 #region SAVE
 
+// https://www.youtube.com/watch?v=R84mR52QaMg
+
 function save(_filename = "savedata.json"){
 	if (os_type == os_gxgames or os_browser != browser_not_a_browser){
 		return false;
@@ -342,12 +355,15 @@ function save(_filename = "savedata.json"){
 		Inv_items : inv_items,
 		Farming_positions: farming_positions,
 	}
+	
+	// push all data into one array
 	array_push(_data, _data_manager);
 	array_push(_data, grid_to_struct(ds_data));
 	array_push(_data, grid_to_struct(ds_hydration_index));
 	array_push(_data, grid_to_struct(ds_veg_index));
 	array_push(_data, grid_to_struct(ds_buildings));
 	
+	// save array to file
 	var _str_data = json_stringify(_data);
 	var _buffer = buffer_create(string_byte_length(_str_data)+1, buffer_fixed, 1);
 	buffer_write(_buffer, buffer_string, _str_data);
@@ -405,10 +421,12 @@ function load(_filename = "savedata.json"){
 	var _str_data = buffer_read(_buffer, buffer_string);
 	buffer_delete(_buffer);
 	
+	// get array with data
 	var _load_data = json_parse(_str_data);
 	
 	remove_objects();
 	
+	// copy over all data
 	var _data_manager = _load_data[0];
 	
 	var s = _data_manager.Seed;
@@ -423,6 +441,7 @@ function load(_filename = "savedata.json"){
 	ds_grid_copy(ds_veg_index, struct_to_grid(_load_data[3]));
 	ds_grid_copy(ds_buildings, struct_to_grid(_load_data[4]));
 	
+	// update world
 	update_draw_surface();
 	load_objects();
 	update_farms();
@@ -430,6 +449,8 @@ function load(_filename = "savedata.json"){
 }
 
 function load_latest() {
+	
+	// get latest
 	var latest = -1;
 	var latest_date = date_create_datetime(2000, 1, 1, 1, 1, 1);
 	for (var i = 0; i <= 6; i++) {
@@ -443,8 +464,10 @@ function load_latest() {
 		}
 	}
 	
+	// if save found
 	if (date_compare_datetime(latest_date, date_create_datetime(2000, 1, 1, 1, 1, 1)) != 0) {
 		var succes = load("SaveGame" + string(latest) + ".json");
+		// if able to load
 		if (succes){
 			global.current_save = latest;
 			return true;

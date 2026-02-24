@@ -1,6 +1,5 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
+// https://www.youtube.com/watch?v=ms1wczeXAT0
 function perlin_noise(_x, _y = 100.213, _z = 450.4215) {
 	
 	#region doubled perm table

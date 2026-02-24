@@ -126,11 +126,11 @@ function pos_to_grid_y(_x, _y){
 	return clamp(_grid_y, 0, vcells - 1);
 }
 
-function can_buy(building) {
+function can_buy(building, amount = 1) {
 	var cost = obj_manager.building_costs[building];
 	var item_count = 2;
 	for (var i = 0; i < item_count; i++) {
-		if (obj_manager.inv_items[i] < cost[i]) {
+		if (obj_manager.inv_items[i] < cost[i] * amount) {
 			return false;
 		}
 	}
@@ -138,8 +138,8 @@ function can_buy(building) {
 }
 
 function can_build(_building, _x1, _y1, _x2 = _x1, _y2 = _y1, _dir = dir.up){
-	
-	if (!can_buy(_building)) {
+	var length = abs(_x1 - _x2 + 1) * abs(_y1 - _y2 + 1);
+	if (!can_buy(_building, length)) {
 		return false;
 	}
 	

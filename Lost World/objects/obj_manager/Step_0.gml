@@ -26,6 +26,7 @@ debug_data = ds_data[# grid_x, grid_y];
 debug_hydration = ds_hydration_index[# grid_x, grid_y];
 debug_warehouse_cost = building_costs[buildings.warehouse];
 
+// turn on in settings
 if (toggle_debug){
 	toggle_debug = false;
 	if (not dbg_view_exists(inspector)){

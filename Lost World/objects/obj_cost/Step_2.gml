@@ -4,6 +4,8 @@ flexpanel_node_style_set_position(fp_cost_panel, flexpanel_edge.left, device_mou
 flexpanel_node_style_set_position(fp_cost_panel, flexpanel_edge.top, device_mouse_y_to_gui(0) - height, flexpanel_unit.point);
 flexpanel_calculate_layout(fp_cost_layer, display_get_gui_width(), display_get_gui_height(), flexpanel_direction.LTR);
 
+// if hovering over building button set cost panel visible and place it at mouse position
+// and update prices according to specific building
 if (global.hovering) {
 	global.hovering = false;
 	layer_set_visible("CostLayer", true);

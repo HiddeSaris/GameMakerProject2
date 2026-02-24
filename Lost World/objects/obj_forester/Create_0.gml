@@ -1,5 +1,5 @@
 output_dir = _dir;
-input_dir = [_dir];
+input_dirs = [_dir];
 
 image_speed = 0;
 image_index = output_dir;

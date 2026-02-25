@@ -5,7 +5,7 @@ if start
 }
 if audio_is_playing(songs[current_song]) == false
 {
-	current_song += 1
+	current_song = (current_song + 1) % array_length(songs);
 	if audio_sound_get_track_position(songs[current_song]) != 0
 	{
 		audio_sound_set_track_position(songs[current_song], 0);
